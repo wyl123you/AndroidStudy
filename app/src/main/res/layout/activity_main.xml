@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/retrofit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Retrofit2 Demo"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/refresh_recycler_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="上拉刷新与下拉加载"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/qr_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="QRCode Demo"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/dialog_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DialogFragment Demo"
+        android:textAllCaps="false" />
+
+
+    <Button
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CardView Demo"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notification Demo"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/ThreadPool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ThreadPool Demo"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/address_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Address Picker Demo"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/javajs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="安卓与JS的交互"
+        android:textAllCaps="false" />
+
+
+    <Button
+        android:id="@+id/diy_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="控件的移动"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="沉浸式相关主题"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/jni"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="jni"
+        android:textAllCaps="false" />
+
+
+
+</LinearLayout>

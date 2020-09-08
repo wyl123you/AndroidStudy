@@ -1,0 +1,49 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--沉浸式状态栏，启动无白屏-->
+    <style name="TransparentTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/welcome</item>
+        <!--避免启动白屏-->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--状态栏是否为半透明-->
+        <item name="android:windowTranslucentStatus">false</item>
+        <!--突出状态栏字体颜色-->
+        <item name="android:windowLightStatusBar">true</item>
+        <!--状态栏背景颜色-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
+
+        <item name="android:windowTranslucentNavigation">true</item>
+
+        <!-- 避免控件会顶到状态栏上 -->
+        <!--<item name="android:fitsSystemWindows">true</item>-->
+    </style>
+
+    <style name="DialogFragment" parent="android:Theme.Holo.Light.Dialog.MinWidth">
+        <item name="android:windowAnimationStyle">@style/animate_dialog</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/bottom_dialog_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/bottom_dialog_exit_anim</item>
+    </style>
+
+
+    <style name="animate_dialog">
+        <item name="android:windowEnterAnimation">@anim/anim_down</item>
+        <item name="android:windowExitAnimation">@anim/anim_up</item>
+    </style>
+
+
+</resources>
