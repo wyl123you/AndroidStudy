@@ -1,49 +1,75 @@
 package com.example.study.demo.touchListener;
 
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-
 import com.example.study.R;
 import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityTouchListenerBinding;
 
-import java.util.concurrent.TimeUnit;
-
 public class TouchListenerActivity extends BaseActivity<ActivityTouchListenerBinding> {
+
+    private int a = 0;
+    private int b = 100;
+
     @Override
     protected void initViews() {
-        mBinding.button2.performClick();
 
-        ThreadPool.SimpleTask<Object> task = new ThreadPool.SimpleTask<Object>() {
-            @Override
-            public Object doInBackground() throws Exception {
-                Log.d("TouchListenerActivity", System.currentTimeMillis() + "");
-                return null;
-            }
-        };
+//        ThreadPool1.SimpleTask<Object> task = new ThreadPool1.SimpleTask<Object>() {
+//            @Nullable
+//            @Override
+//            public Object doInBackground() throws Exception {
+//                Log.d("TouchListenerActivity", System.currentTimeMillis() + "1");
+//                for (int i = 0; i < 3000; i++) {
+//                    Log.d("TouchListenerActivity", System.currentTimeMillis() + "doInBackground: 1  " + (a++));
+//                }
+//                return null;
+//            }
+//        };
+//
+//        ThreadPool1.SimpleTask<?> task1 = new ThreadPool1.SimpleTask<Object>() {
+//            @Nullable
+//            @Override
+//            public Object doInBackground() throws Exception {
+//                Log.d("TouchListenerActivity", System.currentTimeMillis() + "2");
+//                for (int i = 0; i < 3000; i++) {
+//                    Log.d("TouchListenerActivity", System.currentTimeMillis() + "doInBackground: 2  " + (b--));
+//                }
+//                return null;
+//            }
+//        };
+//
+//        ThreadPool1.SimpleTask<?> task3 = new ThreadPool1.SimpleTask<Object>() {
+//            @Nullable
+//            @Override
+//            public Object doInBackground() throws Exception {
+//                Log.d("TouchListenerActivity", System.currentTimeMillis() + "3");
+//                for (int i = 0; i < 3000; i++) {
+//                    Log.d("TouchListenerActivity", System.currentTimeMillis() + "doInBackground:3  " + (b--));
+//                }
+//                return null;
+//            }
+//        };
+//
+//        ThreadPool1.SimpleTask<?> task4 = new ThreadPool1.SimpleTask<Object>() {
+//            @Nullable
+//            @Override
+//            public Object doInBackground() throws Exception {
+//                Log.d("TouchListenerActivity", System.currentTimeMillis() + "4");
+//                for (int i = 0; i < 3000; i++) {
+//                    Log.d("TouchListenerActivity", System.currentTimeMillis() + "doInBackground:43  " + (b--));
+//                }
+//                return null;
+//            }
+//        };
+//
+////        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ThreadPool1.executeBySingle(task);
+//                ThreadPool1.executeBySingle(task1);
+//                ThreadPool1.executeBySingle(task3);
+//                ThreadPool1.executeBySingle(task4);
+//            }
+//        });
 
-        findViewById(R.id.button2).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_MOVE:
-                        //Log.d("WYL", System.currentTimeMillis()+"");
-                        ThreadPool.executeByIoAtFixRate(task, 500, 3000000, TimeUnit.MILLISECONDS);
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        //Log.d("WYL", "停止");
-                        task.cancel();
-                        return true;
-                }
-
-
-                return false;
-            }
-        });
     }
 
     @Override

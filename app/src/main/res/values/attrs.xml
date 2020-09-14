@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GradientTextView">
+        <attr name="startColor" format="reference|color" />
+        <attr name="endColor" format="reference|color" />
+        <attr name="shadowEnable" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="StrokeGradientTextView">
+        <attr name="strokeColor" format="reference|color" />
+        <attr name="strokeWidth" format="reference|dimension" />
+        <attr name="strokeEnable" format="boolean" />
+    </declare-styleable>
+
+
+</resources>
