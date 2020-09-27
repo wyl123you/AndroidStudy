@@ -1,5 +1,10 @@
 package com.example.study.demo.touchListener;
 
+import android.animation.ObjectAnimator;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
 import com.example.study.R;
 import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityTouchListenerBinding;
@@ -70,6 +75,17 @@ public class TouchListenerActivity extends BaseActivity<ActivityTouchListenerBin
 //            }
 //        });
 
+
+        //点击文字抖动
+        mBinding.shakeText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Animation ashe = AnimationUtils.loadAnimation(TouchListenerActivity.this,R.anim.shake);
+                mBinding.shakeText.startAnimation(ashe);
+            }
+        });
+
+        //文字动态闪光
     }
 
     @Override

@@ -1,0 +1,50 @@
+package com.example.study.demo.mvvm;
+
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
+import java.util.ArrayList;
+
+//ViewModel用来处理业务逻辑
+public class ListViewModel extends ViewModel implements LifecycleObserver {
+    //LiveData是一个抽象类，他的实现子类有MutableLiveData,MediatorLiveData,前者常用
+    //常常结合ViewModel一起使用。
+
+    private MutableLiveData<String> name = new MediatorLiveData<>();
+
+    public MutableLiveData<String> getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name.setValue(name);
+    }
+
+    public ListViewModel() {
+    }
+
+    public ArrayList<Person> getPerson() {
+        Person person1 = new Person("邬友亮1", 23);
+        Person person2 = new Person("邬友亮2", 23);
+        Person person3 = new Person("邬友亮3", 23);
+        person1.setImageUrl("https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
+        person2.setImageUrl("https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
+        person3.setImageUrl("https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
+
+        ArrayList<Person> people = new ArrayList<>();
+        people.add(person1);
+        people.add(person2);
+        people.add(person3);
+        return people;
+    }
+
+    public String getTitle() {
+        return "111222333";
+    }
+
+    public void change() {
+        name.setValue(String.valueOf(System.currentTimeMillis()));
+    }
+}

@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Dimension;
@@ -77,23 +78,25 @@ public class StrokeGradientTextView extends GradientTextView {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Log.d(TAG, "onDraw: " + count++);
         //文字
         ColorStateList list = getTextColors();
         TextPaint paint = getPaint();
-        paint.setShader(getShader());
-        setShadowEnable(isShadowEnable());
+
         paint.setStyle(Paint.Style.FILL);
         setTextColor(list);
+        paint.setShader(getShader());
         super.onDraw(canvas);
-        //描边
-        if (strokeEnable) {
+
+        if (isStrokeEnable()) {//描边
             paint.setStyle(Paint.Style.STROKE);
             paint.setStrokeJoin(Paint.Join.ROUND);
             paint.setStrokeWidth(strokeWidth);
             paint.setShader(null);
             setShadowEnable(false);
             setTextColor(strokeColor);
-            super.onDraw(canvas);
         }
+        super.onDraw(canvas);
+
     }
 }

@@ -29,6 +29,8 @@ public class GradientTextView extends androidx.appcompat.widget.AppCompatTextVie
 
     private Shader shader;
 
+    int count = 1;
+
     protected boolean shadowEnable;
 
     public GradientTextView(@NonNull Context context) {
@@ -75,8 +77,6 @@ public class GradientTextView extends androidx.appcompat.widget.AppCompatTextVie
     protected Shader getShader() {
         if (isShadowEnable())
             shader = new LinearGradient(0, 0, 0, getHeight(), startColor, endColor, Shader.TileMode.CLAMP);
-        else
-            shader = new LinearGradient(0, 0, 0, getHeight(), defStartColor, defEndColor, Shader.TileMode.CLAMP);
         return shader;
     }
 
@@ -90,6 +90,7 @@ public class GradientTextView extends androidx.appcompat.widget.AppCompatTextVie
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Log.d(TAG, "onDraw: " + count++);
         if (shadowEnable) {
             getPaint().setShader(getShader());
         }

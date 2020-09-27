@@ -1,14 +1,17 @@
 package com.example.study;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
@@ -62,6 +65,47 @@ public class MyApplication extends MultiDexApplication {
         Log.d(TAG, "onCreate");
         initBugly();
         initNotificationChannel();
+        initActivityCallbacks();
+    }
+
+    private void initActivityCallbacks() {
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
+                Log.d(TAG, "onActivityCreated: ");
+            }
+
+            @Override
+            public void onActivityStarted(@NonNull Activity activity) {
+                Log.d(TAG, "onActivityStarted: ");
+            }
+
+            @Override
+            public void onActivityResumed(@NonNull Activity activity) {
+                Log.d(TAG, "onActivityResumed: ");
+            }
+
+            @Override
+            public void onActivityPaused(@NonNull Activity activity) {
+                Log.d(TAG, "onActivityPaused: ");
+            }
+
+            @Override
+            public void onActivityStopped(@NonNull Activity activity) {
+                Log.d(TAG, "onActivityStopped: ");
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle bundle) {
+                Log.d(TAG, "onActivitySaveInstanceState: ");
+            }
+
+            @Override
+            public void onActivityDestroyed(@NonNull Activity activity) {
+                Log.d(TAG, "onActivityDestroyed: ");
+            }
+        });
+
     }
 
     private void initBugly() {

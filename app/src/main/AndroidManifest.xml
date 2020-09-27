@@ -9,15 +9,11 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="com.vivo.android.launcher.permission.CHANGE_BADGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.CAMERA" />
-
-
     <uses-permission
         android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
 
-    <!--android:resizeableActivity="false"禁止使用多窗口模式-->
     <application
         android:name=".MyApplication"
         android:allowBackup="false"
@@ -29,6 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
+        <activity android:name=".demo.refreshRecyclerView.SmartRefreshActivity"></activity>
         <activity android:name=".demo.notificationDemo.NotificationActivity" />
         <activity android:name=".demo.cardViewDemo.CardViewActivity" />
         <activity android:name=".demo.dialogFragmentDemo.DialogFragmentActivity" />
@@ -67,6 +64,14 @@
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".demo.mvvm.MVVMActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.mvvm.MVVMnewActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".demo.touchListener.TouchListenerActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
@@ -74,25 +79,21 @@
             android:name=".demo.qrcode.QRCodeActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".demo.qrcode.CaptureActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".demo.addressPicker.AddressPickerActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".demo.baidumap.BaiduMapActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".demo.theme.ThemeActivity"
             android:launchMode="singleTask"

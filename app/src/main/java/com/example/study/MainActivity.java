@@ -10,9 +10,12 @@ import com.example.study.demo.cardViewDemo.CardViewActivity;
 import com.example.study.demo.dialogFragmentDemo.DialogFragmentActivity;
 import com.example.study.demo.javajs.JavaJsActivity;
 import com.example.study.demo.jni.JniActivity;
+import com.example.study.demo.mvvm.MVVMActivity;
+import com.example.study.demo.mvvm.MVVMnewActivity;
 import com.example.study.demo.notificationDemo.NotificationActivity;
 import com.example.study.demo.qrcode.QRCodeActivity;
 import com.example.study.demo.refreshRecyclerView.RefreshListActivity;
+import com.example.study.demo.refreshRecyclerView.SmartRefreshActivity;
 import com.example.study.demo.retrofit.RetrofitActivity;
 import com.example.study.demo.theme.ThemeActivity;
 import com.example.study.demo.touchListener.TouchListenerActivity;
@@ -38,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.refresh_recycler_list)
     public void toRefreshRecyclerActivity() {
         startActivity(new Intent(this, RefreshListActivity.class));
+    }
+
+    @OnClick(R.id.refresh_recycler_list_new)
+    public void aa() {
+        startActivity(new Intent(this, SmartRefreshActivity.class));
     }
 
     @OnClick(R.id.qr_code)
@@ -88,5 +96,15 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.jni)
     public void tojniActivity() {
         startActivity(new Intent(this, JniActivity.class));
+    }
+
+    @OnClick(R.id.mvvm)
+    public void TOMVVM() {
+        startActivity(new Intent(this, MVVMActivity.class));
+    }
+
+    @OnClick(R.id.mvvmnew)
+    public void TOMVVMnew() {
+        startActivity(new Intent(this, MVVMnewActivity.class));
     }
 }

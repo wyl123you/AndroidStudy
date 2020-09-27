@@ -22,6 +22,8 @@ import io.reactivex.disposables.Disposable;
 
 public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
 
+    protected final String TAG = this.getClass().getSimpleName();
+
     protected T mBinding = null;
     private ArrayList<Fragment> fragments;
 

@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,6 +30,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.huawei.hms.hmsscankit.ScanUtil;
 import com.huawei.hms.ml.scan.HmsScan;
 import com.huawei.hms.ml.scan.HmsScanAnalyzerOptions;
@@ -50,7 +53,78 @@ public class QRCodeActivity extends BaseActivity<ActivityQrCodeBinding> {
     @Override
     protected void initViews() {
 
+
+       mBinding.qrWithLogo .setImageBitmap(createQRCodeWithLogo("Hello Wo16556841616bkh549+6" +
+               "58416894658491651984964knjolbjlhufuvjghjugo870i=9；，；ljniolnlkjbn1651kjhvkhgrld,",300,BitmapFactory.decodeResource(getResources(),R.drawable.android))) ;
+
     }
+
+    /**
+     * 生成带logo的二维码，logo默认为二维码的1/5
+     *
+     * @param text    需要生成二维码的文字、网址等
+     * @param size    需要生成二维码的大小（）
+     * @param mBitmap logo文件
+     * @return bitmap
+     */
+    public static Bitmap createQRCodeWithLogo(String text, int size, Bitmap mBitmap) {
+        try {
+            int IMAGE_HALFWIDTH = size / 5;
+            Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
+            hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+            hints.put(EncodeHintType.MARGIN,0);
+            /*
+             * 设置容错级别，默认为ErrorCorrectionLevel.L
+             * 因为中间加入logo所以建议你把容错级别调至H,否则可能会出现识别不了
+             */
+            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+            BitMatrix bitMatrix = new QRCodeWriter().encode(text,
+                    BarcodeFormat.QR_CODE, size, size, hints);
+
+            int width = bitMatrix.getWidth();//矩阵高度
+            int height = bitMatrix.getHeight();//矩阵宽度
+            int halfW = width / 2;
+            int halfH = height / 2;
+
+            Matrix m = new Matrix();
+            float sx = (float) 2 * IMAGE_HALFWIDTH / mBitmap.getWidth();
+            float sy = (float) 2 * IMAGE_HALFWIDTH
+                    / mBitmap.getHeight();
+            m.setScale(sx, sy);
+            //设置缩放信息
+            //将logo图片按martix设置的信息缩放
+            mBitmap = Bitmap.createBitmap(mBitmap, 0, 0,
+                    mBitmap.getWidth(), mBitmap.getHeight(), m, false);
+
+            int[] pixels = new int[size * size];
+            for (int y = 0; y < size; y++) {
+                for (int x = 0; x < size; x++) {
+                    if (x > halfW - IMAGE_HALFWIDTH && x < halfW + IMAGE_HALFWIDTH
+                            && y > halfH - IMAGE_HALFWIDTH
+                            && y < halfH + IMAGE_HALFWIDTH) {
+                        //该位置用于存放图片信息
+                        //记录图片每个像素信息
+                        pixels[y * width + x] = mBitmap.getPixel(x - halfW
+                                + IMAGE_HALFWIDTH, y - halfH + IMAGE_HALFWIDTH);
+                    } else {
+                        if (bitMatrix.get(x, y)) {
+                            pixels[y * size + x] = 0xff000000;
+                        } else {
+                            pixels[y * size + x] = 0xffffffff;
+                        }
+                    }
+                }
+            }
+            Bitmap bitmap = Bitmap.createBitmap(size, size,
+                    Bitmap.Config.ARGB_8888);
+            bitmap.setPixels(pixels, 0, size, 0, 0, size, size);
+            return bitmap;
+        } catch (WriterException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     @Override
     protected int getLayoutId() {
@@ -71,7 +145,7 @@ public class QRCodeActivity extends BaseActivity<ActivityQrCodeBinding> {
         public void createQRCode() {
             Log.d(getTag(), "生成二维码");
             String str = mBinding.etQrString.getText().toString();
-            bitmap = getBitmap(str, 350, 350);
+            bitmap = getBitmap(str, 300, 300);
             mBinding.ivQrImage.setImageBitmap(bitmap);
         }
 
@@ -85,11 +159,11 @@ public class QRCodeActivity extends BaseActivity<ActivityQrCodeBinding> {
         }
 
         public void scanByCamera() {
-            if (ActivityCompat.checkSelfPermission(QRCodeActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(QRCodeActivity.this,new String[]{Manifest.permission.CAMERA},0);
+            if (ActivityCompat.checkSelfPermission(QRCodeActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(QRCodeActivity.this, new String[]{Manifest.permission.CAMERA}, 0);
             }
-            if (ActivityCompat.checkSelfPermission(QRCodeActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(QRCodeActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},0);
+            if (ActivityCompat.checkSelfPermission(QRCodeActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(QRCodeActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
             }
             //申请权限之后，调用DefaultView扫码界面
             ScanUtil.startScan(
@@ -105,8 +179,9 @@ public class QRCodeActivity extends BaseActivity<ActivityQrCodeBinding> {
                 Toast.makeText(this, "请输入字符串", Toast.LENGTH_SHORT).show();
                 return null;
             }
-            Hashtable<EncodeHintType, String> hints = new Hashtable<>();
+            Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
             hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+            hints.put(EncodeHintType.MARGIN, 0);
             BitMatrix bitMatrix = new QRCodeWriter().encode(text, BarcodeFormat.QR_CODE, width, height, hints);
             int[] pixels = new int[width * height];
             for (int y = 0; y < height; y++) {

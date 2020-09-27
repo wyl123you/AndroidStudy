@@ -19,6 +19,13 @@
         android:textAllCaps="false" />
 
     <Button
+        android:id="@+id/refresh_recycler_list_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="上拉刷新与下拉加载(新)"
+        android:textAllCaps="false" />
+
+    <Button
         android:id="@+id/qr_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -90,6 +97,19 @@
         android:text="jni"
         android:textAllCaps="false" />
 
+    <Button
+        android:id="@+id/mvvm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Databinding + MVVM"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/mvvmnew"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Databinding + MVVM Demo"
+        android:textAllCaps="false" />
 
 
 </LinearLayout>
