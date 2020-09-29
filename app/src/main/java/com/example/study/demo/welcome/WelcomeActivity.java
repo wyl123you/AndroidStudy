@@ -9,6 +9,8 @@ import com.example.study.R;
 import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityWelcomeBinding;
 
+import java.text.MessageFormat;
+
 
 public class WelcomeActivity extends BaseActivity<ActivityWelcomeBinding> {
 
@@ -16,10 +18,10 @@ public class WelcomeActivity extends BaseActivity<ActivityWelcomeBinding> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
+        CountDownTimer countDownTimer = new CountDownTimer(2000, 1000) {
             @Override
             public void onTick(long l) {
-                mBinding.text.setText(l + "");
+                mBinding.text.setText(MessageFormat.format("{0}", l));
             }
 
             @Override

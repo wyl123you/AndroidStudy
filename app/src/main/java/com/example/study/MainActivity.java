@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.study.demo.FlowLayoutActivity;
 import com.example.study.demo.addressPicker.AddressPickerActivity;
 import com.example.study.demo.cardViewDemo.CardViewActivity;
 import com.example.study.demo.dialogFragmentDemo.DialogFragmentActivity;
@@ -106,5 +107,10 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.mvvmnew)
     public void TOMVVMnew() {
         startActivity(new Intent(this, MVVMnewActivity.class));
+    }
+
+    @OnClick(R.id.flowLayout)
+    public void TfloeMnew() {
+        startActivity(new Intent(this, FlowLayoutActivity.class));
     }
 }

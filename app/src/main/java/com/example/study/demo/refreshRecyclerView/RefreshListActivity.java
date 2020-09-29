@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -103,12 +102,14 @@ public class RefreshListActivity extends BaseActivity<ActivityRefreshListBinding
         helper.attachToRecyclerView(mBinding.mRecyclerView);
 
         //添加系统给的分割线
-        mBinding.mRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        mBinding.mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         //通过使用drawable资源的定制的分割线
-        DividerItemDecoration divider = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
+        DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         divider.setDrawable(getDrawable(R.drawable.divider_recycler_view));
         mBinding.mRecyclerView.addItemDecoration(divider);
+
+
     }
 
     @Override

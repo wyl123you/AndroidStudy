@@ -1,9 +1,12 @@
 package com.example.study.demo.dialogFragmentDemo;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,6 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.study.R;
+import com.example.study.manager.FastBlurUtil;
+
+import org.jetbrains.annotations.NotNull;
 
 public class PasswordDialogFragment extends DialogFragment {
 
@@ -45,14 +51,27 @@ public class PasswordDialogFragment extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(STYLE_NO_TITLE, R.style.DialogFragment);
+
+
     }
 
-    private void initView(View view) {
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getDialog().getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+    }
+
+    private void initView(@NotNull View view) {
         TextView title = view.findViewById(R.id.title);
         TextView tip = view.findViewById(R.id.tip);
         TextView password = view.findViewById(R.id.et_password);
         Button cancel = view.findViewById(R.id.cancel);
         Button confirm = view.findViewById(R.id.confirm);
+
+        //blurBackgroundDrawer为模糊后的背景图片
+//        Window window = getActivity().getWindow();
+//        window.setBackgroundDrawable(new BitmapDrawable(getActivity().getResources(), FastBlurUtil.getBlurBackgroundDrawer(getActivity())));
+
 
         Bundle bundle = getArguments();
         if (bundle != null) {

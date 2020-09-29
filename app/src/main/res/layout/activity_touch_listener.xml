@@ -65,6 +65,29 @@
             android:textSize="30sp"
             app:layout_constraintTop_toBottomOf="@id/text" />
 
+        <CheckBox
+            android:id="@+id/chain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:button="@drawable/hhh"
+            android:text="@string/app_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shimmer" />
+
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:min="0"
+            android:progress="70"
+            android:progressDrawable="@drawable/progress_drawable"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chain" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
