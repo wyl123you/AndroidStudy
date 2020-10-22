@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".demo.FlowLayoutActivity"></activity>
+        <activity android:name=".demo.loadingview.LoadingViewActivity"></activity>
+        <activity android:name=".demo.FlowLayoutActivity" />
         <activity android:name=".demo.refreshRecyclerView.SmartRefreshActivity" />
         <activity android:name=".demo.notificationDemo.NotificationActivity" />
         <activity android:name=".demo.cardViewDemo.CardViewActivity" />

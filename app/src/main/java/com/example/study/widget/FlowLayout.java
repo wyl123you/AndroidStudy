@@ -7,12 +7,15 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class FlowLayout extends ViewGroup {
 
     private final String TAG = this.getClass().getSimpleName();
+
+    private Context context;
 
     private int mHorizontalSpace = 10;
     private int mVerticalSpace = 10;
@@ -22,20 +25,19 @@ public class FlowLayout extends ViewGroup {
 
     public FlowLayout(Context context) {
         super(context);
+        this.context = context;
     }
 
     //反射
     public FlowLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
     }
 
     //主题
     public FlowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    public FlowLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+        this.context = context;
     }
 
     private void init() {
@@ -68,6 +70,8 @@ public class FlowLayout extends ViewGroup {
 
         for (int i = 0; i < childCount; i++) {
             View childView = getChildAt(i);
+            childView.setTag(i + 1);
+            childView.setOnClickListener(view -> Toast.makeText(context, view.getTag() + "", Toast.LENGTH_LONG).show());
             childView.setBackgroundColor(Color.GRAY);
             LayoutParams childLP = childView.getLayoutParams();
             int childWidthMeasureSpec = getChildMeasureSpec(widthMeasureSpec, paddingLeft + paddingRight, childLP.width);
@@ -79,9 +83,8 @@ public class FlowLayout extends ViewGroup {
             Log.d(TAG, "第" + i + "个子View的宽高");
             Log.d(TAG, "w:" + childMeasuredWidth + "  h:" + childMeasuredHeight);
 
-            if (childMeasuredWidth + lineWidthUsed + mHorizontalSpace > selfWidth - paddingLeft - paddingRight) {
+            if (childMeasuredWidth + lineWidthUsed > selfWidth - paddingLeft - paddingRight) {
                 allLines.add(lineViews);
-                Log.d(TAG, "addline: ");
                 lineHeights.add(lineHeight);
                 //一旦换行，我们就可以判断当前行需要的宽高
                 parentNeededHeight = parentNeededHeight + lineHeight + mVerticalSpace;
@@ -92,23 +95,22 @@ public class FlowLayout extends ViewGroup {
             }
 
             lineViews.add(childView);
-
             lineWidthUsed = lineWidthUsed + childMeasuredWidth + mHorizontalSpace;
             lineHeight = Math.max(lineHeight, childMeasuredHeight);
         }
 
         allLines.add(lineViews);
-        Log.d(TAG, "addline: ");
         lineHeights.add(lineHeight);
-
-
+        //一旦换行，我们就可以判断当前行需要的宽高
+        parentNeededHeight = parentNeededHeight + lineHeight;
+        parentNeededWidth = Math.max(parentNeededWidth, lineWidthUsed + mHorizontalSpace);
 
         //度量自己的大小
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 
-        int realWidth = (widthMode == MeasureSpec.EXACTLY) ? selfWidth : parentNeededWidth;
-        int realHeight = (heightMode == MeasureSpec.EXACTLY) ? selfHeight : parentNeededHeight;
+        int realWidth = (widthMode == MeasureSpec.EXACTLY) ? selfWidth : parentNeededWidth+paddingLeft+paddingRight;
+        int realHeight = (heightMode == MeasureSpec.EXACTLY) ? selfHeight : parentNeededHeight+paddingTop+paddingBottom;
         setMeasuredDimension(realWidth, realHeight);
     }
 
@@ -130,7 +132,7 @@ public class FlowLayout extends ViewGroup {
 
                 int right = left + view.getMeasuredWidth();
                 int bottom = top + view.getMeasuredHeight();
-                view.layout(left, top, right, bottom);
+                view.layout(left, top + (lineHeight - view.getMeasuredHeight()) / 2, right, bottom + (lineHeight - view.getMeasuredHeight()) / 2);
                 Log.d(TAG, "第" + (i + 1) + "行，第" + (j + 1) + "个子View的位置:left" + left + "  top:" + top);
                 curL = right + mHorizontalSpace;
             }

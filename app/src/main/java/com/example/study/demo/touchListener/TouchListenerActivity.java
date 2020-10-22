@@ -117,62 +117,56 @@ public class TouchListenerActivity extends BaseActivity<ActivityTouchListenerBin
 
 
         //点击文字抖动
-        mBinding.shakeText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Animation ashe = AnimationUtils.loadAnimation(TouchListenerActivity.this, R.anim.shake);
-                mBinding.shakeText.startAnimation(ashe);
+        mBinding.shakeText.setOnClickListener(view -> {
+            Animation ashe = AnimationUtils.loadAnimation(TouchListenerActivity.this, R.anim.shake);
+            mBinding.shakeText.startAnimation(ashe);
 
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Bitmap bitmap = FastBlurUtil.getBlurBackgroundDrawer(TouchListenerActivity.this);
+            new Thread(() -> {
+                Bitmap bitmap = FastBlurUtil.getBlurBackgroundDrawer(TouchListenerActivity.this);
 
 
-                        File ddd = new File(Environment.getExternalStorageDirectory() + "/bitmap.jpg");
+                File ddd = new File(Environment.getExternalStorageDirectory() + "/a/bitmap.jpg");
 
-                        try {
-                            FileOutputStream fileOutputStream = new FileOutputStream(ddd);
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+                try {
+                    FileOutputStream fileOutputStream = new FileOutputStream(ddd);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
+
+            //下载apk
+            new Thread(() -> {
+                try {
+                    URL apk = new URL("https://res.zhuagewawa.com/cloudy/cover_hw_01.jpg");
+                    HttpsURLConnection coon = (HttpsURLConnection) apk.openConnection();
+                    coon.setDoInput(true);
+                    InputStream is = coon.getInputStream();
+                    File file = new File(Environment.getExternalStorageDirectory() + "/apk.jpg");
+
+                    FileOutputStream fileOutputStream = new FileOutputStream(file);
+                    byte[] bytes = new byte[1024];
+                    int len;
+
+                    while ((len = is.read(bytes)) != -1) {
+                        Log.d(TAG, "onClick: " + len);
+                        fileOutputStream.write(bytes, 0, len);
                     }
-                }).start();
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }).start();
 
 
-                //下载apk
-                new Thread(() -> {
-                    try {
-                        URL apk = new URL("https://res.zhuagewawa.com/cloudy/cover_hw_01.jpg");
-                        HttpsURLConnection coon = (HttpsURLConnection) apk.openConnection();
-                        coon.setDoInput(true);
-                        InputStream is = coon.getInputStream();
-                        File file = new File(Environment.getExternalStorageDirectory() + "/apk.jpg");
+            progress = new Random().nextInt(100);
 
-                        FileOutputStream fileOutputStream = new FileOutputStream(file);
-                        byte[] bytes = new byte[1024];
-                        int len;
-
-                        while ((len = is.read(bytes)) != -1) {
-                            Log.d(TAG, "onClick: " + len);
-                            fileOutputStream.write(bytes, 0, len);
-                        }
-                        fileOutputStream.flush();
-                        fileOutputStream.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }).start();
+            setProgress(mBinding.progress, progress);
 
 
-                progress = new Random().nextInt(100);
-
-                setProgress(mBinding.progress, progress);
-
-
-            }
         });
 
         ArrayList<View> lineViews = new ArrayList<>();//保存一行中的所有的View;

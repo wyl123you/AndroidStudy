@@ -11,6 +11,7 @@ import com.example.study.demo.cardViewDemo.CardViewActivity;
 import com.example.study.demo.dialogFragmentDemo.DialogFragmentActivity;
 import com.example.study.demo.javajs.JavaJsActivity;
 import com.example.study.demo.jni.JniActivity;
+import com.example.study.demo.loadingview.LoadingViewActivity;
 import com.example.study.demo.mvvm.MVVMActivity;
 import com.example.study.demo.mvvm.MVVMnewActivity;
 import com.example.study.demo.notificationDemo.NotificationActivity;
@@ -112,5 +113,10 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.flowLayout)
     public void TfloeMnew() {
         startActivity(new Intent(this, FlowLayoutActivity.class));
+    }
+
+    @OnClick(R.id.LoadingView)
+    public void TfloLoadingVieweMnew() {
+        startActivity(new Intent(this, LoadingViewActivity.class));
     }
 }

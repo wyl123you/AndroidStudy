@@ -26,6 +26,10 @@ import com.tencent.bugly.crashreport.CrashReport;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class MyApplication extends MultiDexApplication {
 
@@ -107,6 +111,16 @@ public class MyApplication extends MultiDexApplication {
         });
 
     }
+
+    public int a(){
+        return  0;
+    }
+
+    public String a(String a){
+        return "aa";
+    }
+
+
 
     private void initBugly() {
         String appId = null;
