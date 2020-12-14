@@ -5,8 +5,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.study.demo.FlowLayoutActivity;
-import com.example.study.demo.addressPicker.AddressPickerActivity;
 import com.example.study.demo.cardViewDemo.CardViewActivity;
 import com.example.study.demo.dialogFragmentDemo.DialogFragmentActivity;
 import com.example.study.demo.javajs.JavaJsActivity;
@@ -19,7 +17,6 @@ import com.example.study.demo.qrcode.QRCodeActivity;
 import com.example.study.demo.refreshRecyclerView.RefreshListActivity;
 import com.example.study.demo.refreshRecyclerView.SmartRefreshActivity;
 import com.example.study.demo.retrofit.RetrofitActivity;
-import com.example.study.demo.theme.ThemeActivity;
 import com.example.study.demo.touchListener.TouchListenerActivity;
 import com.example.study.demo.view_diy.DivViewMoveActivity;
 
@@ -75,11 +72,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, TouchListenerActivity.class));
     }
 
-    @OnClick(R.id.address_picker)
-    public void toAddressPickerActivity() {
-        startActivity(new Intent(this, AddressPickerActivity.class));
-    }
-
     @OnClick(R.id.javajs)
     public void toJavaJsActivity() {
         startActivity(new Intent(this, JavaJsActivity.class));
@@ -90,10 +82,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, DivViewMoveActivity.class));
     }
 
-    @OnClick(R.id.theme)
-    public void tothemeActivity() {
-        startActivity(new Intent(this, ThemeActivity.class));
-    }
 
     @OnClick(R.id.jni)
     public void tojniActivity() {
@@ -110,10 +98,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, MVVMnewActivity.class));
     }
 
-    @OnClick(R.id.flowLayout)
-    public void TfloeMnew() {
-        startActivity(new Intent(this, FlowLayoutActivity.class));
-    }
 
     @OnClick(R.id.LoadingView)
     public void TfloLoadingVieweMnew() {

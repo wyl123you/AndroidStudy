@@ -68,13 +68,6 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/address_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Address Picker Demo"
-            android:textAllCaps="false" />
-
-        <Button
             android:id="@+id/javajs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,13 +80,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="控件的移动"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/theme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="沉浸式相关主题"
             android:textAllCaps="false" />
 
         <Button
@@ -115,13 +101,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Databinding + MVVM Demo"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/flowLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="FlowLayout"
             android:textAllCaps="false" />
 
         <Button

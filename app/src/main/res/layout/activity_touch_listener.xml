@@ -19,23 +19,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <com.example.study.widget.StrokeGradientTextView
-            android:id="@+id/cc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="asdfgh"
-            android:textColor="#ff0000"
-            android:textSize="100sp"
-            app:endColor="#ffff00"
-            app:layout_constraintTop_toBottomOf="@id/button2"
-            app:shadowEnable="true"
-            app:startColor="#00ffff"
-            app:strokeColor="#000000"
-            app:strokeEnable="true"
-            app:strokeWidth="3dp" />
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text"
             android:layout_width="match_parent"
@@ -44,7 +27,7 @@
             android:text="asdfgh"
             android:textColor="#000000"
             android:textSize="100sp"
-            app:layout_constraintTop_toBottomOf="@id/cc" />
+            app:layout_constraintTop_toBottomOf="@id/button2" />
 
         <TextView
             android:id="@+id/shake_text"
@@ -56,14 +39,15 @@
             app:layout_constraintTop_toBottomOf="@id/text" />
 
 
-        <TextView
+        <EditText
             android:id="@+id/shimmer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="465486415348563"
+            android:inputType="number"
+            android:text="10"
             android:textSize="30sp"
-            app:layout_constraintTop_toBottomOf="@id/text" />
+            app:layout_constraintTop_toBottomOf="@id/shake_text" />
 
         <CheckBox
             android:id="@+id/chain"
@@ -81,12 +65,19 @@
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:max="100"
+            android:max="1000"
             android:min="0"
             android:progress="70"
-            android:progressDrawable="@drawable/progress_drawable"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chain" />
+
+        <Button
+            android:id="@+id/set_progresss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置progress"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progress" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

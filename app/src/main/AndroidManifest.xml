@@ -26,7 +26,6 @@
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
         <activity android:name=".demo.loadingview.LoadingViewActivity"></activity>
-        <activity android:name=".demo.FlowLayoutActivity" />
         <activity android:name=".demo.refreshRecyclerView.SmartRefreshActivity" />
         <activity android:name=".demo.notificationDemo.NotificationActivity" />
         <activity android:name=".demo.cardViewDemo.CardViewActivity" />
@@ -80,11 +79,6 @@
         <activity
             android:name=".demo.qrcode.QRCodeActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".demo.qrcode.CaptureActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".demo.addressPicker.AddressPickerActivity"

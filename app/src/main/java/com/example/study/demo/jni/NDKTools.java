@@ -6,7 +6,7 @@ public class NDKTools {
 
 
     static {
-        System.loadLibrary("native-lib");
+        System.loadLibrary("a");
     }
 
     public static native int add(int a, int b);
