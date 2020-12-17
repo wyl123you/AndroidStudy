@@ -2,6 +2,10 @@ package com.example.study.demo.refreshRecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -101,15 +105,64 @@ public class RefreshListActivity extends BaseActivity<ActivityRefreshListBinding
         ItemTouchHelper helper = new ItemTouchHelper(simpleItemTouchCallBack);
         helper.attachToRecyclerView(mBinding.mRecyclerView);
 
-        //添加系统给的分割线
-        mBinding.mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+//        //添加系统给的分割线
+//        mBinding.mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+//
+//        //通过使用drawable资源的定制的分割线
+//        DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+//        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.divider_recycler_view);
+//
+//        assert drawable != null;
+//        divider.setDrawable(drawable);
+//        mBinding.mRecyclerView.addItemDecoration(divider);
 
-        //通过使用drawable资源的定制的分割线
-        DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        divider.setDrawable(getDrawable(R.drawable.divider_recycler_view));
-        mBinding.mRecyclerView.addItemDecoration(divider);
+        mBinding.mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+//                if (parent.getChildAdapterPosition(view) % 2 == 0) {
+                outRect.bottom = 70;
+                outRect.top = 70;
+                outRect.left = 70;
+                outRect.right = 70;
+//                }
+            }
 
+            @Override
+            public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.onDraw(c, parent, state);
 
+                Paint mPaint = new Paint();
+                mPaint.setAntiAlias(true);
+
+                // recyclerView是否设置了paddingLeft和paddingRight
+                final int left = parent.getPaddingLeft();
+                final int right = parent.getWidth() - parent.getPaddingRight();
+                final int childCount = parent.getChildCount();
+                for (int i = 0; i < childCount; i++) {
+                    mPaint.setColor(i % 2 == 0 ? Color.BLACK : Color.RED);
+                    final View child = parent.getChildAt(i);
+                    final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
+                            .getLayoutParams();
+                    // divider的top 应该是 item的bottom 加上 marginBottom 再加上 Y方向上的位移
+                    final int top = child.getBottom() + params.bottomMargin +
+                            Math.round(ViewCompat.getTranslationY(child));
+                    Log.d(TAG, "child.getBottom(): " + child.getBottom());
+                    Log.d(TAG, "params.bottomMargin: " + params.bottomMargin);
+                    Log.d(TAG, " Math.round(ViewCompat.getTranslationY(child): " + Math.round(ViewCompat.getTranslationY(child)));
+                    //divider的bottom就是top加上divider的高度了
+                    final int bottom = (int) (top + 140);
+                    c.drawRect(left, top, right, bottom, mPaint);
+                    c.drawText("" + i, left, top, mPaint);
+                }
+            }
+
+            @Override
+            public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.onDrawOver(c, parent, state);
+
+            }
+        });
     }
 
     @Override

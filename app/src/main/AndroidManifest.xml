@@ -6,8 +6,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="com.vivo.android.launcher.permission.CHANGE_BADGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- <uses-permission android:name="com.vivo.android.launcher.permission.CHANGE_BADGE" /> -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
@@ -24,9 +23,15 @@
         android:roundIcon="@drawable/android"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
-        <activity android:name=".demo.loadingview.LoadingViewActivity"></activity>
-        <activity android:name=".demo.refreshRecyclerView.SmartRefreshActivity" />
+        <activity
+            android:name=".demo.player.ExoPlayerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".demo.player.NodeMediaPlayerActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".demo.loadingview.LoadingViewActivity" />
         <activity android:name=".demo.notificationDemo.NotificationActivity" />
         <activity android:name=".demo.cardViewDemo.CardViewActivity" />
         <activity android:name=".demo.dialogFragmentDemo.DialogFragmentActivity" />

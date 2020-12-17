@@ -1,11 +1,20 @@
 package com.example.study.demo.mvvm;
 
+import android.util.Log;
+
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.study.bean.LuckyMoney;
+import com.example.study.demo.retrofit.BaseObserver;
+import com.example.study.demo.retrofit.Factory;
+
 import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 //ViewModel用来处理业务逻辑
 public class ListViewModel extends ViewModel implements LifecycleObserver {
@@ -14,7 +23,9 @@ public class ListViewModel extends ViewModel implements LifecycleObserver {
 
     private MutableLiveData<String> name = new MediatorLiveData<>();
 
-    public MutableLiveData<String> getName() {
+    private MutableLiveData<ArrayList<LuckyMoney>> luckMoneys = new MediatorLiveData<>();
+
+    public MutableLiveData<String> getNameValue() {
         return name;
     }
 
@@ -23,6 +34,11 @@ public class ListViewModel extends ViewModel implements LifecycleObserver {
     }
 
     public ListViewModel() {
+
+    }
+
+    public MutableLiveData<ArrayList<LuckyMoney>> getLuckMoneys() {
+        return luckMoneys;
     }
 
     public ArrayList<Person> getPerson() {
@@ -41,10 +57,31 @@ public class ListViewModel extends ViewModel implements LifecycleObserver {
     }
 
     public String getTitle() {
-        return "111222333";
+        return name.getValue();
     }
 
     public void change() {
         name.setValue(String.valueOf(System.currentTimeMillis()));
+        Log.d("TAG", "change: " + name.getValue());
+        getByHtp();
+    }
+
+    public void getByHtp() {
+        Factory.create().getAllLuckyMoney()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<ArrayList<LuckyMoney>>() {
+                    @Override
+                    public void onNext(ArrayList<LuckyMoney> luckyMonies) {
+                        super.onNext(luckyMonies);
+                        luckMoneys.setValue(luckyMonies);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        Log.d("TAG", "onError: ");
+                    }
+                });
     }
 }

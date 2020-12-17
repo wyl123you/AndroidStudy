@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{()->viewModel.change()}"
-            android:text="@{viewModel.name}" />
+            android:text="@{viewModel.nameValue}" />
 
         <TextView
             android:layout_width="match_parent"
@@ -35,7 +35,6 @@
             android:text="@{viewModel.title}" />
 
         <androidx.recyclerview.widget.RecyclerView
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:adapter="@{adapter}"

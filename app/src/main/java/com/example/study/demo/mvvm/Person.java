@@ -91,6 +91,6 @@ public class Person extends BaseObservable implements LifecycleObserver, Observe
 
     @Override
     public void onChanged(String o) {
-
+        Log.d("Person", "onChanged: ");
     }
 }

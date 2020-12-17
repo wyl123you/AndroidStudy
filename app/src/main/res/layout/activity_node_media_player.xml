@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <cn.nodemedia.NodePlayerView
+        android:id="@+id/player_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/audio_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/audio_open" />
+
+        <Button
+            android:id="@+id/audio_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/audio_open"
+            android:text="@string/audio_close" />
+
+        <TextView
+            android:id="@+id/delay"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/audio_close"
+            android:gravity="center"
+            android:textColor="#00ff00"
+            android:textSize="20sp"
+            tools:text="asdf" />
+
+        <Button
+            android:id="@+id/audio_decrease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/audio_open"
+            android:layout_marginStart="10dp"
+            android:text="@string/audio_decrease" />
+
+        <Button
+            android:id="@+id/audio_increase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/audio_open"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/audio_open"
+            android:text="@string/audio_increase" />
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/audio_increase"
+            android:layout_marginStart="10dp"
+            android:text="@string/start" />
+
+        <Button
+            android:id="@+id/pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/start"
+            android:layout_marginStart="10dp"
+            android:text="@string/pause" />
+
+        <Button
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pause"
+            android:layout_marginStart="10dp"
+            android:text="@string/stop" />
+
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/stop"
+            android:layout_marginStart="10dp"
+            android:text="@string/refresh" />
+
+        <Button
+            android:id="@+id/is_playing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:text="@string/playing"
+            android:textAllCaps="false"
+            tools:ignore="RelativeOverlap" />
+
+        <Button
+            android:id="@+id/is_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/is_playing"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:text="@string/live"
+            android:textAllCaps="false"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+</FrameLayout>

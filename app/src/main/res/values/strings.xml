@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">AndroidStudy</string>
+
+
+    <string name="audio_open">声音开</string>
+    <string name="audio_close">声音关</string>
+
+    <string name="audio_increase">声音大</string>
+    <string name="audio_decrease">声音小</string>
+
+    <string name="start">开始</string>
+    <string name="stop">停止</string>
+    <string name="pause">暂停</string>
+    <string name="refresh">刷新</string>
+
+    <string name="live">is Live</string>
+    <string name="playing">is Playing</string>
+
+
+
 </resources>

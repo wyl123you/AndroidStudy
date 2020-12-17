@@ -67,7 +67,7 @@ public class MyApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate");
-        initBugly();
+//        initBugly();
         initNotificationChannel();
         initActivityCallbacks();
     }

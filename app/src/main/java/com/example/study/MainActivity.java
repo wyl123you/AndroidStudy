@@ -2,6 +2,8 @@ package com.example.study;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,9 +15,10 @@ import com.example.study.demo.loadingview.LoadingViewActivity;
 import com.example.study.demo.mvvm.MVVMActivity;
 import com.example.study.demo.mvvm.MVVMnewActivity;
 import com.example.study.demo.notificationDemo.NotificationActivity;
+import com.example.study.demo.player.ExoPlayerActivity;
+import com.example.study.demo.player.NodeMediaPlayerActivity;
 import com.example.study.demo.qrcode.QRCodeActivity;
 import com.example.study.demo.refreshRecyclerView.RefreshListActivity;
-import com.example.study.demo.refreshRecyclerView.SmartRefreshActivity;
 import com.example.study.demo.retrofit.RetrofitActivity;
 import com.example.study.demo.touchListener.TouchListenerActivity;
 import com.example.study.demo.view_diy.DivViewMoveActivity;
@@ -30,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        findViewById(R.id.floating).setOnClickListener(view -> {
+            Toast.makeText(MainActivity.this, "点击了悬浮控件", Toast.LENGTH_LONG).show();
+            Log.d("DragFloatActionButton", "onClick");
+        });
     }
 
     @OnClick(R.id.retrofit)
@@ -40,11 +47,6 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.refresh_recycler_list)
     public void toRefreshRecyclerActivity() {
         startActivity(new Intent(this, RefreshListActivity.class));
-    }
-
-    @OnClick(R.id.refresh_recycler_list_new)
-    public void aa() {
-        startActivity(new Intent(this, SmartRefreshActivity.class));
     }
 
     @OnClick(R.id.qr_code)
@@ -78,18 +80,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.diy_view)
-    public void todiy_viewActivity() {
+    public void toDiy_viewActivity() {
         startActivity(new Intent(this, DivViewMoveActivity.class));
     }
 
 
     @OnClick(R.id.jni)
-    public void tojniActivity() {
+    public void toJniActivity() {
         startActivity(new Intent(this, JniActivity.class));
     }
 
     @OnClick(R.id.mvvm)
-    public void TOMVVM() {
+    public void toMvvM() {
         startActivity(new Intent(this, MVVMActivity.class));
     }
 
@@ -100,7 +102,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     @OnClick(R.id.LoadingView)
-    public void TfloLoadingVieweMnew() {
+    public void toLoadingView() {
         startActivity(new Intent(this, LoadingViewActivity.class));
+    }
+
+    @OnClick(R.id.node_media_player)
+    public void toNodeMediaPlayerActivity() {
+        startActivity(new Intent(this, NodeMediaPlayerActivity.class));
+    }
+
+    @OnClick(R.id.exo_player)
+    public void toExoPlayerActivity() {
+        startActivity(new Intent(this, ExoPlayerActivity.class));
     }
 }
