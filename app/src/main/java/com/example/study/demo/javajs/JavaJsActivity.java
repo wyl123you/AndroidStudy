@@ -14,7 +14,7 @@ public class JavaJsActivity extends BaseActivity<ActivityJavaJaBinding> {
     @Override
     protected void initViews() {
         mBinding.webview.getSettings().setJavaScriptEnabled(true);
-        mBinding.webview.loadUrl("http://47.102.137.211/wyl/index.html");
+        mBinding.webview.loadUrl("http://jarka.cn/wyl/index.html");
         mBinding.webview.addJavascriptInterface(JavaJsActivity.this, "Android");
 
         mBinding.tvAndroidcalljs.setOnClickListener(v -> mBinding.webview.loadUrl("javascript:javacalljs()"));

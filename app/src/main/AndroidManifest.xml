@@ -27,7 +27,7 @@
         tools:replace="android:allowBackup">
         <activity
             android:name=".demo.player.ExoPlayerActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".demo.player.NodeMediaPlayerActivity"
             android:screenOrientation="landscape" />

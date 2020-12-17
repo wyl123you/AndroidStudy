@@ -4,24 +4,24 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.SparseLongArray;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.study.R;
-import com.google.android.exoplayer2.DefaultLoadControl;
-import com.google.android.exoplayer2.DefaultRenderersFactory;
-import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.example.study.manager.ThreadPool;
+import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.extractor.ExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.LoopingMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.ui.StyledPlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DataSpec;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
@@ -32,15 +32,38 @@ import com.google.android.exoplayer2.util.Util;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class ExoPlayerActivity extends AppCompatActivity {
 
     private SimpleExoPlayer player;
-    private SimpleExoPlayerView playerView;
+    private StyledPlayerView playerView;
+    private MediaItem mediaItem;
 
     private boolean playWhenReady;
     private int currentWindow;
     private long playbackPosition;
+
+    private ThreadPool.SimpleTask<Long> networkDelayDetectTask = new ThreadPool.SimpleTask<Long>() {
+        private int lastPtr = 0;
+        private int delayArraySize = 5;
+        private SparseLongArray delayArray = new SparseLongArray(delayArraySize);
+
+        @NotNull
+        @Override
+        public Long doingBackground() {
+            long delay = player.getBufferedPosition() - player.getCurrentPosition();
+            delayArray.put(lastPtr++ % delayArraySize, delay);
+            return delay;
+        }
+
+        @Override
+        public void onSuccess(Long result) {
+            super.onSuccess(result);
+            ((TextView) findViewById(R.id.delay)).setText(String.format(Locale.CHINA, "%s\n%d", delayArray.toString(), result));
+        }
+    };
 
 
     @Override
@@ -48,18 +71,33 @@ public class ExoPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exo_player);
 
-        playerView = (SimpleExoPlayerView) findViewById(R.id.play_view);
+        playerView = findViewById(R.id.play_view);
 
-        player = ExoPlayerFactory.newSimpleInstance(new DefaultRenderersFactory(this), new DefaultTrackSelector(), new DefaultLoadControl());
+        player = new SimpleExoPlayer.Builder(this).build();
         playerView.setPlayer(player);
-        player.setPlayWhenReady(true);
-        player.seekTo(currentWindow, playbackPosition);
+        playerView.setUseController(false);
 
+        mediaItem = MediaItem.fromUri("http://pull.zhuagewawa.com/record/w058.flv");
 
-        player.prepare(getRawMediaSource(), true, false);
+//        mediaItem = MediaItem.fromUri(RawResourceDataSource.buildRawResourceUri(R.raw.aaaaa));
+        mediaItem = MediaItem.fromUri("rawresource:///" + R.raw.aaaaa);
+
+        player.setMediaItem(mediaItem);
+        player.prepare();
+        player.play();
+
+        ThreadPool.executeByIoAtFixedRate(networkDelayDetectTask, 0, 1000, TimeUnit.MILLISECONDS);
+
+//        findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                player.setMediaSource(getRawMediaSource());
+//            }
+//        });
     }
 
     @NotNull
+    @Deprecated
     private MediaSource getRawMediaSource() {
         RawResourceDataSource rawResourceDataSource = new RawResourceDataSource(this);
         Uri uri = RawResourceDataSource.buildRawResourceUri(R.raw.aaaaa);
@@ -80,14 +118,11 @@ public class ExoPlayerActivity extends AppCompatActivity {
     }
 
     @NotNull
+    @Deprecated
     private MediaSource getHttpMediaSource() {
-
-        Uri uri = Uri.parse("http://pull.zhuagewawa.com/record/w057.flv");
-
+        Uri uri = Uri.parse("http://pull.zhuagewawa.com/record/w058.flv");
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, Util.getUserAgent(this, "飞星"), new DefaultBandwidthMeter());
-
         ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
-
         return new ExtractorMediaSource(uri, dataSourceFactory, extractorsFactory, new Handler(), new ExtractorMediaSource.EventListener() {
             @Override
             public void onLoadError(IOException error) {
@@ -97,10 +132,17 @@ public class ExoPlayerActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         setFullScreen();
-        player.setPlayWhenReady(true);
+        player.setMediaItem(mediaItem);
+        player.prepare();
+        player.play();
     }
 
     protected void setFullScreen() {
@@ -121,6 +163,22 @@ public class ExoPlayerActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        player.setPlayWhenReady(false);
+        player.pause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        player.stop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        player.release();
+        if (networkDelayDetectTask != null) {
+            networkDelayDetectTask.cancel();
+            networkDelayDetectTask = null;
+        }
     }
 }
