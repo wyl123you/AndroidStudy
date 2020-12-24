@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.androidstudy"
-        minSdkVersion 26
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0.0"
@@ -134,7 +134,5 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-dash:2.12.2'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.12.2'
 
-
-
-
+    implementation 'com.tencent:mmkv:1.0.23'
 }

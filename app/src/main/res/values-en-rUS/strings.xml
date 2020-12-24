@@ -21,7 +21,8 @@
 
     <string name="language">CHN/ENG</string>
 
-    <string name="chinese">中文</string>
-    <string name="english">英语</string>
+    <string name="chinese">Chinese</string>
+    <string name="english">English</string>
+
 
 </resources>

@@ -14,7 +14,10 @@ import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -22,6 +25,8 @@ import retrofit2.http.QueryMap;
 public interface APIService {
 
     @GET("luckyMoneys")
+    //接口设置缓存时间段，max-age 的单位是秒, 表示缓存时长
+    @Headers("Cache-Control:public,max-age=10")
     Call<ArrayList<LuckyMoney>> getAllLuckyMoneys();
 
     /**
@@ -103,4 +108,9 @@ public interface APIService {
     @POST("uploadFile")
     Observable<Boolean> uploadFile(
             @Body MultipartBody body);
+
+    @Multipart
+    @POST("uploadFile")
+    Observable<Boolean> uploadFile2(
+            @Part MultipartBody.Part body);
 }

@@ -42,9 +42,9 @@ public class DragFloatActionButton extends FloatingActionButton {
         int rawY = (int) event.getRawY();
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                setPressed(true);
+//                setPressed(true);
                 isDrag = false;
-//                getParent().requestDisallowInterceptTouchEvent(true);
+                getParent().requestDisallowInterceptTouchEvent(true);
                 lastX = rawX;
                 lastY = rawY;
                 ViewGroup parent;
@@ -72,7 +72,8 @@ public class DragFloatActionButton extends FloatingActionButton {
                 lastY = rawY;
                 break;
             case MotionEvent.ACTION_UP:
-                setPressed(false);
+                Log.d(TAG, "UP: ");
+//                setPressed(false);
                 if (rawX >= parentWidth / 2) {
                     //靠右吸附
                     animate().setInterpolator(new DecelerateInterpolator())
@@ -89,6 +90,7 @@ public class DragFloatActionButton extends FloatingActionButton {
                 break;
         }
         //如果是拖拽(超过10个像素)则消耗事件，否则正常传递即可。
-        return event.getAction() != MotionEvent.ACTION_UP && (!isDrag || super.onTouchEvent(event));
+//        return event.getAction() != MotionEvent.ACTION_UP && (!isDrag || super.onTouchEvent(event));
+        return isDrag || super.onTouchEvent(event);
     }
 }

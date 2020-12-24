@@ -121,6 +121,13 @@
                 android:layout_height="wrap_content"
                 android:text="谷歌EXO Player"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/language_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="APP内语言切换"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 
@@ -128,11 +135,14 @@
         android:id="@+id/floating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#ff0000"
+        android:backgroundTintMode="add"
         android:clickable="true"
         android:elevation="1dp"
         android:focusable="true"
         android:src="@drawable/icon_lock"
+        android:tint="@color/colorAccent"
+        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTintMode="src_over"
         app:borderWidth="0dp"
         app:pressedTranslationZ="4dp" />
 </RelativeLayout>

@@ -11,6 +11,7 @@ import com.example.study.demo.cardViewDemo.CardViewActivity;
 import com.example.study.demo.dialogFragmentDemo.DialogFragmentActivity;
 import com.example.study.demo.javajs.JavaJsActivity;
 import com.example.study.demo.jni.JniActivity;
+import com.example.study.demo.language.LanguageActivity;
 import com.example.study.demo.loadingview.LoadingViewActivity;
 import com.example.study.demo.mvvm.MVVMActivity;
 import com.example.study.demo.mvvm.MVVMnewActivity;
@@ -114,5 +115,10 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.exo_player)
     public void toExoPlayerActivity() {
         startActivity(new Intent(this, ExoPlayerActivity.class));
+    }
+
+    @OnClick(R.id.language_setting)
+    public void toLanguageActivity() {
+        startActivity(new Intent(this, LanguageActivity.class));
     }
 }

@@ -14,11 +14,29 @@ import java.text.MessageFormat;
 
 public class WelcomeActivity extends BaseActivity<ActivityWelcomeBinding> {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//        CountDownTimer countDownTimer = new CountDownTimer(2000, 1000) {
+//            @Override
+//            public void onTick(long l) {
+//                mBinding.text.setText(MessageFormat.format("{0}", l));
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+//                finish();
+//            }
+//        }.start();
+//
+//
+//    }
 
-        CountDownTimer countDownTimer = new CountDownTimer(2000, 1000) {
+    @Override
+    protected void initViews() {
+                CountDownTimer countDownTimer = new CountDownTimer(2000, 1000) {
             @Override
             public void onTick(long l) {
                 mBinding.text.setText(MessageFormat.format("{0}", l));
@@ -30,12 +48,6 @@ public class WelcomeActivity extends BaseActivity<ActivityWelcomeBinding> {
                 finish();
             }
         }.start();
-
-
-    }
-
-    @Override
-    protected void initViews() {
 
     }
 

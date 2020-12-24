@@ -1,7 +1,10 @@
 package com.example.study.demo.player;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.SparseLongArray;
 import android.view.View;
@@ -90,6 +93,7 @@ public class NodeMediaPlayerActivity extends AppCompatActivity implements View.O
         findViewById(R.id.refresh).setOnClickListener(this);
         findViewById(R.id.is_playing).setOnClickListener(this);
         findViewById(R.id.is_live).setOnClickListener(this);
+        findViewById(R.id.language).setOnClickListener(this);
         ThreadPool.executeByIoAtFixedRate(networkDelayDetectTask, 0, 1, TimeUnit.SECONDS);
     }
 
@@ -186,6 +190,20 @@ public class NodeMediaPlayerActivity extends AppCompatActivity implements View.O
                 break;
             case R.id.is_live:
                 Toast.makeText(this, player.isLive() + "", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.language:
+                Log.d(TAG, Locale.getDefault().getLanguage() + "  " + Locale.getDefault().getCountry());
+                Locale locale = new Locale("en", "US");
+//                Locale.setDefault(locale);
+
+                Resources resources = getApplicationContext().getResources();
+                DisplayMetrics dm = resources.getDisplayMetrics();
+
+                Configuration configuration = resources.getConfiguration();
+                configuration.locale = Locale.ENGLISH;
+
+                resources.updateConfiguration(configuration, dm);
+                Log.d(TAG, Locale.getDefault().getLanguage() + "  " + Locale.getDefault().getCountry());
                 break;
         }
     }

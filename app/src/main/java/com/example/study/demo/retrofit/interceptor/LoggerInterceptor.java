@@ -1,4 +1,4 @@
-package com.example.study.demo.retrofit;
+package com.example.study.demo.retrofit.interceptor;
 
 import android.util.Log;
 
@@ -9,11 +9,15 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -24,12 +28,15 @@ import okio.Buffer;
 import okio.BufferedSource;
 
 
-public class OKHttpInterceptor implements Interceptor {
+public class LoggerInterceptor implements Interceptor {
     private static final String TAG = "OKHttpInterceptor";
 
     @Override
     @NonNull
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NotNull Chain chain) throws IOException {
+
+        Log.d("1234", "LoggerInterceptor: ");
+
 
         Charset UTF8 = StandardCharsets.UTF_8;
 
@@ -47,7 +54,11 @@ public class OKHttpInterceptor implements Interceptor {
                 charset = mediaType.charset(UTF8);
             }
             assert charset != null;
-            reqBody = toPrettyFormat(buffer.clone().readString(charset));
+            try {
+                reqBody = toPrettyFormat(buffer.clone().readString(charset));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         Log.d(TAG, String.format("\n发送请求\nmethod：%s\nurl：%s\nheaders: %s\nbody：%s",
                 request.method(), request.url(), request.headers(), reqBody));
@@ -74,8 +85,8 @@ public class OKHttpInterceptor implements Interceptor {
             assert charset != null;
             respBody = toPrettyFormat(buffer.clone().readString(charset));
         }
-        Log.d(TAG, String.format("\n收到响应\n%s %s\n请求url：%s\n请求body：%s\n响应body：%s",
-                response.code(), response.message(), response.request().url(), reqBody, respBody));
+        Log.d(TAG, String.format("收到响应\n响应code：%s\n响应message%s\n响应url：%s\n响应headers：%s\n响应body：%s",
+                response.code(), response.message(), response.request().url(), response.headers(), respBody));
         return response;
     }
 

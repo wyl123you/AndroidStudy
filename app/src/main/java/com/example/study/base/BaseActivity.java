@@ -1,5 +1,6 @@
 package com.example.study.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -13,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.study.manager.ActivityStackManager;
+import com.example.study.manager.LanguageUtil;
+import com.example.study.manager.MMKVUtil;
 
 import java.util.ArrayList;
 
@@ -28,6 +31,12 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
     private ArrayList<Fragment> fragments;
 
     private CompositeDisposable mCompositeDisposable;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        String language = MMKVUtil.getLanguage();
+        super.attachBaseContext(LanguageUtil.attachBaseContext(newBase, language));
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

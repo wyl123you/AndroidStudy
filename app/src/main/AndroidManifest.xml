@@ -26,10 +26,14 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
         <activity
+            android:name=".demo.language.LanguageActivity"
+            android:configChanges="locale" />
+        <activity
             android:name=".demo.player.ExoPlayerActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".demo.player.NodeMediaPlayerActivity"
+            android:configChanges="orientation|screenSize|keyboard|locale"
             android:screenOrientation="landscape" />
         <activity android:name=".demo.loadingview.LoadingViewActivity" />
         <activity android:name=".demo.notificationDemo.NotificationActivity" />

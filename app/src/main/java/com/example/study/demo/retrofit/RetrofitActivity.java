@@ -17,6 +17,7 @@ import com.example.study.databinding.ActivityRetrofitBinding;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -66,6 +67,17 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
 
             }
         });
+
+        File file = new File(Environment.getExternalStorageDirectory(), "wyl.txt");
+        String a = "wewrwetertery";
+        try {
+            FileOutputStream stream = new FileOutputStream(file);
+            stream.write(a.getBytes());
+            stream.flush();
+            stream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -307,7 +319,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
             case R.id.uploadFile:
                 String path = Environment.getExternalStorageDirectory().getAbsolutePath();
                 File file = new File(path, "wyl.txt");
-                RequestBody fileBody = RequestBody.create(MEDIA_TYPE_FILE, file);
+                RequestBody fileBody = RequestBody.create(file, MEDIA_TYPE_FILE);
 //                MultipartBody.Part part = MultipartBody.Part.createFormData("file", "wyl.txt", fileBody);
                 MultipartBody requestBody = new MultipartBody.Builder().setType(MediaType.parse("multipart/form-data"))
                         .addFormDataPart("file", "wyl.txt", fileBody)
@@ -328,6 +340,47 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
                             public void onSubscribe(Disposable d) {
                                 addToCompositeDisposable(d);
                                 super.onSubscribe(d);
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                super.onError(e);
+                                Toast.makeText(RetrofitActivity.this, "error", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                break;
+            case R.id.uploadFile2:
+                String path1 = Environment.getExternalStorageDirectory().getAbsolutePath();
+                File file1 = new File(path1, "wyl.txt");
+
+
+                RequestBody fileBody1 = RequestBody.create(file1, MEDIA_TYPE_FILE);
+                MultipartBody.Part part = MultipartBody.Part.createFormData("file", "wyl.txt", fileBody1);
+//                MultipartBody requestBody1 = new MultipartBody.Builder().setType(MediaType.parse("multipart/form-data"))
+//                        .addFormDataPart("file", "wyl.txt", fileBody1)
+//                        .build();
+
+                Factory.create()
+                        .uploadFile2(part)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new BaseObserver<Boolean>() {
+                            @Override
+                            public void onNext(Boolean aBoolean) {
+                                super.onNext(aBoolean);
+                                Toast.makeText(RetrofitActivity.this, aBoolean.toString(), Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onSubscribe(Disposable d) {
+                                addToCompositeDisposable(d);
+                                super.onSubscribe(d);
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                super.onError(e);
+                                Toast.makeText(RetrofitActivity.this, "error", Toast.LENGTH_LONG).show();
                             }
                         });
                 break;

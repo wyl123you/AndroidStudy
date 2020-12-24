@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,18 +19,17 @@ import androidx.multidex.MultiDexApplication;
 import com.example.study.demo.notificationDemo.NotifyUtil;
 import com.example.study.manager.ActivityStackManager;
 import com.example.study.manager.FragmentStackManager;
+import com.example.study.manager.LanguageUtil;
+import com.example.study.manager.MMKVUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.mmkv.MMKV;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class MyApplication extends MultiDexApplication {
 
@@ -53,13 +53,7 @@ public class MyApplication extends MultiDexApplication {
     }
 
     public static MyApplication getInstance() {
-        if (instance == null) {
-            synchronized (MyApplication.class) {
-                if (instance == null) {
-                    instance = new MyApplication();
-                }
-            }
-        }
+
         return instance;
     }
 
@@ -67,16 +61,19 @@ public class MyApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate");
-//        initBugly();
+        initBugly();
+        instance = this;
         initNotificationChannel();
         initActivityCallbacks();
+        initMMKV();
+        initLanguage();
     }
 
     private void initActivityCallbacks() {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
-                Log.d(TAG, "onActivityCreated: ");
+                Log.d(TAG, "onActivityCreated: " + activity.getLocalClassName());
             }
 
             @Override
@@ -109,17 +106,7 @@ public class MyApplication extends MultiDexApplication {
                 Log.d(TAG, "onActivityDestroyed: ");
             }
         });
-
     }
-
-    public int a(){
-        return  0;
-    }
-
-    public String a(String a){
-        return "aa";
-    }
-
 
 
     private void initBugly() {
@@ -209,6 +196,21 @@ public class MyApplication extends MultiDexApplication {
                 NotificationManager.IMPORTANCE_HIGH);
     }
 
+    private void initMMKV() {
+        MMKV.initialize(this);
+        MMKVUtil.initSystemMMKV();
+        MMKVUtil.initUserMMKV();
+    }
+
+    private void initLanguage() {
+        //针对安卓7.0以下，需要在Application创建的时候进行语言切换
+        //安卓7.0，以及7.0以上，见BaseActivity
+        String language = MMKVUtil.getLanguage();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            LanguageUtil.switchLanguage(this, language);
+        }
+    }
+
     @Override
     public void onTerminate() {
         super.onTerminate();
@@ -224,6 +226,11 @@ public class MyApplication extends MultiDexApplication {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         Log.d(TAG, "onConfigurationChanged");
+    }
+
+    @Override
+    public Context createConfigurationContext(Configuration overrideConfiguration) {
+        return super.createConfigurationContext(overrideConfiguration);
     }
 
     @Override

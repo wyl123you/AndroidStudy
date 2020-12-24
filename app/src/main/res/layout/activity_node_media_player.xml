@@ -108,6 +108,16 @@
             android:text="@string/live"
             android:textAllCaps="false"
             tools:ignore="RelativeOverlap" />
-    </RelativeLayout>
 
+        <Button
+            android:id="@+id/language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/is_live"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:text="@string/language"
+            android:textAllCaps="false"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
 </FrameLayout>
