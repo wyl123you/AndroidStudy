@@ -128,6 +128,13 @@
                 android:layout_height="wrap_content"
                 android:text="APP内语言切换"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/security"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="解锁(指纹 面部 密码)"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 

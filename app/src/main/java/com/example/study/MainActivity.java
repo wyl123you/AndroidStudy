@@ -21,6 +21,7 @@ import com.example.study.demo.player.NodeMediaPlayerActivity;
 import com.example.study.demo.qrcode.QRCodeActivity;
 import com.example.study.demo.refreshRecyclerView.RefreshListActivity;
 import com.example.study.demo.retrofit.RetrofitActivity;
+import com.example.study.demo.securityTest.SecurityActivity;
 import com.example.study.demo.touchListener.TouchListenerActivity;
 import com.example.study.demo.view_diy.DivViewMoveActivity;
 
@@ -120,5 +121,10 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.language_setting)
     public void toLanguageActivity() {
         startActivity(new Intent(this, LanguageActivity.class));
+    }
+
+    @OnClick(R.id.security)
+    public void toSecurityActivity() {
+        startActivity(new Intent(this, SecurityActivity.class));
     }
 }
