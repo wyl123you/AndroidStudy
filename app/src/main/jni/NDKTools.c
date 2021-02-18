@@ -10,8 +10,7 @@ JNIEXPORT jint JNICALL Java_com_example_study_demo_jni_NDKTools_add
     return a + b;
 }
 
-JNIEXPORT jstring JNICALL
-Java_com_example_study_demo_jni_NDKTools_getStringFromNDK
+JNIEXPORT jstring JNICALL Java_com_example_study_demo_jni_NDKTools_getStringFromNDK
         (JNIEnv *env, jclass clazz, jstring j_string) {
     // TODO: implement getStringFromNDK()
     const char *c_str = (*env)->GetStringUTFChars(env, j_string, JNI_FALSE);
@@ -19,8 +18,7 @@ Java_com_example_study_demo_jni_NDKTools_getStringFromNDK
     return (*env)->NewStringUTF(env, a);
 }
 
-JNIEXPORT jstring JNICALL
-Java_com_example_study_demo_jni_NDKTools_getSign
+JNIEXPORT jstring JNICALL Java_com_example_study_demo_jni_NDKTools_getSign
         (JNIEnv *env, jclass clazz, jstring j_url, jobject j_map, jstring j_key) {
     // TODO: implement getSign()
     const char *c_url = (*env)->GetStringUTFChars(env, j_url, JNI_FALSE);
@@ -28,4 +26,3 @@ Java_com_example_study_demo_jni_NDKTools_getSign
 
     return (*env)->NewStringUTF(env, c_url);
 }
-

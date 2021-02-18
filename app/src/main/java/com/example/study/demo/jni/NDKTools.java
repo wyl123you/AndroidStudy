@@ -4,7 +4,6 @@ import java.util.Map;
 
 public class NDKTools {
 
-
     static {
         System.loadLibrary("a");
     }
