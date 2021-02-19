@@ -15,7 +15,7 @@ buildscript {
         // in the individual module build.gradle files
 
         // 2.
-        classpath 'com.huawei.agconnect:agcp:1.2.0.300'
+        classpath 'com.huawei.agconnect:agcp:1.4.2.300'
     }
 }
 

@@ -1,5 +1,6 @@
 package com.example.study;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.study.demo.breatheLight.BreatheActivity;
 import com.example.study.demo.cardViewDemo.CardViewActivity;
 import com.example.study.demo.dialogFragmentDemo.DialogFragmentActivity;
 import com.example.study.demo.javajs.JavaJsActivity;
@@ -16,6 +18,7 @@ import com.example.study.demo.loadingview.LoadingViewActivity;
 import com.example.study.demo.mvvm.MVVMActivity;
 import com.example.study.demo.mvvm.MVVMnewActivity;
 import com.example.study.demo.notificationDemo.NotificationActivity;
+import com.example.study.demo.palettePager.PalettePagerActivity;
 import com.example.study.demo.player.ExoPlayerActivity;
 import com.example.study.demo.player.NodeMediaPlayerActivity;
 import com.example.study.demo.qrcode.QRCodeActivity;
@@ -28,6 +31,7 @@ import com.example.study.demo.view_diy.DivViewMoveActivity;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+@SuppressLint("NonConstantResourceId")
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -86,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, DivViewMoveActivity.class));
     }
 
-
     @OnClick(R.id.jni)
     public void toJniActivity() {
         startActivity(new Intent(this, JniActivity.class));
@@ -101,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
     public void TOMVVMnew() {
         startActivity(new Intent(this, MVVMnewActivity.class));
     }
-
 
     @OnClick(R.id.LoadingView)
     public void toLoadingView() {
@@ -126,5 +128,15 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.security)
     public void toSecurityActivity() {
         startActivity(new Intent(this, SecurityActivity.class));
+    }
+
+    @OnClick(R.id.palette)
+    public void toPaletteActivity() {
+        startActivity(new Intent(this, PalettePagerActivity.class));
+    }
+
+    @OnClick(R.id.breathe)
+    public void toBreatheActivity() {
+        startActivity(new Intent(this, BreatheActivity.class));
     }
 }
