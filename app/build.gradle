@@ -136,4 +136,7 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.12.2'
 
     implementation 'com.tencent:mmkv:1.0.23'
+
+    //轮播图
+    implementation 'cn.bingoogolapple:bga-banner:2.2.6'
 }
