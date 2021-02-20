@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="HardcodedText">
+
+        <Button
+            android:id="@+id/app_icon1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onAppIcon1"
+            android:text="切换图标"
+            android:scaleType="fitXY"
+            android:src="@drawable/account"
+            tools:ignore="ContentDescription" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/app_icon1"
+            android:onClick="onDefault"
+            android:text="恢复默认" />
+    </RelativeLayout>
+</layout>

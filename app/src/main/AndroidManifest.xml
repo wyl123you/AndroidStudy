@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.study">
 
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,6 +18,7 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="false"
+        android:enabled="true"
         android:icon="@drawable/android"
         android:label="@string/app_name"
         android:persistent="true"
@@ -26,23 +28,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
-        <activity android:name=".demo.breatheLight.BreatheActivity"></activity>
-        <activity android:name=".demo.palettePager.PalettePagerActivity" />
-        <activity android:name=".demo.securityTest.SecurityActivity" />
-        <activity
-            android:name=".demo.language.LanguageActivity"
-            android:configChanges="locale" />
-        <activity
-            android:name=".demo.player.ExoPlayerActivity"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".demo.player.NodeMediaPlayerActivity"
-            android:configChanges="orientation|screenSize|keyboard|locale"
-            android:screenOrientation="landscape" />
-        <activity android:name=".demo.loadingview.LoadingViewActivity" />
-        <activity android:name=".demo.notificationDemo.NotificationActivity" />
-        <activity android:name=".demo.cardViewDemo.CardViewActivity" />
-        <activity android:name=".demo.dialogFragmentDemo.DialogFragmentActivity" />
+
         <activity
             android:name=".demo.welcome.WelcomeActivity"
             android:launchMode="standard"
@@ -53,6 +39,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity-alias
+            android:name=".TestIcon1"
+            android:enabled="false"
+            android:icon="@drawable/account"
+            android:label="@string/app_name1"
+            android:targetActivity=".demo.welcome.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".TestIcon2"
+            android:enabled="false"
+            android:icon="@drawable/background"
+            android:label="@string/app_name2"
+            android:targetActivity=".demo.welcome.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
@@ -82,6 +95,10 @@
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".demo.appicon.AppIconActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".demo.mvvm.MVVMnewActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
@@ -107,6 +124,44 @@
             android:name=".demo.theme.ThemeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.breatheLight.BreatheActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.palettePager.PalettePagerActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.securityTest.SecurityActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.language.LanguageActivity"
+            android:configChanges="locale" />
+        <activity
+            android:name=".demo.player.ExoPlayerActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".demo.player.NodeMediaPlayerActivity"
+            android:configChanges="orientation|screenSize|keyboard|locale"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".demo.loadingview.LoadingViewActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.notificationDemo.NotificationActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.cardViewDemo.CardViewActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.dialogFragmentDemo.DialogFragmentActivity"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
 
         <meta-data

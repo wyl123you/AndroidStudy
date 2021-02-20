@@ -2,6 +2,8 @@
 
 
     <string name="app_name">AndroidStudy</string>
+    <string name="app_name1">AndroidStudy_iconTest1</string>
+    <string name="app_name2">AndroidStudy_iconTest2</string>
 
 
     <string name="audio_open">audio open</string>

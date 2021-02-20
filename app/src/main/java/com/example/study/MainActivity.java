@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.study.demo.appicon.AppIconActivity;
 import com.example.study.demo.breatheLight.BreatheActivity;
 import com.example.study.demo.cardViewDemo.CardViewActivity;
 import com.example.study.demo.dialogFragmentDemo.DialogFragmentActivity;
@@ -138,5 +139,10 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.breathe)
     public void toBreatheActivity() {
         startActivity(new Intent(this, BreatheActivity.class));
+    }
+
+    @OnClick(R.id.appicon)
+    public void toAppiconActivity() {
+        startActivity(new Intent(this, AppIconActivity.class));
     }
 }
