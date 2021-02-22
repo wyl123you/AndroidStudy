@@ -1,5 +1,6 @@
 package com.example.study.demo.moveUnlock;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -89,9 +90,9 @@ public class ImageAuthenticationView extends AppCompatImageView {
      * 拼图成功的回调
      **/
     public interface onPuzzleListener {
-        public void onSuccess();
+        void onSuccess();
 
-        public void onFail();
+        void onFail();
     }
 
     /**
@@ -102,7 +103,7 @@ public class ImageAuthenticationView extends AppCompatImageView {
     /**
      * 设置回调
      *
-     * @param listener
+     * @param listener 监听
      */
     public void setPuzzleListener(onPuzzleListener listener) {
         this.mlistener = listener;
@@ -157,10 +158,10 @@ public class ImageAuthenticationView extends AppCompatImageView {
         // 防止生成的X坐标截图时导致异常
         if (mUnitRandomX + mUintWidth > getWidth()) {
             initUnitXY();
-            return;
         }
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -186,7 +187,7 @@ public class ImageAuthenticationView extends AppCompatImageView {
     /**
      * 重置
      */
-    public void reSet() {
+    public void reset() {
         isReSet = true;
         mUnitMoveDistance = 0;
         if (needRotate) {
@@ -200,7 +201,7 @@ public class ImageAuthenticationView extends AppCompatImageView {
     /**
      * 获取每次滑动的平均偏移值
      *
-     * @return
+     * @return xx
      */
     public float getAverageDistance(int max) {
         return (float) (mBitmap.getWidth() - mUintWidth) / max;
@@ -210,7 +211,7 @@ public class ImageAuthenticationView extends AppCompatImageView {
     /**
      * 滑块移动距离
      *
-     * @param distance
+     * @param distance ss
      */
     public void setUnitMoveDistance(float distance) {
         mUnitMoveDistance = distance;
@@ -240,7 +241,7 @@ public class ImageAuthenticationView extends AppCompatImageView {
     /**
      * 创建目标图片(阴影部分)
      *
-     * @return
+     * @return dd
      */
     private Bitmap drawTargetBitmap() {
         // 绘制图片
@@ -260,7 +261,7 @@ public class ImageAuthenticationView extends AppCompatImageView {
     /**
      * 创建结滑块图片
      *
-     * @param bp
+     * @param bp vv
      */
     private Bitmap drawResultBitmap(Bitmap bp) {
         // 绘制图片
@@ -292,29 +293,28 @@ public class ImageAuthenticationView extends AppCompatImageView {
     /**
      * 获取实际显示的图片
      *
-     * @return
+     * @return dd
      */
     public Bitmap getBaseBitmap() {
         //获取背景图片Bitmap
         Bitmap b = drawableToBitamp(getDrawable());
-        float scaleX = 1.0f;
-        float scaleY = 1.0f;
+        float scaleX;
+        float scaleY;
         // 如果图片的宽或者高与view的宽高不匹配，计算出需要缩放的比例；缩放后的图片的宽高，一定要大于我们view的宽高；所以我们这里取大值；
         scaleX = getWidth() * 1.0f / b.getWidth();
         scaleY = getHeight() * 1.0f / b.getHeight();
         //按比例缩放
         Matrix matrix = new Matrix();
         matrix.setScale(scaleX, scaleY);
-        Bitmap bd = Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(),
+        return Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(),
                 matrix, true);
-        return bd;
     }
 
     /**
      * drawable转bitmap
      *
-     * @param drawable
-     * @return
+     * @param drawable ss
+     * @return ss
      */
     private Bitmap drawableToBitamp(Drawable drawable) {
         if (null == drawable) {
@@ -339,37 +339,20 @@ public class ImageAuthenticationView extends AppCompatImageView {
     }
 
     /**
-     * 缩放图片
-     *
-     * @param bp
-     * @param x
-     * @param y
-     * @return
-     */
-//    private Bitmap BitmapUtil.scale(Bitmap bp, float x, float y) {
-//        int w = bp.getWidth();
-//        int h = bp.getHeight();
-//        float sx = (float) x / w;
-//        float sy = (float) y / h;
-//        Matrix matrix = new Matrix();
-//        matrix.postScale(sx, sy);
-//        Bitmap resizeBmp = Bitmap.createBitmap(bp, 0, 0, w,
-//                h, matrix, true);
-//        return resizeBmp;
-//    }
-
-    /**
      * 旋转图片
      *
-     * @param degree
-     * @param bitmap
-     * @return
+     * @param degree dd
+     * @param bitmap dd
+     * @return gg
      */
     public Bitmap rotateBitmap(int degree, Bitmap bitmap) {
         Matrix matrix = new Matrix();
         matrix.postRotate(degree);
-        Bitmap bm = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
                 bitmap.getHeight(), matrix, true);
-        return bm;
+    }
+
+    public int getMaxProgress() {
+        return getWidth() - mUintWidth;
     }
 }

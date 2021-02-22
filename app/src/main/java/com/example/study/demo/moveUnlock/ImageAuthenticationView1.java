@@ -12,7 +12,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -61,7 +60,7 @@ public class ImageAuthenticationView1 extends AppCompatImageView {
     private Bitmap mSourceBitmap;
 
     //滑块背景阴影图像
-    private Bitmap mShadowBitmap;
+    private final Bitmap mShadowBitmap;
 
     //验证的图像
     private Bitmap mBitmap;
@@ -76,7 +75,10 @@ public class ImageAuthenticationView1 extends AppCompatImageView {
     public int DEFAULT_DEVIATE;
 
     //判断是否重新绘制图像
-    private boolean isReSet = true;
+    private boolean isReset = true;
+
+    //回调
+    private OnPuzzleListener mListener;
 
     public ImageAuthenticationView1(@NonNull Context context) {
         this(context, null);
@@ -123,7 +125,7 @@ public class ImageAuthenticationView1 extends AppCompatImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (isReSet) {
+        if (isReset) {
             mBitmap = getBaseBitmap();
 
             if (mUnitWidth == 0) {
@@ -135,7 +137,9 @@ public class ImageAuthenticationView1 extends AppCompatImageView {
             }
             initUnitXY();
             mSourceBitmap = BitmapUtil.create(mBitmap, mUnitRandomX, mUnitRandomY, mUnitWidth, mUnitHeight);
+            isReset = false;
         }
+
         canvas.drawBitmap(drawTargetBitmap(), mUnitRandomX, mUnitRandomY, mPaint);
         canvas.drawBitmap(drawSourceBitmap(), mUnitMoveDistance, mUnitRandomY, mPaint);
     }
@@ -144,8 +148,6 @@ public class ImageAuthenticationView1 extends AppCompatImageView {
      * 随机生成生成滑块的XY坐标
      */
     private void initUnitXY() {
-        Log.d(TAG, "backgroundBitmap width: " + mBitmap.getWidth());
-        Log.d(TAG, "backgroundBitmap height: " + mBitmap.getHeight());
         mUnitRandomX = (int) (Math.random() * (mBitmap.getWidth() - mUnitWidth));
         mUnitRandomY = (int) (Math.random() * (mBitmap.getHeight() - mUnitHeight));
         //防止生成的位置距离太近
@@ -188,7 +190,7 @@ public class ImageAuthenticationView1 extends AppCompatImageView {
         Bitmap resultBmp = Bitmap.createBitmap(mUnitWidth, mUnitHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(resultBmp);
         canvas.drawBitmap(shadowBitmap, new Rect(0, 0, mUnitWidth, mUnitHeight), new Rect(0, 0, mUnitWidth, mUnitHeight), paint);
-        // 选择交集去上层图片
+        //选择交集去上层图片
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
         canvas.drawBitmap(mSourceBitmap, new Rect(0, 0, mUnitWidth, mUnitHeight), new Rect(0, 0, mUnitWidth, mUnitHeight), paint);
         return resultBmp;
@@ -203,8 +205,6 @@ public class ImageAuthenticationView1 extends AppCompatImageView {
         Bitmap targetBitmap;
         if (mTargetBitmap != null) {
             targetBitmap = BitmapUtil.scale(mTargetBitmap, mUnitWidth, mUnitHeight);
-            Log.d(TAG, "mUnitWidth: " + mUnitWidth);
-            Log.d(TAG, "mUnitHeight: " + mUnitHeight);
         } else {
             targetBitmap = BitmapUtil.scale(BitmapFactory.decodeResource(getResources(), R.drawable.puzzle_show), mUnitWidth, mUnitHeight);
         }
@@ -242,11 +242,66 @@ public class ImageAuthenticationView1 extends AppCompatImageView {
      */
     public void setUnitMoveDistance(float distance) {
         mUnitMoveDistance = distance;
-        // 防止滑块滑出图片
+        //防止滑块滑出图片
         if (mUnitMoveDistance > mBitmap.getWidth() - mUnitWidth) {
             mUnitMoveDistance = mBitmap.getWidth() - mUnitWidth;
         }
         invalidate();
     }
 
+    /**
+     * 获取每次滑动的平均偏移值
+     *
+     * @return 每次滑动的平均偏移值
+     */
+    public float getAverageDistance(int max) {
+        return (float) (mBitmap.getWidth() - mUnitWidth) / max;
+    }
+
+    /**
+     * 验证是否拼接成功
+     */
+    public void testPuzzle() {
+        if (Math.abs(mUnitMoveDistance - mUnitRandomX) <= DEFAULT_DEVIATE) {
+            if (mListener != null) {
+                mListener.onSuccess();
+            }
+        } else {
+            if (mListener != null) {
+                mListener.onFail();
+            }
+        }
+    }
+
+    /**
+     * 重置
+     */
+    public void reset() {
+        isReset = true;
+        mUnitMoveDistance = 0;
+        if (needRotate) {
+            rotate = (int) (Math.random() * 3) * 90;
+        } else {
+            rotate = 0;
+        }
+        invalidate();
+    }
+
+    /**
+     * 拼图成功的回调
+     **/
+    public interface OnPuzzleListener {
+        void onSuccess();
+
+        void onFail();
+    }
+
+    /**
+     * 设置回调
+     *
+     * @param listener 监听器
+     */
+    public void setPuzzleListener(OnPuzzleListener listener) {
+        this.mListener = listener;
+    }
 }
