@@ -158,6 +158,13 @@
                 android:layout_height="wrap_content"
                 android:text="切换图标"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/move_unlock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="滑动解锁"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 

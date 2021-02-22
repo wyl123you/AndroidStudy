@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        tools:context=".MainActivity">
+
+        <com.example.study.demo.moveUnlock.ImageAuthenticationView
+            android:id="@+id/dy_v"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/test"
+            app:needRotate="true"
+            app:unitHeight="60dp"
+            app:unitShadeSrc="@drawable/puzzle_shade"
+            app:unitShowSrc="@drawable/puzzle_show"
+            app:unitWidth="100dp"
+            tools:ignore="MissingClass" />
+
+        <com.example.study.demo.moveUnlock.ImageAuthenticationView1
+            android:id="@+id/aaa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/test"
+            app:needRotate1="true"
+            app:unitHeight1="50dp"
+            app:unitShadeSrc1="@drawable/puzzle_shade"
+            app:unitShowSrc1="@drawable/puzzle_show"
+            app:unitWidth1="50dp"
+            tools:ignore="MissingClass" />
+
+        <SeekBar
+            android:id="@+id/sb_dy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_seekbar"
+            android:max="100" />
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重置"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+</layout>

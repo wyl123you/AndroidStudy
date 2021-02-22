@@ -16,6 +16,7 @@ import com.example.study.demo.javajs.JavaJsActivity;
 import com.example.study.demo.jni.JniActivity;
 import com.example.study.demo.language.LanguageActivity;
 import com.example.study.demo.loadingview.LoadingViewActivity;
+import com.example.study.demo.moveUnlock.MoveUnlockActivity;
 import com.example.study.demo.mvvm.MVVMActivity;
 import com.example.study.demo.mvvm.MVVMnewActivity;
 import com.example.study.demo.notificationDemo.NotificationActivity;
@@ -144,5 +145,10 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.appicon)
     public void toAppiconActivity() {
         startActivity(new Intent(this, AppIconActivity.class));
+    }
+
+    @OnClick(R.id.move_unlock)
+    public void toMoveUnlockActivity() {
+        startActivity(new Intent(this, MoveUnlockActivity.class));
     }
 }
