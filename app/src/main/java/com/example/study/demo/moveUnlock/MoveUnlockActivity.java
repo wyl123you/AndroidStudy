@@ -113,7 +113,7 @@ public class MoveUnlockActivity extends BaseActivity<ActivityMoveUnlockBinding> 
             @Override
             public void onFail() {
                 Toast.makeText(MoveUnlockActivity.this, "验证失败", Toast.LENGTH_SHORT).show();
-                mSeekBar.setProgress(0);
+                mSeekBar1.setProgress(0);
             }
         });
 

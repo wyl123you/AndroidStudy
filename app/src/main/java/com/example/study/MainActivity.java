@@ -27,8 +27,10 @@ import com.example.study.demo.qrcode.QRCodeActivity;
 import com.example.study.demo.refreshRecyclerView.RefreshListActivity;
 import com.example.study.demo.retrofit.RetrofitActivity;
 import com.example.study.demo.securityTest.SecurityActivity;
+import com.example.study.demo.shareAnimation.ShareAnimationActivity;
 import com.example.study.demo.touchListener.TouchListenerActivity;
 import com.example.study.demo.view_diy.DivViewMoveActivity;
+import com.example.study.viewPager3D.ViewPager3DActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -150,5 +152,15 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.move_unlock)
     public void toMoveUnlockActivity() {
         startActivity(new Intent(this, MoveUnlockActivity.class));
+    }
+
+    @OnClick(R.id.share_animation)
+    public void toShareAnimationActivity() {
+        startActivity(new Intent(this, ShareAnimationActivity.class));
+    }
+
+    @OnClick(R.id.view_pager_3d)
+    public void to3DViewPagerActivity() {
+        startActivity(new Intent(this, ViewPager3DActivity.class));
     }
 }

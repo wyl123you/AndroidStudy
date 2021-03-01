@@ -165,6 +165,20 @@
                 android:layout_height="wrap_content"
                 android:text="滑动解锁"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/share_animation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="共享动画"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/view_pager_3d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3D ViewPager"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 
