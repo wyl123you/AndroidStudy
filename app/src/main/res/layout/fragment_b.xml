@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="page1"
+        android:text="page2"
         android:textColor="#ffffff"
         android:textSize="30sp" />
 </RelativeLayout>

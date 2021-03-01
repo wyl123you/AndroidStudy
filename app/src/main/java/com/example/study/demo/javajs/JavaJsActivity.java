@@ -14,14 +14,10 @@ public class JavaJsActivity extends BaseActivity<ActivityJavaJaBinding> {
     @Override
     protected void initViews() {
         mBinding.webview.getSettings().setJavaScriptEnabled(true);
-        mBinding.webview.loadUrl("http://jarka.cn/wyl/index.html");
+        mBinding.webview.loadUrl("http://jarka.cn/aaaaa.html");
         mBinding.webview.addJavascriptInterface(JavaJsActivity.this, "Android");
-
         mBinding.tvAndroidcalljs.setOnClickListener(v -> mBinding.webview.loadUrl("javascript:javacalljs()"));
-
         mBinding.tvAndroidcalljsargs.setOnClickListener(v -> mBinding.webview.loadUrl("javascript:javacalljswith(" + "'Android传过来的参数'" + ")"));
-
-
     }
 
     @Override
