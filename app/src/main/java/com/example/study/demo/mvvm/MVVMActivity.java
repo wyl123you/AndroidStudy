@@ -4,9 +4,8 @@ import android.widget.Toast;
 
 import androidx.lifecycle.LifecycleRegistry;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.adapter.DatabindingAdapter;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityMvvmBinding;
 
 import java.util.ArrayList;

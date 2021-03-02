@@ -1,7 +1,7 @@
 package com.example.study.demo.view_diy;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityDiyViewMoveBinding;
 
 public class DivViewMoveActivity extends BaseActivity<ActivityDiyViewMoveBinding> {

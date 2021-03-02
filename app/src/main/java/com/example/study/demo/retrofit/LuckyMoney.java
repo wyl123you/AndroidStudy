@@ -1,4 +1,4 @@
-package com.example.study.bean;
+package com.example.study.demo.retrofit;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;

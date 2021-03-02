@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityQrCodeBinding;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;

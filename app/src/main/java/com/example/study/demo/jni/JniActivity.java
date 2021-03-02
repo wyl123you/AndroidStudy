@@ -5,8 +5,8 @@ import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.Toast;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityJniBinding;
 
 public class JniActivity extends BaseActivity<ActivityJniBinding> {

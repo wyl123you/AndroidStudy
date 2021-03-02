@@ -29,8 +29,8 @@ import com.example.study.demo.retrofit.RetrofitActivity;
 import com.example.study.demo.securityTest.SecurityActivity;
 import com.example.study.demo.shareAnimation.ShareAnimationActivity;
 import com.example.study.demo.touchListener.TouchListenerActivity;
+import com.example.study.demo.viewPager3D.ViewPager3DActivity;
 import com.example.study.demo.view_diy.DivViewMoveActivity;
-import com.example.study.viewPager3D.ViewPager3DActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

@@ -4,8 +4,8 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityMoveUnlockBinding;
 
 public class MoveUnlockActivity extends BaseActivity<ActivityMoveUnlockBinding> {

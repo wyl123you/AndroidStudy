@@ -1,4 +1,4 @@
-package com.example.study.adapter;
+package com.example.study.demo.mvvm;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.study.BR;
 import com.example.study.R;
-import com.example.study.demo.mvvm.Person;
 
 import java.util.ArrayList;
 

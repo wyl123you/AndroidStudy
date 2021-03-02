@@ -28,9 +28,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
-        <activity android:name=".viewPager3D.ViewPager3DActivity"></activity>
-        <activity android:name=".demo.shareAnimation.DetailActivity" />
-        <activity android:name=".demo.shareAnimation.ShareAnimationActivity" />
+
         <activity
             android:name=".demo.welcome.WelcomeActivity"
             android:launchMode="standard"
@@ -154,6 +152,18 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".demo.loadingview.LoadingViewActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.viewPager3D.ViewPager3DActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.shareAnimation.DetailActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.shareAnimation.ShareAnimationActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
         <activity

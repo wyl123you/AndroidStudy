@@ -10,9 +10,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
-import com.example.study.bean.LuckyMoney;
 import com.example.study.databinding.ActivityRetrofitBinding;
 import com.google.android.material.textfield.TextInputLayout;
 

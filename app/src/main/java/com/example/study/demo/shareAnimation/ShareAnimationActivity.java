@@ -7,8 +7,8 @@ import android.view.View;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityShareAnimationBinding;
 
 public class ShareAnimationActivity extends BaseActivity<ActivityShareAnimationBinding> {

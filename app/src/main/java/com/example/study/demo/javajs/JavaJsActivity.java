@@ -3,8 +3,8 @@ package com.example.study.demo.javajs;
 import android.annotation.SuppressLint;
 import android.webkit.JavascriptInterface;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityJavaJaBinding;
 
 @SuppressLint({"JavascriptInterface", "SetJavaScriptEnabled"})

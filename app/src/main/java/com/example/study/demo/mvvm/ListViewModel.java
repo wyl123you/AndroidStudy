@@ -7,9 +7,9 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.study.bean.LuckyMoney;
 import com.example.study.demo.retrofit.BaseObserver;
 import com.example.study.demo.retrofit.Factory;
+import com.example.study.demo.retrofit.LuckyMoney;
 
 import java.util.ArrayList;
 

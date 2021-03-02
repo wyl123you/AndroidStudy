@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.CountDownTimer;
 
+import com.example.study.BaseActivity;
 import com.example.study.MainActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityWelcomeBinding;
 
 import java.text.MessageFormat;

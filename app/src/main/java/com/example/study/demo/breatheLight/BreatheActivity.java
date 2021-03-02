@@ -6,8 +6,8 @@ import android.graphics.Color;
 import android.view.View;
 import android.view.Window;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityBreatheBinding;
 
 import java.util.Random;

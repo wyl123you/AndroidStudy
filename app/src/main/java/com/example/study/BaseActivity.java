@@ -1,4 +1,4 @@
-package com.example.study.base;
+package com.example.study;
 
 import android.content.Context;
 import android.os.Bundle;

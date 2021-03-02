@@ -1,7 +1,5 @@
 package com.example.study.demo.retrofit;
 
-import com.example.study.bean.LuckyMoney;
-
 import java.util.ArrayList;
 import java.util.Map;
 

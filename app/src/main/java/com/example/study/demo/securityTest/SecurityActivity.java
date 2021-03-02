@@ -15,8 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivitySecurityBinding;
 
 public class SecurityActivity extends BaseActivity<ActivitySecurityBinding> {

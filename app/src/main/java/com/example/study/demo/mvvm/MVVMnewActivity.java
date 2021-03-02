@@ -6,11 +6,10 @@ import android.widget.Toast;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.adapter.DatabindingAdapter;
-import com.example.study.base.BaseActivity;
-import com.example.study.bean.LuckyMoney;
 import com.example.study.databinding.ActivityMvvmNewBinding;
+import com.example.study.demo.retrofit.LuckyMoney;
 
 import java.util.ArrayList;
 

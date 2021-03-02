@@ -1,4 +1,4 @@
-package com.example.study.viewPager3D;
+package com.example.study.demo.viewPager3D;
 
 import android.util.Log;
 import android.view.View;
@@ -7,8 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.Activity3dViewpagerBinding;
 import com.example.study.demo.palettePager.PagerAdapter;
 import com.example.study.demo.palettePager.fragment.FragmentA;

@@ -12,13 +12,10 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import com.example.study.BaseActivity;
 import com.example.study.MainActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityNotificationBinding;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 public class NotificationActivity extends BaseActivity<ActivityNotificationBinding> {
 

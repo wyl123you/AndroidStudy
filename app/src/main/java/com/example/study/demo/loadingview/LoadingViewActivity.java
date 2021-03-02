@@ -2,8 +2,8 @@ package com.example.study.demo.loadingview;
 
 import android.view.View;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityLoadingViewBinding;
 
 public class LoadingViewActivity extends BaseActivity<ActivityLoadingViewBinding> {

@@ -3,8 +3,8 @@ package com.example.study.demo.shareAnimation;
 import android.content.Intent;
 import android.view.View;
 
+import com.example.study.BaseActivity;
 import com.example.study.R;
-import com.example.study.base.BaseActivity;
 import com.example.study.databinding.ActivityDetailBinding;
 
 public class DetailActivity extends BaseActivity<ActivityDetailBinding> {
