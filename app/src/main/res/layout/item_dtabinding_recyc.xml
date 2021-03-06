@@ -9,6 +9,8 @@
             name="person"
             type="com.example.study.demo.mvvm.Person" />
 
+        <import type="android.graphics.Color" />
+
     </data>
 
     <LinearLayout
@@ -21,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:contentDescription="@string/app_name"
-            app:imageUrl="@{person.imageUrl}" />
+            app:background="@{Color.BLUE}" />
 
         <TextView
             android:layout_width="match_parent"

@@ -26,5 +26,11 @@
     <string name="chinese">Chinese</string>
     <string name="english">English</string>
 
+    <string name="mvvn_str_format2">MVVM字符串拼接2 age:%d name:%s</string>
+    <string name="mvvn_str_format3">MVVM字符串拼接3 age:%d name:%s</string>
+    <string name="mvvn_str_format4">MVVM字符串拼接4 age:%d name:%s</string>
+    <string name="mvvn_str_format5">MVVM字符串拼接5 age:%d name:%s</string>
+    <string name="mvvn_str_format6">MVVM字符串拼接6 age:%d name:%s</string>
+
 
 </resources>

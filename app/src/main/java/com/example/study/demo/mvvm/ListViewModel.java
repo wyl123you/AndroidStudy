@@ -11,6 +11,8 @@ import com.example.study.demo.retrofit.BaseObserver;
 import com.example.study.demo.retrofit.Factory;
 import com.example.study.demo.retrofit.LuckyMoney;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -42,9 +44,9 @@ public class ListViewModel extends ViewModel implements LifecycleObserver {
     }
 
     public ArrayList<Person> getPerson() {
-        Person person1 = new Person("邬友亮1", 23);
-        Person person2 = new Person("邬友亮2", 23);
-        Person person3 = new Person("邬友亮3", 23);
+        Person person1 = new Person("邬友亮1", 23, "https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
+        Person person2 = new Person("邬友亮2", 23, "https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
+        Person person3 = new Person("邬友亮3", 23, "https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
         person1.setImageUrl("https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
         person2.setImageUrl("https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
         person3.setImageUrl("https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
@@ -72,7 +74,7 @@ public class ListViewModel extends ViewModel implements LifecycleObserver {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<ArrayList<LuckyMoney>>() {
                     @Override
-                    public void onNext(ArrayList<LuckyMoney> luckyMonies) {
+                    public void onNext(@NotNull ArrayList<LuckyMoney> luckyMonies) {
                         super.onNext(luckyMonies);
                         luckMoneys.setValue(luckyMonies);
                     }

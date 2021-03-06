@@ -155,7 +155,7 @@ public class ImageAuthenticationView1 extends AppCompatImageView {
             mUnitRandomX = mUnitRandomX + mBitmap.getWidth() / 4;
         }
         //防止生成的X坐标截图时导致异常
-        if (mUnitRandomX + mUnitWidth > getWidth()) {
+        if (mUnitRandomX + mUnitWidth > getWidth() || mUnitRandomX <= mBitmap.getWidth() / 2) {
             initUnitXY();
         }
     }
@@ -194,6 +194,11 @@ public class ImageAuthenticationView1 extends AppCompatImageView {
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
         canvas.drawBitmap(mSourceBitmap, new Rect(0, 0, mUnitWidth, mUnitHeight), new Rect(0, 0, mUnitWidth, mUnitHeight), paint);
         return resultBmp;
+    }
+
+    @Override
+    public void setImageBitmap(Bitmap bm) {
+        super.setImageBitmap(bm);
     }
 
     /**

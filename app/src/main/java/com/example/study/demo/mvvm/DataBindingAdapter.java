@@ -15,12 +15,12 @@ import com.example.study.R;
 
 import java.util.ArrayList;
 
-public class DatabindingAdapter extends RecyclerView.Adapter<DatabindingAdapter.ViewHolder> {
+public class DataBindingAdapter extends RecyclerView.Adapter<DataBindingAdapter.ViewHolder> {
 
-    private ArrayList<Person> people;
-    private Context context;
+    private final ArrayList<Person> people;
+    private final Context context;
 
-    public DatabindingAdapter(ArrayList<Person> people, Context context) {
+    public DataBindingAdapter(ArrayList<Person> people, Context context) {
         this.people = people;
         this.context = context;
     }
@@ -41,7 +41,6 @@ public class DatabindingAdapter extends RecyclerView.Adapter<DatabindingAdapter.
         ViewDataBinding binding = DataBindingUtil.getBinding(holder.itemView);
         if (person != null && binding != null) {
             binding.setVariable(BR.person, person);
-
             binding.executePendingBindings();
         }
     }

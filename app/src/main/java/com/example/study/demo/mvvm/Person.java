@@ -1,9 +1,14 @@
 package com.example.study.demo.mvvm;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.RequiresApi;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.BindingAdapter;
@@ -23,9 +28,10 @@ public class Person extends BaseObservable implements LifecycleObserver, Observe
     private int age;
     private String imageUrl;
 
-    public Person(String name, int age) {
+    public Person(String name, int age, String imageUrl) {
         this.name = name;
         this.age = age;
+        this.imageUrl = imageUrl;
     }
 
     @Bindable
@@ -67,11 +73,27 @@ public class Person extends BaseObservable implements LifecycleObserver, Observe
         notifyPropertyChanged(BR.age);
     }
 
-    @BindingAdapter("imageUrl")
-    public static void imageLoader(@NotNull ImageView imageView, String url) {
+    @BindingAdapter("src")
+    public static void setSource(@NotNull ImageView imageView, String url) {
         Glide.with(imageView.getContext())
                 .load(url)
                 .into(imageView);
+    }
+
+    @BindingAdapter("background")
+    public static void setBackground(@NotNull ImageView imageView, @ColorInt int color) {
+        imageView.setBackgroundColor(color);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @BindingAdapter("background")
+    public static void setBackground(@NotNull ImageView imageView, @NotNull Color color) {
+        imageView.setBackgroundColor(color.toArgb());
+    }
+
+    @BindingAdapter("foreground")
+    public static void setForeground(@NotNull ImageView imageView, @DrawableRes int url) {
+        imageView.setImageResource(url);
     }
 
     @NotNull

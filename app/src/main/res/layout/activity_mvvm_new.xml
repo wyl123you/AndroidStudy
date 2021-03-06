@@ -6,7 +6,7 @@
 
         <variable
             name="adapter"
-            type="com.example.study.demo.mvvm.DatabindingAdapter" />
+            type="com.example.study.demo.mvvm.DataBindingAdapter" />
 
         <variable
             name="viewModel"

@@ -11,6 +11,7 @@ import com.example.study.BaseActivity;
 import com.example.study.R;
 import com.example.study.databinding.ActivityShareAnimationBinding;
 
+@SuppressWarnings("unchecked")
 public class ShareAnimationActivity extends BaseActivity<ActivityShareAnimationBinding> {
 
     @Override

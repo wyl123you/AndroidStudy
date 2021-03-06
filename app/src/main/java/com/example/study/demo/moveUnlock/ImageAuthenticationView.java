@@ -156,7 +156,7 @@ public class ImageAuthenticationView extends AppCompatImageView {
             mUnitRandomX = mUnitRandomX + mBitmap.getWidth() / 4;
         }
         // 防止生成的X坐标截图时导致异常
-        if (mUnitRandomX + mUintWidth > getWidth()) {
+        if (mUnitRandomX + mUintWidth > getWidth() || mUnitRandomX <= mBitmap.getWidth() / 2) {
             initUnitXY();
         }
     }
