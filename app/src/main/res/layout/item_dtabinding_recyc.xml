@@ -29,5 +29,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{person.name}" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:contentDescription="@string/app_name"
+            app:error="@{person.imageUrl}"
+            app:imageUrl="@{person.imageUrl}"
+            app:loading="@{@drawable/account}" />
     </LinearLayout>
 </layout>

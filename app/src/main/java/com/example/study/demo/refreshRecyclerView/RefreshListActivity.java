@@ -141,6 +141,7 @@ public class RefreshListActivity extends BaseActivity<ActivityRefreshListBinding
                 final int childCount = parent.getChildCount();
                 for (int i = 0; i < childCount; i++) {
                     mPaint.setColor(i % 2 == 0 ? Color.BLACK : Color.RED);
+                    mPaint.setTextSize(30);
                     final View child = parent.getChildAt(i);
                     final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
                             .getLayoutParams();

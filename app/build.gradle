@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0.0"
         multiDexEnabled true
+        flavorDimensions 'channel'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         externalNativeBuild {
@@ -24,16 +25,60 @@ android {
         ndk {
             moduleName "b"
         }
+    }
 
+    signingConfigs {
+        debug {
+            storeFile file('wyl.keystore')
+            storePassword '19970511'
+            keyAlias 'wyl'
+            keyPassword '19970511'
+        }
+
+        release {
+            storeFile file('wyl.keystore')
+            storePassword '19970511'
+            keyAlias 'wyl'
+            keyPassword '19970511'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
     }
 
 
     buildTypes {
+        debug {
+            //applicationIdSuffix ".debug"//加后缀
+            debuggable true
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+
         release {
+            debuggable false
             minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             //使用MultiDex
             multiDexKeepFile file('multidex-config.pro')
+            signingConfig signingConfigs.release
+        }
+    }
+
+    productFlavors {
+        xiaomi {
+            dimension 'channel'
+            applicationId "com.lotogram.live"
+            buildConfigField('String', 'FLAVOR', '"miaomi"')
+            manifestPlaceholders = [ICON: "@drawable/icon"]
+        }
+
+        huawei {
+            dimension 'channel'
+            applicationId "com.lotogram.live"
+            buildConfigField('String', 'FLAVOR', '"huawei"')
+            manifestPlaceholders = [ICON: "@drawable/icon"]
         }
     }
 
@@ -47,23 +92,7 @@ android {
         dataBinding = true
     }
 
-    signingConfigs {
-//        debug {
-//            storeFile file('wyl.keystore')
-//            storePassword '19970511'
-//            keyAlias 'wyl'
-//            keyPassword '19970511'
-//        }
-//
-//        release {
-//            storeFile file('wyl.keystore')
-//            storePassword '19970511'
-//            keyAlias 'wyl'
-//            keyPassword '19970511'
-//            v1SigningEnabled true
-//            v2SigningEnabled true
-//        }
-    }
+
     externalNativeBuild {
         cmake {
             path file('CMakeLists.txt')

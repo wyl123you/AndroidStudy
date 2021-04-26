@@ -15,12 +15,17 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
+import android.widget.ImageView;
 
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
 import com.example.study.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -299,5 +304,57 @@ public class ImageUtil {
         } catch (Exception e) {
             return bitmap;
         }
+    }
+
+    /**
+     * 缩放图片
+     *
+     * @param originBitmap 需要缩放的Bitmap
+     * @param targetWidth  目标宽度
+     * @param targetHeight 目标高度
+     * @return 缩放后的Bitmap
+     */
+    public static Bitmap scale(@NotNull Bitmap originBitmap, float targetWidth, float targetHeight) {
+        int originWidth = originBitmap.getWidth();
+        int originHeight = originBitmap.getHeight();
+        float widthRatio = targetWidth / originWidth;
+        float heightRatio = targetHeight / originHeight;
+        Matrix matrix = new Matrix();
+        matrix.postScale(widthRatio, heightRatio);
+        return Bitmap.createBitmap(originBitmap, 0, 0, originWidth, originHeight, matrix, true);
+        //if (!originBitmap.isRecycled()) {
+        //    originBitmap.recycle();
+        //}
+        //return targetBitmap;
+    }
+
+    /**
+     * 旋转图片
+     *
+     * @param originBitmap 需要旋转的Bitmap
+     * @param degree       需要旋转的角度
+     * @return 旋转后的图片
+     */
+    public static Bitmap rotate(@NotNull Bitmap originBitmap, int degree) {
+        int width = originBitmap.getWidth();
+        int height = originBitmap.getHeight();
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        return Bitmap.createBitmap(originBitmap, 0, 0, width, height, matrix, true);
+    }
+
+    public static Bitmap create(@NotNull Bitmap sourceBitmap, int startX, int startY, int width, int height) {
+        return Bitmap.createBitmap(sourceBitmap, startX, startY, width, height);
+    }
+
+    @BindingAdapter(value = {"imageUrl", "loading", "error"})
+    public static void setResource(@NotNull final ImageView imageView, final String url, final Drawable loading, final String error) {
+        Glide.with(imageView.getContext())
+                .load(url)
+                .centerCrop()
+                .placeholder(loading)
+                .error(error)
+                .into(imageView);
+        imageView.invalidate();
     }
 }

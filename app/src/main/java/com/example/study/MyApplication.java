@@ -174,26 +174,28 @@ public class MyApplication extends MultiDexApplication {
     }
 
     private void initNotificationChannel() {
-        //创建聊天消息通道
-        NotifyUtil.createChannel(
-                getApplicationContext(),
-                NotifyUtil.CHANNEL_MESSAGE,
-                NotifyUtil.CHANNEL_MESSAGE,
-                NotificationManager.IMPORTANCE_HIGH);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //创建聊天消息通道
+            NotifyUtil.createChannel(
+                    getApplicationContext(),
+                    NotifyUtil.CHANNEL_MESSAGE,
+                    NotifyUtil.CHANNEL_MESSAGE,
+                    NotificationManager.IMPORTANCE_HIGH);
 
-        //创建推送消息通道
-        NotifyUtil.createChannel(
-                getApplicationContext(),
-                NotifyUtil.CHANNEL_PUSH,
-                NotifyUtil.CHANNEL_PUSH,
-                NotificationManager.IMPORTANCE_HIGH);
+            //创建推送消息通道
+            NotifyUtil.createChannel(
+                    getApplicationContext(),
+                    NotifyUtil.CHANNEL_PUSH,
+                    NotifyUtil.CHANNEL_PUSH,
+                    NotificationManager.IMPORTANCE_HIGH);
 
-        //创建通知消息通道
-        NotifyUtil.createChannel(
-                getApplicationContext(),
-                NotifyUtil.CHANNEL_NOTICE,
-                NotifyUtil.CHANNEL_NOTICE,
-                NotificationManager.IMPORTANCE_HIGH);
+            //创建通知消息通道
+            NotifyUtil.createChannel(
+                    getApplicationContext(),
+                    NotifyUtil.CHANNEL_NOTICE,
+                    NotifyUtil.CHANNEL_NOTICE,
+                    NotificationManager.IMPORTANCE_HIGH);
+        }
     }
 
     private void initMMKV() {

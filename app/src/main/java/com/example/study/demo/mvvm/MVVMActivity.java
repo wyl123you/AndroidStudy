@@ -38,10 +38,10 @@ public class MVVMActivity extends BaseActivity<ActivityMvvmBinding> {
         mBinding.setPerson(person);
 
         Person person1 = new Person("邬友亮1", 23, "https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
-        Person person2 = new Person("邬友亮2", 23, "https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
+        Person person2 = new Person("邬友亮2", 23, "https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d");
         Person person3 = new Person("邬友亮3", 23, "https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
         Person person4 = new Person("邬友亮4", 23, "https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
-        Person person5 = new Person("邬友亮5", 23, "https://pics5.baidu.com/feed/562c11dfa9ec8a132169ba503e89d688a1ecc0a5.jpeg?token=640e1ae26c187b992869c0a1cc2378e8");
+        Person person5 = new Person("邬友亮5", 23, "https://pics5.baidu.com/feed/562c11dfa9ec8");
         people = new ArrayList<>();
         people.add(person1);
         people.add(person2);
