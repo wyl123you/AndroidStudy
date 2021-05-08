@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.example.study.widget.FlowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/floating"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/colorAccent">
+    android:background="@color/colorAccent"
+    tools:ignore="HardcodedText">
 
     <TextView
         android:layout_width="wrap_content"
@@ -143,57 +145,55 @@
         android:layout_width="70dp"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="19"
+        android:text="20"
         android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="70dp"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="19"
+        android:text="21"
         android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="70dp"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="19"
+        android:text="22"
         android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="70dp"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="19"
+        android:text="23"
         android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="70dp"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="19"
+        android:text="24"
         android:textColor="#ffffff" />
 
     <TextView
-        android:layout_width="70dp"
+        android:layout_width="160dp"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="19"
+        android:text="25"
         android:textColor="#ffffff" />
 
     <TextView
-        android:layout_width="70dp"
+        android:layout_width="160dp"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="19"
+        android:text="26"
         android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="90dp"
         android:gravity="center"
-        android:text="19"
+        android:text="27"
         android:textColor="#ffffff" />
-
-
 </com.example.study.widget.FlowLayout>

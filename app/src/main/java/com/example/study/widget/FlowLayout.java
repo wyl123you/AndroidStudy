@@ -109,8 +109,8 @@ public class FlowLayout extends ViewGroup {
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 
-        int realWidth = (widthMode == MeasureSpec.EXACTLY) ? selfWidth : parentNeededWidth+paddingLeft+paddingRight;
-        int realHeight = (heightMode == MeasureSpec.EXACTLY) ? selfHeight : parentNeededHeight+paddingTop+paddingBottom;
+        int realWidth = (widthMode == MeasureSpec.EXACTLY) ? selfWidth : parentNeededWidth + paddingLeft + paddingRight;
+        int realHeight = (heightMode == MeasureSpec.EXACTLY) ? selfHeight : parentNeededHeight + paddingTop + paddingBottom;
         setMeasuredDimension(realWidth, realHeight);
     }
 
