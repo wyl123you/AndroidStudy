@@ -1,6 +1,5 @@
 package com.example.study.widget;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -11,7 +10,6 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.animation.AccelerateDecelerateInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +26,7 @@ import java.util.Arrays;
  * @Company LotoGram
  */
 
-public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView implements Runnable {
+public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -128,7 +126,6 @@ public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView
             case MeasureSpec.UNSPECIFIED:
                 Log.d(TAG, "MeasureSpec Mode: UNSPECIFIED");
                 Log.d(TAG, "子视图没有大小限制");
-
                 break;
         }
 
@@ -173,35 +170,35 @@ public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView
             paint.setStrokeWidth(borderWidth);
             paint.setStyle(Paint.Style.STROKE);
             paint.setDither(true);
-            canvas.drawArc(rectF, startAngle, 180f, false, paint);
+            canvas.drawArc(rectF, startAngle, 360f, false, paint);
             Log.d(TAG, "起始角:" + startAngle);
-            post(this);
+            //post(this);
         }
     }
 
-    private final Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            startAngle += 10;
-            invalidate();
-        }
-    };
-
-    @Override
-    public void run() {
-        ValueAnimator anim = ValueAnimator.ofFloat(0, 360);
-        anim.setRepeatMode(ValueAnimator.RESTART);
-        anim.setRepeatCount(ValueAnimator.INFINITE);
-        anim.setInterpolator(new AccelerateDecelerateInterpolator());
-        anim.setDuration(10000);
-        anim.addUpdateListener(animation -> {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        });
-        anim.start();
-    }
+//    private final Runnable runnable = new Runnable() {
+//        @Override
+//        public void run() {
+//            startAngle += 10;
+//            invalidate();
+//        }
+//    };
+//
+//    @Override
+//    public void run() {
+//        ValueAnimator anim = ValueAnimator.ofFloat(0, 360);
+//        anim.setRepeatMode(ValueAnimator.RESTART);
+//        anim.setRepeatCount(ValueAnimator.INFINITE);
+//        anim.setInterpolator(new AccelerateDecelerateInterpolator());
+//        anim.setDuration(10000);
+//        anim.addUpdateListener(animation -> {
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//        });
+//        anim.start();
+//    }
 }
