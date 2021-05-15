@@ -175,7 +175,7 @@ public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView
             paint.setDither(true);
             canvas.drawArc(rectF, startAngle, 180f, false, paint);
             Log.d(TAG, "起始角:" + startAngle);
-            post(this);
+            postDelayed(runnable,100);
         }
     }
 
