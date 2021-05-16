@@ -193,6 +193,13 @@
                 android:layout_height="wrap_content"
                 android:text="System UI"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/screenRecord"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Screen Record"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 

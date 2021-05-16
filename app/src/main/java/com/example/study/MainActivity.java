@@ -7,7 +7,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.study.demo.appicon.AppIconActivity;
 import com.example.study.demo.breatheLight.BreatheActivity;
@@ -28,6 +27,7 @@ import com.example.study.demo.qrcode.QRCodeActivity;
 import com.example.study.demo.refreshRecyclerView.RefreshListActivity;
 import com.example.study.demo.retrofit.RetrofitActivity;
 import com.example.study.demo.roundImageVIew.RoundImageViewActivity;
+import com.example.study.demo.screenRecord.ScreenRecordActivity;
 import com.example.study.demo.securityTest.SecurityActivity;
 import com.example.study.demo.shareAnimation.ShareAnimationActivity;
 import com.example.study.demo.systemUI.SystemUIActivity;
@@ -175,5 +175,10 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.system_ui)
     public void toStstemUIActivity() {
         startActivity(new Intent(this, SystemUIActivity.class));
+    }
+
+    @OnClick(R.id.screenRecord)
+    public void toScreenRecordActivity() {
+        startActivity(new Intent(this, ScreenRecordActivity.class));
     }
 }

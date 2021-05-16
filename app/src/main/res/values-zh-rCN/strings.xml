@@ -31,4 +31,11 @@
     <string name="mvvn_str_format5">MVVM字符串拼接5 age:%d name:%s</string>
     <string name="mvvn_str_format6">MVVM字符串拼接6 age:%d name:%s</string>
 
+
+    <string name="record_save">录屏(保存)</string>
+    <string name="record_push">录屏(发送)</string>
+
+    <string name="stop1">停止</string>
+    <string name="start1">开始</string>
+
 </resources>

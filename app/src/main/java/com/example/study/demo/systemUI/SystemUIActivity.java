@@ -1,11 +1,6 @@
 package com.example.study.demo.systemUI;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -18,8 +13,10 @@ import android.view.Window;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.study.R;
-import com.umeng.commonsdk.debug.I;
 
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class SystemUIActivity extends AppCompatActivity {
 
 
         //刘海屏适配必须要在设置中  设置为自动
-        Log.d(TAG, "onCreate: "+isCutOut(this));
+        Log.d(TAG, "onCreate: " + isCutOut(this));
         openFullScreenModel(this);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_system_uiactivity);
@@ -43,11 +40,11 @@ public class SystemUIActivity extends AppCompatActivity {
         int nightMode = getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_MASK;
 
-        if (nightMode ==Configuration.UI_MODE_NIGHT_NO){
+        if (nightMode == Configuration.UI_MODE_NIGHT_NO) {
             Log.d(TAG, "非夜间模式");
-        }else if (nightMode == Configuration.UI_MODE_NIGHT_YES){
+        } else if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
             Log.d(TAG, "夜间模式");
-        }else if (nightMode == Configuration.UI_MODE_NIGHT_UNDEFINED){
+        } else if (nightMode == Configuration.UI_MODE_NIGHT_UNDEFINED) {
             Log.d(TAG, "不明确");
         }
 
@@ -81,7 +78,7 @@ public class SystemUIActivity extends AppCompatActivity {
         int a = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION//布局放到导航栏,状态栏后面
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION//隐藏导航栏
                 | View.SYSTEM_UI_FLAG_FULLSCREEN//隐藏状态栏
-                |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
         Window window = getWindow();
         View view = window.getDecorView();
@@ -112,13 +109,13 @@ public class SystemUIActivity extends AppCompatActivity {
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         Log.d(TAG, "onAttachedToWindow: ");
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.P){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             aaa();
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
-    private void aaa(){
+    private void aaa() {
         final View decorView = getWindow().getDecorView();
 
         decorView.postDelayed(() -> {
@@ -128,23 +125,23 @@ public class SystemUIActivity extends AppCompatActivity {
                 return;
             }
             DisplayCutout displayCutout = rootWindowInsets.getDisplayCutout();
-           if (displayCutout!=null){
-               Log.e("TAG", "安全区域距离屏幕左边的距离 SafeInsetLeft:" + displayCutout.getSafeInsetLeft());
-               Log.e("TAG", "安全区域距离屏幕右部的距离 SafeInsetRight:" + displayCutout.getSafeInsetRight());
-               Log.e("TAG", "安全区域距离屏幕顶部的距离 SafeInsetTop:" + displayCutout.getSafeInsetTop());
-               Log.e("TAG", "安全区域距离屏幕底部的距离 SafeInsetBottom:" + displayCutout.getSafeInsetBottom());
+            if (displayCutout != null) {
+                Log.e("TAG", "安全区域距离屏幕左边的距离 SafeInsetLeft:" + displayCutout.getSafeInsetLeft());
+                Log.e("TAG", "安全区域距离屏幕右部的距离 SafeInsetRight:" + displayCutout.getSafeInsetRight());
+                Log.e("TAG", "安全区域距离屏幕顶部的距离 SafeInsetTop:" + displayCutout.getSafeInsetTop());
+                Log.e("TAG", "安全区域距离屏幕底部的距离 SafeInsetBottom:" + displayCutout.getSafeInsetBottom());
 
-               List<Rect> rects = displayCutout.getBoundingRects();
-               if (rects == null || rects.size() == 0) {
-                   Log.e("TAG", "不是刘海屏");
-               } else {
-                   Log.e("TAG", "刘海屏数量:" + rects.size());
-                   for (Rect rect : rects) {
-                       Log.e("TAG", "刘海屏区域：" + rect);
-                   }
-               }
-           }
-        },1000);
+                List<Rect> rects = displayCutout.getBoundingRects();
+                if (rects == null || rects.size() == 0) {
+                    Log.e("TAG", "不是刘海屏");
+                } else {
+                    Log.e("TAG", "刘海屏数量:" + rects.size());
+                    for (Rect rect : rects) {
+                        Log.e("TAG", "刘海屏区域：" + rect);
+                    }
+                }
+            }
+        }, 1000);
     }
 
     public boolean isCutOut(Activity ctx) {

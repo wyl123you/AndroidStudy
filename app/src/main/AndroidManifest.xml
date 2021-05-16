@@ -15,6 +15,13 @@
         android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="false"
@@ -28,10 +35,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
-        <activity android:name=".demo.systemUI.SystemUIActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"  android:launchMode="singleTask"
+        <activity
+            android:name=".demo.systemUI.SystemUIActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".demo.roundImageVIew.RoundImageViewActivity"  android:launchMode="singleTask"
+        <activity
+            android:name=".demo.roundImageVIew.RoundImageViewActivity"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".demo.welcome.WelcomeActivity"
@@ -180,6 +191,18 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".demo.dialogFragmentDemo.DialogFragmentActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.screenRecord.RecordPushActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.screenRecord.RecordSaveActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.screenRecord.ScreenRecordActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
 
