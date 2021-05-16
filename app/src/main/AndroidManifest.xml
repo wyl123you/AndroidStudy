@@ -28,8 +28,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
-        <activity android:name=".demo.systemUI.SystemUIActivity"></activity>
-        <activity android:name=".demo.roundImageVIew.RoundImageViewActivity" />
+        <activity android:name=".demo.systemUI.SystemUIActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"  android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".demo.roundImageVIew.RoundImageViewActivity"  android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".demo.welcome.WelcomeActivity"
             android:launchMode="standard"
