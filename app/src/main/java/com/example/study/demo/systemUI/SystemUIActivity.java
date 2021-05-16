@@ -1,6 +1,7 @@
 package com.example.study.demo.systemUI;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.study.R;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class SystemUIActivity extends AppCompatActivity {
@@ -27,16 +29,7 @@ public class SystemUIActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        //刘海屏适配必须要在设置中  设置为自动
-        Log.d(TAG, "onCreate: " + isCutOut(this));
-        openFullScreenModel(this);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_system_uiactivity);
-
-        Log.d(TAG, "onCreate: ");
-
         int nightMode = getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_MASK;
 
@@ -47,8 +40,6 @@ public class SystemUIActivity extends AppCompatActivity {
         } else if (nightMode == Configuration.UI_MODE_NIGHT_UNDEFINED) {
             Log.d(TAG, "不明确");
         }
-
-
         // 这样就可以根据用户的喜好来设置是否启用夜间模式,注意点:
         // AppCompatDelegate类中还有一个方法：setLocalNightMode(int mode)，
         // 这个方法作用在当前组件，Activity中使用 getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)设置。
@@ -66,6 +57,20 @@ public class SystemUIActivity extends AppCompatActivity {
         // 保存好相关属性值,重建时使用
         //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
+        //刘海屏适配必须要在设置中  设置为自动
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            getWindow().setAttributes(lp);
+        } else {
+            if (Build.BRAND.toLowerCase().contains("vivo")){
+                Log.d(TAG, "您的手机是vivo");
+                Log.d(TAG, "您的手机是刘海屏"+hasNotchAtVivo(this));
+                //vivo在设置–显示与亮度–第三方应用显示比例中可以切换是否全屏显示还是安全区域显示。
+                //vivo不提供接口获取刘海尺寸，目前vivo的刘海宽为100dp,高为27dp。
+            }
+            //https://blog.csdn.net/u011810352/article/details/80587531?utm_term=android区域控制屏幕显示&utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduweb~default-5-80587531&spm=3001.4430
+        }
     }
 
     //@RequiresApi(api = Build.VERSION_CODES.P)
@@ -85,15 +90,11 @@ public class SystemUIActivity extends AppCompatActivity {
         window.setStatusBarColor(Color.RED);
         window.setNavigationBarColor(Color.YELLOW);
         view.setSystemUiVisibility(a);
-//
+
 //        WindowManager.LayoutParams lp = getWindow().getAttributes();
-//
-//        //下面图1
-////        lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER;
-//        //下面图2
+//        lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER;
 //        lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
-//        //下面图3
-////        lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT;
+//        lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT;
 //        getWindow().setAttributes(lp);
     }
 
@@ -155,4 +156,27 @@ public class SystemUIActivity extends AppCompatActivity {
             return false;
         }
     }
+
+    public static final int VIVO_NOTCH = 0x00000020;//是否有刘海
+    public static final int VIVO_FILLET = 0x00000008;//是否有圆角
+
+    public static boolean hasNotchAtVivo(Context context) {
+        boolean ret = false;
+        try {
+            ClassLoader classLoader = context.getClassLoader();
+            Class FtFeature = classLoader.loadClass("android.util.FtFeature");
+            Method method = FtFeature.getMethod("isFeatureSupport", int.class);
+            ret = (boolean) method.invoke(FtFeature, VIVO_NOTCH);
+        } catch (ClassNotFoundException e) {
+            Log.e("Notch", "hasNotchAtVivo ClassNotFoundException");
+        } catch (NoSuchMethodException e) {
+            Log.e("Notch", "hasNotchAtVivo NoSuchMethodException");
+        } catch (Exception e) {
+            Log.e("Notch", "hasNotchAtVivo Exception");
+        } finally {
+            return ret;
+        }
+    }
+
+
 }
