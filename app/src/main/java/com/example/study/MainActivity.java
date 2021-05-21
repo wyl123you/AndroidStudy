@@ -8,8 +8,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.study.demo.android11storage.Android11StorageActivity;
 import com.example.study.demo.appicon.AppIconActivity;
 import com.example.study.demo.breatheLight.BreatheActivity;
+import com.example.study.demo.broadcast.BroadcastActivity;
 import com.example.study.demo.cardViewDemo.CardViewActivity;
 import com.example.study.demo.dialogFragmentDemo.DialogFragmentActivity;
 import com.example.study.demo.javajs.JavaJsActivity;
@@ -180,5 +182,15 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.screenRecord)
     public void toScreenRecordActivity() {
         startActivity(new Intent(this, ScreenRecordActivity.class));
+    }
+
+    @OnClick(R.id.android11storage)
+    public void toAndroid11strorageActivity() {
+        startActivity(new Intent(this, Android11StorageActivity.class));
+    }
+
+    @OnClick(R.id.broadcast)
+    public void tobroadcastActivity() {
+        startActivity(new Intent(this, BroadcastActivity.class));
     }
 }

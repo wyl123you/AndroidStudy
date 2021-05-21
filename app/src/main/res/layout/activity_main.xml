@@ -200,6 +200,20 @@
                 android:layout_height="wrap_content"
                 android:text="Screen Record"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/android11storage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="安卓11存储相关"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/broadcast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="广播学习"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 
