@@ -14,6 +14,7 @@ import com.example.study.demo.breatheLight.BreatheActivity;
 import com.example.study.demo.broadcast.BroadcastActivity;
 import com.example.study.demo.cardViewDemo.CardViewActivity;
 import com.example.study.demo.dialogFragmentDemo.DialogFragmentActivity;
+import com.example.study.demo.home.HomeActivity;
 import com.example.study.demo.javajs.JavaJsActivity;
 import com.example.study.demo.jni.JniActivity;
 import com.example.study.demo.language.LanguageActivity;
@@ -191,12 +192,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.android11storage)
-    public void toAndroid11strorageActivity() {
+    public void toAndroid11StorageActivity() {
         startActivity(new Intent(this, Android11StorageActivity.class));
     }
 
     @OnClick(R.id.broadcast)
     public void tobroadcastActivity() {
         startActivity(new Intent(this, BroadcastActivity.class));
+    }
+
+    @OnClick(R.id.home)
+    public void toHomeActivity() {
+        startActivity(new Intent(this, HomeActivity.class));
     }
 }
