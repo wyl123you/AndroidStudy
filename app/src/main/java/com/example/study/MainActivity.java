@@ -22,6 +22,7 @@ import com.example.study.demo.moveUnlock.MoveUnlockActivity;
 import com.example.study.demo.mvvm.MVVMActivity;
 import com.example.study.demo.mvvm.MVVMnewActivity;
 import com.example.study.demo.notificationDemo.NotificationActivity;
+import com.example.study.demo.okhttp.OKHttpActivity;
 import com.example.study.demo.palettePager.PalettePagerActivity;
 import com.example.study.demo.player.ExoPlayerActivity;
 import com.example.study.demo.player.NodeMediaPlayerActivity;
@@ -57,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.retrofit)
     public void toRetrofitActivity() {
         startActivity(new Intent(this, RetrofitActivity.class));
+    }
+
+    @OnClick(R.id.okhttp)
+    public void toOKHttpActivity() {
+        startActivity(new Intent(this, OKHttpActivity.class));
     }
 
     @OnClick(R.id.refresh_recycler_list)
