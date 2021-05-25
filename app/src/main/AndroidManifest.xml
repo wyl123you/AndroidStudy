@@ -64,7 +64,7 @@
             android:icon="@drawable/account"
             android:label="@string/app_name1"
             android:targetActivity=".demo.welcome.WelcomeActivity">
-            <intent-filter >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -197,13 +197,16 @@
         <receiver
             android:name=".demo.broadcast.BootBroadcastReceiver"
             android:enabled="true"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="dddddddd" />
                 <action android:name="dfgkfkjndkfjnkdbf" />
             </intent-filter>
             <intent-filter>
                 <action android:name="qqqqqqqqqqqqqq" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 

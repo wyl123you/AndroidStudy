@@ -65,7 +65,15 @@ public class BroadcastActivity extends AppCompatActivity {
         intent.setAction("qqqqqqqqqqqqqq");
         intent.setAction("dddddddd");
         intent.setFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-        intent.setComponent(new ComponentName(getPackageName(),BootBroadcastReceiver.class.getName()));
+        intent.setComponent(new ComponentName(getPackageName(), BootBroadcastReceiver.class.getName()));
         sendBroadcast(intent);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_BATTERY_CHANGED);
+        filter.addAction(Intent.ACTION_BATTERY_LOW);
+        filter.addAction(Intent.ACTION_BATTERY_OKAY);
+        filter.addAction(Intent.ACTION_POWER_CONNECTED);
+        filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
+        registerReceiver(new BatteryBroadcastReceiver(),filter);
     }
 }
