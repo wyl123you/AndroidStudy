@@ -4,7 +4,6 @@
     package="com.example.study">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -36,8 +35,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
-        <activity android:name=".demo.broadcast.BroadcastActivity"></activity>
-        <activity android:name=".demo.android11storage.Android11StorageActivity" />
         <activity
             android:name=".demo.systemUI.SystemUIActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -193,6 +190,22 @@
             android:name=".demo.screenRecord.ScreenRecordActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.home.HomeActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.okhttp.OKHttpActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.broadcast.BroadcastActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.android11storage.Android11StorageActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
 
         <receiver
             android:name=".demo.broadcast.BootBroadcastReceiver"
@@ -203,7 +216,7 @@
                 <action android:name="dfgkfkjndkfjnkdbf" />
             </intent-filter>
             <intent-filter>
-                <action android:name="qqqqqqqqqqqqqq" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

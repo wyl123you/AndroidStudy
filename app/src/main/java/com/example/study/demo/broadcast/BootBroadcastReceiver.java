@@ -14,8 +14,8 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, @NotNull Intent intent) {
         String action = intent.getAction();
 
-        Log.d("aaaaa", "收到了自己发送的静态广播"+action);
+        Log.d("aaaaa", "收到了自己发送的静态广播" + action);
 
-        Toast.makeText(context, "收到了自己发送的静态广播"+action, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "收到了自己发送的静态广播" + action, Toast.LENGTH_LONG).show();
     }
 }

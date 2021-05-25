@@ -16,12 +16,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <Button
                 android:id="@+id/retrofit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Retrofit2 Demo"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/okhttp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="OKHttp Demo"
                 android:textAllCaps="false" />
 
             <Button
@@ -213,6 +219,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="广播学习"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="主页伸缩布局"
                 android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
