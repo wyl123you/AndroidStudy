@@ -227,6 +227,13 @@
                 android:layout_height="wrap_content"
                 android:text="主页伸缩布局"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/device"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="设备信息"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 

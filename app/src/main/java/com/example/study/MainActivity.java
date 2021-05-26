@@ -13,6 +13,7 @@ import com.example.study.demo.appicon.AppIconActivity;
 import com.example.study.demo.breatheLight.BreatheActivity;
 import com.example.study.demo.broadcast.BroadcastActivity;
 import com.example.study.demo.cardViewDemo.CardViewActivity;
+import com.example.study.demo.deviceInfo.DeviceInfoActivity;
 import com.example.study.demo.dialogFragmentDemo.DialogFragmentActivity;
 import com.example.study.demo.home.HomeActivity;
 import com.example.study.demo.javajs.JavaJsActivity;
@@ -204,5 +205,12 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.home)
     public void toHomeActivity() {
         startActivity(new Intent(this, HomeActivity.class));
+    }
+
+    @OnClick(R.id.device)
+    public void toDeviceInfoActivity() {
+        Intent intent = new Intent();
+        intent.setClass(this, DeviceInfoActivity.class);
+        startActivity(intent);
     }
 }
