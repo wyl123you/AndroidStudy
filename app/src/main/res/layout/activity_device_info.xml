@@ -33,7 +33,7 @@
             android:layout_height="40dp"
             android:layout_below="@id/brand_tip"
             android:gravity="center|start"
-            android:text="Mac地址："
+            android:text="Wlan Mac地址："
             android:textColor="#000000" />
 
         <TextView
@@ -42,6 +42,24 @@
             android:layout_height="40dp"
             android:layout_below="@id/brand_tip"
             android:layout_toEndOf="@id/mac_tip"
+            android:gravity="center|start"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/blue_tooth_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@id/mac_tip"
+            android:gravity="center|start"
+            android:text="蓝牙地址："
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/blue_tooth"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/mac_tip"
+            android:layout_toEndOf="@id/blue_tooth_tip"
             android:gravity="center|start"
             android:textColor="#000000" />
     </RelativeLayout>

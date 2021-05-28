@@ -7,12 +7,12 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.util.Log;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
@@ -30,64 +30,64 @@ public class MacAddressUtil {
 
     /**
      * Android 6.0 之前（不包括6.0）获取mac地址
-     * 必须的权限 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+     * 必须的权限 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
      *
      * @param context * @return
      */
+    @Nullable
     private static String getMacDefault(Context context) {
-        String mac = "0";
-        if (context == null) {
-            return mac;
-        }
-        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        WifiInfo info = null;
+        if (context == null) return null;
         try {
-            info = wifi.getConnectionInfo();
+            WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            WifiInfo info = wifi.getConnectionInfo();
+            return info == null ? null : info.getMacAddress();
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        if (info == null) {
             return null;
         }
-        mac = info.getMacAddress();
-
-        return mac;
     }
 
     /**
      * Android 6.0-Android 7.0 获取mac地址
      */
     private static String getMacAddress() {
-        String macSerial = null;
-        String str = "0";
-
+//        String macSerial = null;
+//        String str = "0";
+//
+//        try {
+//            Process pp = Runtime.getRuntime().exec("cat/sys/class/net/wlan0/address");
+//            InputStreamReader ir = new InputStreamReader(pp.getInputStream());
+//            LineNumberReader input = new LineNumberReader(ir);
+//
+//            while (null != str) {
+//                str = input.readLine();
+//                if (str != null) {
+//                    macSerial = str.trim(); //去空格
+//                    break;
+//                }
+//            }
+//        } catch (IOException ex) {
+//            // 赋予默认值
+//            ex.printStackTrace();
+//        }
+//
+//        return macSerial;
         try {
-            Process pp = Runtime.getRuntime().exec("cat/sys/class/net/wlan0/address");
-            InputStreamReader ir = new InputStreamReader(pp.getInputStream());
-            LineNumberReader input = new LineNumberReader(ir);
-
-            while (null != str) {
-                str = input.readLine();
-                if (str != null) {
-                    macSerial = str.trim(); //去空格
-                    break;
-                }
-            }
-        } catch (IOException ex) {
-            // 赋予默认值
-            ex.printStackTrace();
+            String path = "/sys/class/net/wlan0/address";
+            File file = new File(path);
+            FileReader reader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            return bufferedReader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
-
-        return macSerial;
     }
 
     /**
      * Android 7.0之后获取Mac地址
      * 遍历循环所有的网络接口，找到接口是 wlan0
-     * 必须的权限 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-     *
-     * @return
+     * 必须的权限 <uses-permission android:name="android.permission.INTERNET"/>
      */
     @Nullable
     private static String getMacFromHardware() {
@@ -117,9 +117,8 @@ public class MacAddressUtil {
         return null;
     }
 
-    @NotNull
     public static String getMac(Context context) {
-        String mac = "0";
+        String mac;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mac = getMacDefault(context);
             Log.d(TAG, "getMacDefault: ");
@@ -129,9 +128,6 @@ public class MacAddressUtil {
         } else {
             mac = getMacFromHardware();
             Log.d(TAG, "getMacFromHardware: ");
-        }
-        if (mac == null || mac.equals("")) {
-            mac = "0";
         }
         return mac;
     }
