@@ -171,4 +171,7 @@ dependencies {
 
     //轮播图
     implementation 'cn.bingoogolapple:bga-banner:2.2.6'
+
+     //获取蓝牙地址
+    implementation 'net.vidageek:mirror:1.6.1'
 }

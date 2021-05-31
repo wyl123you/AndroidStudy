@@ -228,6 +228,14 @@
                 android:text="主页伸缩布局"
                 android:textAllCaps="false" />
 
+            <EditText
+                android:id="@+id/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="true"
+                android:hint="安全键盘"
+                android:inputType="number" />
+
             <Button
                 android:id="@+id/device"
                 android:layout_width="match_parent"

@@ -1,9 +1,12 @@
 package com.example.study;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,12 +42,33 @@ import com.example.study.demo.systemUI.SystemUIActivity;
 import com.example.study.demo.touchListener.TouchListenerActivity;
 import com.example.study.demo.viewPager3D.ViewPager3DActivity;
 import com.example.study.demo.view_diy.DivViewMoveActivity;
+import com.example.study.widget.KeyboardPopupWindow1;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 @SuppressLint("NonConstantResourceId")
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
+
+    private boolean isUiCreated = false;
+    private KeyboardPopupWindow1 window;
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        Log.d(TAG, "onWindowFocusChanged: " + hasFocus);
+        isUiCreated = true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (window != null) {
+            window.releaseResources();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +78,32 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.floating).setOnClickListener(view -> {
             Toast.makeText(MainActivity.this, "点击了悬浮控件", Toast.LENGTH_LONG).show();
             Log.d("DragFloatActionButton", "onClick");
+        });
+
+        EditText editText = findViewById(R.id.edit_text);
+        window = new KeyboardPopupWindow1(this, getWindow().getDecorView(), editText, true);
+        //window.setAnchor(getWindow().getDecorView());
+        //window.setEditText(editText);
+
+        editText.setOnClickListener(v -> {
+            window.show();
+            Log.d(TAG, "KeyboardPopupWindow Show");
+        });
+
+        editText.setOnFocusChangeListener((v, hasFocus) -> {
+            Log.d(TAG, "hasFocus: " + hasFocus);
+            if (isUiCreated) {
+                //isUiCreated 很重要，Unable to add window -- token null is not valid; is your activity running?
+                window.refreshKeyboardOutSideTouchable(!hasFocus);
+                // 需要等待页面创建完成后焦点变化才去显示自定义键盘
+            }
+
+            if (hasFocus) {
+                //隐藏系统软键盘
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+            }
+
         });
     }
 

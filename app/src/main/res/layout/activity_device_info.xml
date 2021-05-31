@@ -6,61 +6,14 @@
 
     </data>
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:ignore="HardcodedText">
-
-        <TextView
-            android:id="@+id/brand_tip"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:gravity="center|start"
-            android:text="品牌："
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/brand"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_toEndOf="@id/brand_tip"
-            android:gravity="center|start"
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/mac_tip"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_below="@id/brand_tip"
-            android:gravity="center|start"
-            android:text="Wlan Mac地址："
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/mac"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_below="@id/brand_tip"
-            android:layout_toEndOf="@id/mac_tip"
-            android:gravity="center|start"
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/blue_tooth_tip"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_below="@id/mac_tip"
-            android:gravity="center|start"
-            android:text="蓝牙地址："
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/blue_tooth"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_below="@id/mac_tip"
-            android:layout_toEndOf="@id/blue_tooth_tip"
-            android:gravity="center|start"
-            android:textColor="#000000" />
-    </RelativeLayout>
+        android:gravity="center|start|top"
+        android:lineSpacingMultiplier="1.5"
+        android:padding="10dp"
+        android:text="品牌："
+        android:textColor="#000000"
+        tools:ignore="HardcodedText" />
 </layout>
