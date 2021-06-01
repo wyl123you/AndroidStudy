@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.study.demo.Observer.ObserverActivity;
 import com.example.study.demo.android11storage.Android11StorageActivity;
 import com.example.study.demo.appicon.AppIconActivity;
 import com.example.study.demo.breatheLight.BreatheActivity;
@@ -261,6 +262,13 @@ public class MainActivity extends AppCompatActivity {
     public void toDeviceInfoActivity() {
         Intent intent = new Intent();
         intent.setClass(this, DeviceInfoActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.observer)
+    public void toObserverActivity() {
+        Intent intent = new Intent();
+        intent.setClass(this, ObserverActivity.class);
         startActivity(intent);
     }
 }

@@ -242,6 +242,13 @@
                 android:layout_height="wrap_content"
                 android:text="设备信息"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/observer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="观察者模式"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 

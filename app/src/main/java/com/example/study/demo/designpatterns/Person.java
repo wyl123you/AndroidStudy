@@ -50,27 +50,18 @@ public class Person implements Cloneable {
         books.add(book);
     }
 
-    //    @NonNull
-//    @Override
-//    public Object clone() throws CloneNotSupportedException {
-//        return super.clone();
-//    }
-
-
     @NotNull
     @Override
-    public Object clone() {
+    public Person clone() {
         Person person;
         try {
             person = (Person) super.clone();
-            person.age = this.age;
-            person.name = this.name;
             person.books = (ArrayList<String>) this.books.clone();
             return person;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
+            return new Person("aaa", 55, new ArrayList<>());
         }
-        return null;
     }
 
     @NotNull
