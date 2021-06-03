@@ -20,6 +20,7 @@ import com.example.study.demo.notificationDemo.NotifyUtil;
 import com.example.study.manager.ActivityStackManager;
 import com.example.study.manager.FragmentStackManager;
 import com.example.study.manager.LanguageUtil;
+import com.example.study.manager.LogUtil;
 import com.example.study.manager.MMKVUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -67,6 +68,12 @@ public class MyApplication extends MultiDexApplication {
         initActivityCallbacks();
         initMMKV();
         initLanguage();
+
+        LogUtil.getConfig()
+                .setEnable(true)
+                .setLog2Console(true)
+                .setLog2File(true)
+                .setEncryptType(LogUtil.Config.BASE64);
     }
 
     private void initActivityCallbacks() {

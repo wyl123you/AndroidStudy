@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.study.R;
 import com.example.study.databinding.ActivityDiyExtensionBinding;
+import com.example.study.manager.LogUtil;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -22,6 +23,8 @@ public class DiyExtensionActivity extends AppCompatActivity {
 
     private ActivityDiyExtensionBinding binding;
 
+    private String TAG = "DiyExtensionActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,7 @@ public class DiyExtensionActivity extends AppCompatActivity {
 
     public void write(View view) {
         String content = binding.editText1.getText().toString();
+        LogUtil.d(TAG, content, content+"1", content+"2");
         if (TextUtils.isEmpty(content)) {
             Toast.makeText(this, "请输入内容", Toast.LENGTH_LONG).show();
         }
