@@ -45,8 +45,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
-        <activity android:name=".demo.Observer.ObserverActivity"></activity>
-        <activity android:name=".demo.deviceInfo.DeviceInfoActivity" />
         <activity
             android:name=".demo.systemUI.SystemUIActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -68,10 +66,10 @@
         </activity>
 
         <activity-alias
-            android:name=".TestIcon1"
+            android:name=".TestIcon2"
             android:enabled="false"
-            android:icon="@drawable/account"
-            android:label="@string/app_name1"
+            android:icon="@drawable/background"
+            android:label="@string/app_name2"
             android:targetActivity=".demo.welcome.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -80,10 +78,10 @@
             </intent-filter>
         </activity-alias>
         <activity-alias
-            android:name=".TestIcon2"
+            android:name=".TestIcon1"
             android:enabled="false"
-            android:icon="@drawable/background"
-            android:label="@string/app_name2"
+            android:icon="@drawable/account"
+            android:label="@string/app_name1"
             android:targetActivity=".demo.welcome.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -216,6 +214,18 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".demo.android11storage.Android11StorageActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.diyExtension.DiyExtensionActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.Observer.ObserverActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.deviceInfo.DeviceInfoActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
 

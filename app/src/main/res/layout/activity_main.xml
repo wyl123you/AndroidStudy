@@ -249,6 +249,13 @@
                 android:layout_height="wrap_content"
                 android:text="观察者模式"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/diy_extension"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="自定义扩展名"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 

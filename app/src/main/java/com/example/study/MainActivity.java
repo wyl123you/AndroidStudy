@@ -19,6 +19,7 @@ import com.example.study.demo.broadcast.BroadcastActivity;
 import com.example.study.demo.cardViewDemo.CardViewActivity;
 import com.example.study.demo.deviceInfo.DeviceInfoActivity;
 import com.example.study.demo.dialogFragmentDemo.DialogFragmentActivity;
+import com.example.study.demo.diyExtension.DiyExtensionActivity;
 import com.example.study.demo.home.HomeActivity;
 import com.example.study.demo.javajs.JavaJsActivity;
 import com.example.study.demo.jni.JniActivity;
@@ -269,6 +270,13 @@ public class MainActivity extends AppCompatActivity {
     public void toObserverActivity() {
         Intent intent = new Intent();
         intent.setClass(this, ObserverActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.diy_extension)
+    public void toDiyExtensionActivity() {
+        Intent intent = new Intent();
+        intent.setClass(this, DiyExtensionActivity.class);
         startActivity(intent);
     }
 }
