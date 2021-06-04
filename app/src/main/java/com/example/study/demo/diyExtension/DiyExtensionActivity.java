@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.study.R;
 import com.example.study.databinding.ActivityDiyExtensionBinding;
+import com.example.study.demo.mvvm.Person;
 import com.example.study.manager.LogUtil;
 
 import java.io.BufferedInputStream;
@@ -34,7 +35,8 @@ public class DiyExtensionActivity extends AppCompatActivity {
 
     public void write(View view) {
         String content = binding.editText1.getText().toString();
-        LogUtil.d(TAG, content, content+"1", content+"2");
+        LogUtil.v(TAG, content, content + "1", content + "2");
+        LogUtil.v(TAG, new Person("aa", 23, "aa"));
         if (TextUtils.isEmpty(content)) {
             Toast.makeText(this, "请输入内容", Toast.LENGTH_LONG).show();
         }

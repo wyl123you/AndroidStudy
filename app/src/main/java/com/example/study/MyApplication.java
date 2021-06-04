@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
+import com.example.study.demo.mvvm.Person;
 import com.example.study.demo.notificationDemo.NotifyUtil;
 import com.example.study.manager.ActivityStackManager;
 import com.example.study.manager.FragmentStackManager;
@@ -27,6 +28,8 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mmkv.MMKV;
+
+import net.vidageek.mirror.dsl.Mirror;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -69,12 +72,16 @@ public class MyApplication extends MultiDexApplication {
         initMMKV();
         initLanguage();
 
+        Log.d(TAG, BuildConfig.FLAVOR);
+
+
         LogUtil.getConfig()
                 .setEnable(true)
                 .setLog2Console(true)
-                .setConsoleFilter(LogUtil.V)
+                .setConsoleFilter(LogUtil.VERBOSE)
                 .setLog2File(true)
-                .setFileFilter(LogUtil.V)
+                .setFileFilter(LogUtil.VERBOSE)
+                .setDir("this.getCacheDir()")
                 .setDir(this.getCacheDir())
                 .setFileExtension(".txt")
                 .setFilePrefix("aaaa")
@@ -82,7 +89,30 @@ public class MyApplication extends MultiDexApplication {
                 .setEncryptType(LogUtil.Config.BASE64)
                 .setAutoDelete(true);
 
-        LogUtil.v("a","a");
+        LogUtil.v("a", "a");
+        LogUtil.v(new Person("aa", 23, "aa"));
+        LogUtil.d("a", "a");
+        LogUtil.d(new Person("aa", 23, "aa"));
+        LogUtil.i("a", "a");
+        LogUtil.i(new Person("aa", 23, "aa"));
+        LogUtil.w("a", new Mirror());
+        LogUtil.w(new Person("aa", 23, "aa"));
+        LogUtil.e("a", "a");
+        LogUtil.e(new Person("aa", 23, "aa"));
+        LogUtil.a("a", "a");
+        LogUtil.a(new Person("aa", 23, "aa"));
+        LogUtil.json("a");
+        LogUtil.json("a", "a");
+        LogUtil.json(LogUtil.DEBUG, "a");
+        LogUtil.json(LogUtil.DEBUG, "aaa", "aaaaa");
+        LogUtil.file("a");
+        LogUtil.file("a", "a");
+        LogUtil.file(LogUtil.DEBUG, "a");
+        LogUtil.file(LogUtil.DEBUG, "aaa", "aaaaa");
+        LogUtil.xml("a");
+        LogUtil.xml("a", "a");
+        LogUtil.xml(LogUtil.DEBUG, "a");
+        LogUtil.xml(LogUtil.DEBUG, "aaa", "aaaaa");
     }
 
     private void initActivityCallbacks() {

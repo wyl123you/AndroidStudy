@@ -9,6 +9,7 @@ import android.util.Log;
 import androidx.annotation.IntDef;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.lang.annotation.Retention;
@@ -28,14 +29,14 @@ import java.util.concurrent.Executors;
 
 public final class LogUtil {
 
-    public static final int V = Log.VERBOSE;
-    public static final int D = Log.DEBUG;
-    public static final int I = Log.INFO;
-    public static final int W = Log.WARN;
-    public static final int E = Log.ERROR;
-    public static final int A = Log.ASSERT;
+    public static final int VERBOSE = Log.VERBOSE;
+    public static final int DEBUG = Log.DEBUG;
+    public static final int INFO = Log.INFO;
+    public static final int WARN = Log.WARN;
+    public static final int ERROR = Log.ERROR;
+    public static final int ASSERT = Log.ASSERT;
 
-    @IntDef({V, D, I, W, E, A})
+    @IntDef({VERBOSE, DEBUG, INFO, WARN, ERROR, ASSERT})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Level {
     }
@@ -45,10 +46,10 @@ public final class LogUtil {
     private static final int JSON = 0x20;
     private static final int XML = 0x30;
 
-    @IntDef({FILE, JSON, XML})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+//    @IntDef({FILE, JSON, XML})
+//    @Retention(RetentionPolicy.SOURCE)
+//    public @interface Type {
+//    }
 
     private static final String FILE_SEP = System.getProperty("file.separator");
     private static final String LINE_SEP = System.getProperty("line.separator");
@@ -64,72 +65,72 @@ public final class LogUtil {
 
     public static void v(final Object... objects) {
         //VERBOSE:无TAG,可变长字符串打印
-        log(V, CONFIG.getGlobalTag(), objects);
+        log(VERBOSE, CONFIG.getGlobalTag(), objects);
     }
 
     public static void v(final String tag, final Object... objects) {
         //VERBOSE:有TAG,可变长字符串打印
-        log(V, tag, objects);
+        log(VERBOSE, tag, objects);
     }
 
     public static void d(final Object... objects) {
         //DEBUG:无TAG,可变长字符串打印
-        log(D, CONFIG.getGlobalTag(), objects);
+        log(DEBUG, CONFIG.getGlobalTag(), objects);
     }
 
     public static void d(final String tag, final Object... objects) {
         //DEBUG:有TAG,可变长字符串打印
-        log(D, tag, objects);
+        log(DEBUG, tag, objects);
     }
 
     public static void i(final Object... objects) {
         //INFO:无TAG,可变长字符串打印
-        log(I, CONFIG.getGlobalTag(), objects);
+        log(INFO, CONFIG.getGlobalTag(), objects);
     }
 
     public static void i(final String tag, final Object... objects) {
         //INFO:有TAG,可变长字符串打印
-        log(I, tag, objects);
+        log(INFO, tag, objects);
     }
 
     public static void w(final Object... objects) {
         //WARN:无TAG,可变长字符串打印
-        log(W, CONFIG.getGlobalTag(), objects);
+        log(WARN, CONFIG.getGlobalTag(), objects);
     }
 
     public static void w(final String tag, final Object... objects) {
         //WARN:有TAG,可变长字符串打印
-        log(W, tag, objects);
+        log(WARN, tag, objects);
     }
 
     public static void e(final Object... objects) {
         //ERROR:无TAG,可变长字符串打印
-        log(E, CONFIG.getGlobalTag(), objects);
+        log(ERROR, CONFIG.getGlobalTag(), objects);
     }
 
     public static void e(final String tag, final Object... objects) {
         //ERROR:有TAG,可变长字符串打印
-        log(E, tag, objects);
+        log(ERROR, tag, objects);
     }
 
     public static void a(final Object... objects) {
         //ASSERT:无TAG,可变长字符串打印
-        log(A, CONFIG.getGlobalTag(), objects);
+        log(ASSERT, CONFIG.getGlobalTag(), objects);
     }
 
     public static void a(final String tag, final Object... objects) {
         //ASSERT:有TAG,可变长字符串打印
-        log(A, tag, objects);
+        log(ASSERT, tag, objects);
     }
 
     //特殊数据类型日志打印(文件)
     public static void file(final Object content) {
-        int typeAndLevel = FILE | D;
+        int typeAndLevel = FILE | DEBUG;
         log(typeAndLevel, CONFIG.getGlobalTag(), content);
     }
 
     public static void file(final String tag, final Object content) {
-        int typeAndLevel = FILE | D;
+        int typeAndLevel = FILE | DEBUG;
         log(typeAndLevel, tag, content);
     }
 
@@ -145,43 +146,43 @@ public final class LogUtil {
 
     //特殊数据类型日志打印(Json)
     public static void json(final Object content) {
-        int typeAndLevel = FILE | D;
+        int typeAndLevel = JSON | DEBUG;
         log(typeAndLevel, CONFIG.getGlobalTag(), content);
     }
 
     public static void json(final String tag, final Object content) {
-        int typeAndLevel = FILE | D;
+        int typeAndLevel = JSON | DEBUG;
         log(typeAndLevel, tag, content);
     }
 
     public static void json(@Level final int level, final Object content) {
-        int typeAndLevel = FILE | level;
+        int typeAndLevel = JSON | level;
         log(typeAndLevel, CONFIG.getGlobalTag(), content);
     }
 
     public static void json(@Level final int level, final String tag, final Object content) {
-        int typeAndLevel = FILE | level;
+        int typeAndLevel = JSON | level;
         log(typeAndLevel, tag, content);
     }
 
     //特殊数据类型日志打印(Xml)
     public static void xml(final Object content) {
-        int typeAndLevel = FILE | D;
+        int typeAndLevel = XML | DEBUG;
         log(typeAndLevel, CONFIG.getGlobalTag(), content);
     }
 
     public static void xml(final String tag, final Object content) {
-        int typeAndLevel = FILE | D;
+        int typeAndLevel = XML | DEBUG;
         log(typeAndLevel, tag, content);
     }
 
     public static void xml(@Level final int level, final Object content) {
-        int typeAndLevel = FILE | level;
+        int typeAndLevel = XML | level;
         log(typeAndLevel, CONFIG.getGlobalTag(), content);
     }
 
     public static void xml(@Level final int level, final String tag, final Object content) {
-        int typeAndLevel = FILE | level;
+        int typeAndLevel = XML | level;
         log(typeAndLevel, tag, content);
     }
 
@@ -199,7 +200,7 @@ public final class LogUtil {
              * 3、日志类型为非文件类型
              */
             if (CONFIG.isLog2Console() && level >= CONFIG.getConsoleFilter() && type != FILE) {
-                //print2Console(level, tag, (String...) msg);
+                print2Console(level, type, tag, msg);
             }
 
             /*
@@ -208,18 +209,30 @@ public final class LogUtil {
              * 2、日志等级大于等于日志过滤等级
              * 3、日志类型为文件类型
              */
-            if (CONFIG.isLog2File() && level >= CONFIG.getFileFilter() && type == FILE) {
+            if (CONFIG.isLog2File() && level >= CONFIG.getFileFilter() || type == FILE) {
                 print2File();
             }
         }
     }
 
     private static void print2Console(
-            final @Level int level,
+            final int level,
+            final int type,
             final String tag,
-            final @NotNull String... text) {
-        for (String msg : text) {
-            Log.println(level, tag, msg);
+            final @NotNull Object... text) {
+        for (Object object : text) {
+            if (object instanceof String) {
+                Log.println(level, tag, (String) object);
+            } else {
+                Log.println(level, tag, object.getClass().getName());
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put(object.getClass().getSimpleName(), object);
+                    Log.println(level, tag, jsonObject.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -339,8 +352,8 @@ public final class LogUtil {
         @ENCRYPT
         private int encryptType = BASE64;
         private int validDays = 15;
-        private int consoleFilter = V;
-        private int fileFilter = V;
+        private int consoleFilter = VERBOSE;
+        private int fileFilter = VERBOSE;
 
         @IntDef({BASE64, BINARY})
         @Retention(RetentionPolicy.SOURCE)

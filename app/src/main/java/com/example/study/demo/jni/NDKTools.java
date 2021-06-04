@@ -5,7 +5,8 @@ import java.util.Map;
 public class NDKTools {
 
     static {
-        System.loadLibrary("a");
+        System.loadLibrary("libraryName");
+//        System.loadLibrary("libraaaaryName");
     }
 
     public static native int add(int a, int b);

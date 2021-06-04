@@ -96,15 +96,15 @@ public class Person extends BaseObservable implements LifecycleObserver, Observe
         imageView.setImageResource(url);
     }
 
-    @NotNull
-    @Override
-    public String toString() {
-        Log.d("TAG", "toString: 1321313");
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
-    }
+//    @NotNull
+//    @Override
+//    public String toString() {
+//        Log.d("TAG", "toString: 1321313");
+//        return "Person{" +
+//                "name='" + name + '\'' +
+//                ", age=" + age +
+//                '}';
+//    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void print() {

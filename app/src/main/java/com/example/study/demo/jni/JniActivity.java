@@ -11,7 +11,6 @@ import com.example.study.databinding.ActivityJniBinding;
 
 public class JniActivity extends BaseActivity<ActivityJniBinding> {
 
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_jni;
