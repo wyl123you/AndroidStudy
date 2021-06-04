@@ -72,8 +72,17 @@ public class MyApplication extends MultiDexApplication {
         LogUtil.getConfig()
                 .setEnable(true)
                 .setLog2Console(true)
+                .setConsoleFilter(LogUtil.V)
                 .setLog2File(true)
-                .setEncryptType(LogUtil.Config.BASE64);
+                .setFileFilter(LogUtil.V)
+                .setDir(this.getCacheDir())
+                .setFileExtension(".txt")
+                .setFilePrefix("aaaa")
+                .setLogHeadEnable(true)
+                .setEncryptType(LogUtil.Config.BASE64)
+                .setAutoDelete(true);
+
+        LogUtil.v("a","a");
     }
 
     private void initActivityCallbacks() {

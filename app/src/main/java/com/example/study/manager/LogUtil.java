@@ -37,13 +37,18 @@ public final class LogUtil {
 
     @IntDef({V, D, I, W, E, A})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TYPE {
-        int value() default V;
+    public @interface Level {
     }
 
-    private static final int FILE = 0x0010;
-    private static final int JSON = 0x0020;
-    private static final int XML = 0x0030;
+    //特殊日志类型
+    private static final int FILE = 0x10;
+    private static final int JSON = 0x20;
+    private static final int XML = 0x30;
+
+    @IntDef({FILE, JSON, XML})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Type {
+    }
 
     private static final String FILE_SEP = System.getProperty("file.separator");
     private static final String LINE_SEP = System.getProperty("line.separator");
@@ -53,119 +58,180 @@ public final class LogUtil {
     private static ExecutorService EXECUTOR;
 
     public LogUtil() {
+        //不可实例化
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    public static void v(final Object... msg) {
-        log(V, CONFIG.getGlobalTag(), msg);
+    public static void v(final Object... objects) {
+        //VERBOSE:无TAG,可变长字符串打印
+        log(V, CONFIG.getGlobalTag(), objects);
     }
 
-    public static void v(final String tag, final Object... msg) {
-        log(V, tag, msg);
+    public static void v(final String tag, final Object... objects) {
+        //VERBOSE:有TAG,可变长字符串打印
+        log(V, tag, objects);
     }
 
-    public static void d(final Object... msg) {
-        log(D, CONFIG.getGlobalTag(), msg);
+    public static void d(final Object... objects) {
+        //DEBUG:无TAG,可变长字符串打印
+        log(D, CONFIG.getGlobalTag(), objects);
     }
 
-    public static void d(final String tag, final Object... msg) {
-        log(D, tag, msg);
+    public static void d(final String tag, final Object... objects) {
+        //DEBUG:有TAG,可变长字符串打印
+        log(D, tag, objects);
     }
 
-    public static void i(final Object... msg) {
-        log(I, CONFIG.getGlobalTag(), msg);
+    public static void i(final Object... objects) {
+        //INFO:无TAG,可变长字符串打印
+        log(I, CONFIG.getGlobalTag(), objects);
     }
 
-    public static void i(final String tag, final Object... msg) {
-        log(I, tag, msg);
+    public static void i(final String tag, final Object... objects) {
+        //INFO:有TAG,可变长字符串打印
+        log(I, tag, objects);
     }
 
-    public static void w(final Object... msg) {
-        log(W, CONFIG.getGlobalTag(), msg);
+    public static void w(final Object... objects) {
+        //WARN:无TAG,可变长字符串打印
+        log(W, CONFIG.getGlobalTag(), objects);
     }
 
-    public static void w(final String tag, final Object... msg) {
-        log(W, tag, msg);
+    public static void w(final String tag, final Object... objects) {
+        //WARN:有TAG,可变长字符串打印
+        log(W, tag, objects);
     }
 
-    public static void e(final Object... msg) {
-        log(E, CONFIG.getGlobalTag(), msg);
+    public static void e(final Object... objects) {
+        //ERROR:无TAG,可变长字符串打印
+        log(E, CONFIG.getGlobalTag(), objects);
     }
 
-    public static void e(final String tag, final Object... msg) {
-        log(E, tag, msg);
+    public static void e(final String tag, final Object... objects) {
+        //ERROR:有TAG,可变长字符串打印
+        log(E, tag, objects);
     }
 
-    public static void a(final Object... msg) {
-        log(A, CONFIG.getGlobalTag(), msg);
+    public static void a(final Object... objects) {
+        //ASSERT:无TAG,可变长字符串打印
+        log(A, CONFIG.getGlobalTag(), objects);
     }
 
-    public static void a(final String tag, final Object... msg) {
-        log(A, tag, msg);
+    public static void a(final String tag, final Object... objects) {
+        //ASSERT:有TAG,可变长字符串打印
+        log(A, tag, objects);
     }
 
+    //特殊数据类型日志打印(文件)
     public static void file(final Object content) {
-        log(FILE | D, CONFIG.getGlobalTag(), content);
+        int typeAndLevel = FILE | D;
+        log(typeAndLevel, CONFIG.getGlobalTag(), content);
     }
 
     public static void file(final String tag, final Object content) {
-        log(FILE | D, tag, content);
+        int typeAndLevel = FILE | D;
+        log(typeAndLevel, tag, content);
     }
 
-    public static void file(@TYPE final int type, final Object content) {
-        log(FILE | type, CONFIG.getGlobalTag(), content);
+    public static void file(@Level final int level, final Object content) {
+        int typeAndLevel = FILE | level;
+        log(typeAndLevel, CONFIG.getGlobalTag(), content);
     }
 
-    public static void file(@TYPE final int type, final String tag, final Object content) {
-        log(FILE | type, tag, content);
+    public static void file(@Level final int level, final String tag, final Object content) {
+        int typeAndLevel = FILE | level;
+        log(typeAndLevel, tag, content);
     }
 
+    //特殊数据类型日志打印(Json)
     public static void json(final Object content) {
-        log(JSON | D, CONFIG.getGlobalTag(), content);
+        int typeAndLevel = FILE | D;
+        log(typeAndLevel, CONFIG.getGlobalTag(), content);
     }
 
     public static void json(final String tag, final Object content) {
-        log(JSON | D, tag, content);
+        int typeAndLevel = FILE | D;
+        log(typeAndLevel, tag, content);
     }
 
-    public static void json(@TYPE final int type, final Object content) {
-        log(JSON | type, CONFIG.getGlobalTag(), content);
+    public static void json(@Level final int level, final Object content) {
+        int typeAndLevel = FILE | level;
+        log(typeAndLevel, CONFIG.getGlobalTag(), content);
     }
 
-    public static void json(@TYPE final int type, final String tag, final Object content) {
-        log(JSON | type, tag, content);
+    public static void json(@Level final int level, final String tag, final Object content) {
+        int typeAndLevel = FILE | level;
+        log(typeAndLevel, tag, content);
     }
 
+    //特殊数据类型日志打印(Xml)
     public static void xml(final Object content) {
-        log(XML | D, CONFIG.getGlobalTag(), content);
+        int typeAndLevel = FILE | D;
+        log(typeAndLevel, CONFIG.getGlobalTag(), content);
     }
 
     public static void xml(final String tag, final Object content) {
-        log(XML | D, tag, content);
+        int typeAndLevel = FILE | D;
+        log(typeAndLevel, tag, content);
     }
 
-    public static void xml(@TYPE final int type, final Object content) {
-        log(XML | type, CONFIG.getGlobalTag(), content);
+    public static void xml(@Level final int level, final Object content) {
+        int typeAndLevel = FILE | level;
+        log(typeAndLevel, CONFIG.getGlobalTag(), content);
     }
 
-    public static void xml(@TYPE final int type, final String tag, final Object content) {
-        log(XML | type, tag, content);
+    public static void xml(@Level final int level, final String tag, final Object content) {
+        int typeAndLevel = FILE | level;
+        log(typeAndLevel, tag, content);
     }
 
-    private static void log(final int type, final String tag, final Object... msg) {
+    private static void log(final int typeAndLevel, final String tag, final Object... msg) {
         if (!CONFIG.isEnable()) return;
-        final int typeHigh = type & 0xf0;
-        final int typeLow = type & 0x0f;
-        if (CONFIG.isLog2Console() || CONFIG.isLog2File() || typeHigh == FILE) {
-            if (typeLow < CONFIG.getConsoleFilter() && typeLow < CONFIG.getFileFilter()) return;
+        final int type = typeAndLevel & 0xf0;
+        final int level = typeAndLevel & 0x0f;
 
-            if (CONFIG.isLog2Console() && typeHigh != FILE && typeLow >= CONFIG.getConsoleFilter()) {
-                for (Object str : msg) {
-                    Log.d(tag, (String) str);
-                }
+        if (CONFIG.isLog2Console() || CONFIG.isLog2File()) {
+            String body = "aaa";
+            /*
+             * 控制台日志打印条件:
+             * 1、开启控制台日志打印
+             * 2、日志等级大于等于控制台过滤等级
+             * 3、日志类型为非文件类型
+             */
+            if (CONFIG.isLog2Console() && level >= CONFIG.getConsoleFilter() && type != FILE) {
+                //print2Console(level, tag, (String...) msg);
+            }
+
+            /*
+             * 文件日志打印条件:
+             * 1、开启文件日志打印
+             * 2、日志等级大于等于日志过滤等级
+             * 3、日志类型为文件类型
+             */
+            if (CONFIG.isLog2File() && level >= CONFIG.getFileFilter() && type == FILE) {
+                print2File();
             }
         }
     }
+
+    private static void print2Console(
+            final @Level int level,
+            final String tag,
+            final @NotNull String... text) {
+        for (String msg : text) {
+            Log.println(level, tag, msg);
+        }
+    }
+
+    private static void print2File() {
+
+    }
+
+//    private static TagHead processHead(String tag) {
+//        if (TextUtils.isEmpty(tag) && !CONFIG.isLogHeadEnable()) {
+//
+//        }
+//    }
 
     private static void executor(final Runnable r) {
         if (EXECUTOR == null) {
@@ -220,10 +286,47 @@ public final class LogUtil {
         return false;
     }
 
+    public static final class TagHead {
+        private String tag;
+        private String[] consoleHead;
+        private String fileHead;
+
+        public TagHead(String tag, String[] consoleHead, String fileHead) {
+            this.tag = tag;
+            this.consoleHead = consoleHead;
+            this.fileHead = fileHead;
+        }
+
+        public String getTag() {
+            return tag;
+        }
+
+        public void setTag(String tag) {
+            this.tag = tag;
+        }
+
+        public String[] getConsoleHead() {
+            return consoleHead;
+        }
+
+        public void setConsoleHead(String[] consoleHead) {
+            this.consoleHead = consoleHead;
+        }
+
+        public String getFileHead() {
+            return fileHead;
+        }
+
+        public void setFileHead(String fileHead) {
+            this.fileHead = fileHead;
+        }
+    }
+
     public static final class Config {
         private boolean enable = true;//LogUtil是否可用
         private boolean log2Console = true;//打印到控制台
         private boolean log2File = true;
+        private boolean logHeadEnable = true;
         private boolean autoDelete = true;
         private boolean isSpaceTag = true;
 
@@ -242,7 +345,6 @@ public final class LogUtil {
         @IntDef({BASE64, BINARY})
         @Retention(RetentionPolicy.SOURCE)
         public @interface ENCRYPT {
-            int value() default BASE64;
         }
 
         public static final int BASE64 = 0x0001;
@@ -337,12 +439,23 @@ public final class LogUtil {
             return this;
         }
 
-        public void setConsoleFilter(@TYPE int consoleFilter) {
+        public Config setConsoleFilter(@Level int consoleFilter) {
             this.consoleFilter = consoleFilter;
+            return this;
         }
 
-        public void setFileFilter(int fileFilter) {
+        public Config setFileFilter(int fileFilter) {
             this.fileFilter = fileFilter;
+            return this;
+        }
+
+        public Config setLogHeadEnable(boolean logHeadEnable) {
+            this.logHeadEnable = logHeadEnable;
+            return this;
+        }
+
+        public boolean isLogHeadEnable() {
+            return logHeadEnable;
         }
 
         public int getConsoleFilter() {
