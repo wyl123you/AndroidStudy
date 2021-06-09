@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="GradientTextView">
+    <declare-styleable name="StrokeGradientText">
         <attr name="startColor" format="reference|color" />
         <attr name="endColor" format="reference|color" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="strokeEnable" format="boolean" />
+        <attr name="strokeColor" format="color" />
         <attr name="shadowEnable" format="boolean" />
+        <attr name="shadowType" format="enum">
+            <enum name="linear" value="0" />
+            <enum name="sweep" value="1" />
+            <enum name="radial" value="2" />
+        </attr>
     </declare-styleable>
 
-    <declare-styleable name="StrokeGradientTextView">
-        <attr name="strokeColor" format="reference|color" />
-        <attr name="strokeWidth" format="reference|dimension" />
-        <attr name="strokeEnable" format="boolean" />
+    <declare-styleable name="GeometryView">
+        <attr name="lineColor" format="color" />
+        <attr name="lineWidth" format="dimension" />
+        <attr name="radius1" format="dimension" />
+        <attr name="recWidth" format="dimension" />
+        <attr name="recHeight" format="dimension" />
+        <attr name="triSize" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="LoadingView">
@@ -74,5 +85,26 @@
         <attr name="borderColor" format="color|reference" />
         <attr name="borderWidth" format="dimension" />
         <attr name="borderDash" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SweepImageView">
+        <attr name="periodInMillis" format="integer" />
+        <attr name="repeat" format="boolean" />
+        <attr name="areaAngle" format="float" />
+        <attr name="startAngle" format="enum">
+            <enum name="zero" value="0" />
+            <enum name="quarter" value="90" />
+            <enum name="half" value="180" />
+            <enum name="quarters" value="270" />
+        </attr>
+        <attr name="sweepType" format="enum">
+            <enum name="circle" value="0" />
+            <enum name="square" value="1" />
+            <enum name="radar" value="2" />
+        </attr>
+        <attr name="direction" format="enum">
+            <enum name="CW" value="0" />
+            <enum name="CCW" value="1" />
+        </attr>
     </declare-styleable>
 </resources>

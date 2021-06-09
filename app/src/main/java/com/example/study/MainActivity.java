@@ -34,6 +34,7 @@ import com.example.study.demo.palettePager.PalettePagerActivity;
 import com.example.study.demo.player.ExoPlayerActivity;
 import com.example.study.demo.player.NodeMediaPlayerActivity;
 import com.example.study.demo.qrcode.QRCodeActivity;
+import com.example.study.demo.radarVIew.RadarActivity;
 import com.example.study.demo.refreshRecyclerView.RefreshListActivity;
 import com.example.study.demo.retrofit.RetrofitActivity;
 import com.example.study.demo.roundImageVIew.RoundImageViewActivity;
@@ -277,6 +278,13 @@ public class MainActivity extends AppCompatActivity {
     public void toDiyExtensionActivity() {
         Intent intent = new Intent();
         intent.setClass(this, DiyExtensionActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.radar)
+    public void toRadarActivity() {
+        Intent intent = new Intent();
+        intent.setClass(this, RadarActivity.class);
         startActivity(intent);
     }
 }
