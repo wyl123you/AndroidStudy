@@ -18,13 +18,15 @@
             android:layout_height="300dp"
             android:scaleType="fitXY"
             android:src="@drawable/img_skeletontyrant_small"
+            app:areaAngle="0"
+            app:direction="CW"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:periodInMillis="5000"
-            app:repeat="true"
+            app:repeat="false"
             app:startAngle="zero"
-            app:sweepType="circle" />
+            app:sweepType="square" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

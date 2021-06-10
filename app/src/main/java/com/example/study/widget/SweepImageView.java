@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
  * @Company LotoGram
  */
 
-public class SweepImageView extends androidx.appcompat.widget.AppCompatImageView {
+public class SweepImageView extends androidx.appcompat.widget.AppCompatImageView implements Runnable {
 
     private final static String TAG = "SweepImageView";
     private final static int DEFAULT_PERIOD = 5000;
@@ -31,12 +32,19 @@ public class SweepImageView extends androidx.appcompat.widget.AppCompatImageView
     private final Paint paint;
     private final RectF rectF;
 
-    private int period;
-    private int startAngle;
+    private float originStartAngle;
+
+    private long period;
+    private float startAngle;
     private float areaAngle;
     private boolean repeat;
     private SweepType sweepType;
     private Direction direction;
+    private Thread timingThread;
+
+    private float anglePerMillis;
+    private long timeOfLastInvalid;
+    private float deltaAreaAngle;
 
     public enum Direction {
         CW(0),
@@ -97,24 +105,31 @@ public class SweepImageView extends androidx.appcompat.widget.AppCompatImageView
         paint.setColor(Color.argb(80, 0, 0, 0));
         rectF = new RectF(0, 0, 0, 0);
         initAttrs(context, attrs);
+        if (sweepType != SweepType.RADAR) {
+            timeOfLastInvalid = System.currentTimeMillis();
+            anglePerMillis = (360 - areaAngle) / period;
+            timingThread = new Thread(this);
+            timingThread.start();
+        }
     }
 
     private void initAttrs(@NotNull Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SweepImageView);
         setPeriod(ta.getInteger(R.styleable.SweepImageView_periodInMillis, DEFAULT_PERIOD));
         setStartAngle(ta.getInteger(R.styleable.SweepImageView_startAngle, DEFAULT_START_ANGLE));
-        setAreaAngle(ta.getInteger(R.styleable.SweepImageView_areaAngle, DEFAULT_AREA_ANGLE));
+        setAreaAngle(ta.getFloat(R.styleable.SweepImageView_areaAngle, DEFAULT_AREA_ANGLE));
         setRepeat(ta.getBoolean(R.styleable.SweepImageView_repeat, true));
         setDirection(ta.getInteger(R.styleable.SweepImageView_direction, DEFAULT_DIRECTION));
         setSweepType(ta.getInteger(R.styleable.SweepImageView_sweepType, DEFAULT_SWEEP_TYPE));
         ta.recycle();
     }
 
-    public void setStartAngle(int angle) {
+    public void setStartAngle(float angle) {
         this.startAngle = angle;
+        this.originStartAngle = angle;
     }
 
-    public int getStartAngle() {
+    public float getStartAngle() {
         return startAngle;
     }
 
@@ -130,11 +145,11 @@ public class SweepImageView extends androidx.appcompat.widget.AppCompatImageView
         return direction;
     }
 
-    public void setPeriod(int period) {
+    public void setPeriod(long period) {
         this.period = period;
     }
 
-    public float getPeriod() {
+    public long getPeriod() {
         return period;
     }
 
@@ -169,39 +184,52 @@ public class SweepImageView extends androidx.appcompat.widget.AppCompatImageView
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
         int width = getWidth();
         int height = getHeight();
-//        private int period;
-//        private int startAngle;
-//        private float areaAngle;
-//        private boolean repeat;
-//        private Direction direction;
 
         rectF.left = sweepType == SweepType.SQUARE ? -1000 : 0;
         rectF.top = sweepType == SweepType.SQUARE ? -1000 : 0;
         rectF.right = sweepType == SweepType.SQUARE ? width + 1000 : width;
         rectF.bottom = sweepType == SweepType.SQUARE ? height + 1000 : height;
 
-        if (repeat) {
+        repeat = sweepType == SweepType.RADAR || repeat;
+        if (sweepType == SweepType.RADAR) {
             if (direction == Direction.CW) {
-                areaAngle--;
+                startAngle = (startAngle % 360) + 1;
             } else {
-                areaAngle++;
+                startAngle = (startAngle % 360) - 1;
+            }
+        } else {
+            if (direction == Direction.CW) {
+                //areaAngle += 1;
+                if (repeat && areaAngle - originStartAngle >= 360) {
+                    areaAngle = originStartAngle;
+                }
+            } else {
+                //areaAngle -= 1;
+                if (repeat && originStartAngle - areaAngle >= 360) {
+                    areaAngle = originStartAngle;
+                }
             }
         }
+        canvas.drawArc(rectF, startAngle, areaAngle, true, paint);
+        Log.d(TAG, "areaAngle: " + areaAngle);
 
-        canvas.drawArc(
-                rectF,
-                0,
-                areaAngle--,
-                true,
-                paint);
-        if (areaAngle == -360) areaAngle = 360;
-
-        postInvalidateDelayed(period / 360);
+        if (areaAngle >= 0 && areaAngle <= 360) {
+            postInvalidate();
+        } else {
+            timingThread.interrupt();
+        }
     }
 
-    private float fwr(int a) {
-        return (float) (Math.sqrt(2) * a);
+    @Override
+    public void run() {
+        while (true) {
+            long pastTime = System.currentTimeMillis() - timeOfLastInvalid;
+            areaAngle += (pastTime * anglePerMillis);
+            Log.d(TAG, "while: " + areaAngle);
+            timeOfLastInvalid = System.currentTimeMillis();
+        }
     }
 }
