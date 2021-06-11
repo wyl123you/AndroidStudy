@@ -89,22 +89,27 @@
 
     <declare-styleable name="SweepImageView">
         <attr name="periodInMillis" format="integer" />
+        <attr name="areaAngle" format="integer" />
         <attr name="repeat" format="boolean" />
-        <attr name="areaAngle" format="float" />
         <attr name="startAngle" format="enum">
             <enum name="zero" value="0" />
             <enum name="quarter" value="90" />
             <enum name="half" value="180" />
             <enum name="quarters" value="270" />
         </attr>
-        <attr name="sweepType" format="enum">
-            <enum name="circle" value="0" />
-            <enum name="square" value="1" />
-            <enum name="radar" value="2" />
+        <attr name="sweep" format="enum">
+            <enum name="radial" value="0" />
+            <enum name="circle" value="1" />
+            <enum name="square" value="2" />
+
         </attr>
         <attr name="direction" format="enum">
             <enum name="CW" value="0" />
             <enum name="CCW" value="1" />
+        </attr>
+        <attr name="type" format="enum">
+            <enum name="show" value="0" />
+            <enum name="hide" value="1" />
         </attr>
     </declare-styleable>
 </resources>

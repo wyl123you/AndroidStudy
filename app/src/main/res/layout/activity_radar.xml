@@ -14,19 +14,82 @@
         tools:context=".demo.radarVIew.RadarActivity">
 
         <com.example.study.widget.SweepImageView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:id="@+id/aaaaa"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
             android:scaleType="fitXY"
             android:src="@drawable/img_skeletontyrant_small"
-            app:areaAngle="0"
+            app:areaAngle="90"
             app:direction="CW"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:periodInMillis="5000"
-            app:repeat="false"
-            app:startAngle="zero"
-            app:sweepType="square" />
+            app:repeat="true"
+            app:startAngle="half"
+            app:sweep="square"
+            app:type="hide" />
+
+        <com.example.study.widget.SweepImageView
+            android:id="@+id/bbbbb"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_skeletontyrant_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aaaaa"
+            app:repeat="false" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:background="#5A5454"
+            app:layout_constraintBottom_toBottomOf="@+id/aaaaa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/aaaaa" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:background="#5A5454"
+            app:layout_constraintBottom_toBottomOf="@+id/bbbbb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bbbbb" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="0dp"
+            android:background="#5A5454"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="onStart"
+            android:text="开始"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bbbbb" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="onStop"
+            android:text="停止"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/start" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

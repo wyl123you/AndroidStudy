@@ -8,7 +8,7 @@ public class Test {
         int a = 0x0001;
         int b = 0xf0;
 
-        System.out.println(a & b);
+        System.out.println(-368 % 360);
 
     }
 }
