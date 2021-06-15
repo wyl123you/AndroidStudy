@@ -52,11 +52,14 @@ public class RecordSaveService extends Thread {
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mMediaRecorder.setOutputFile(mDstPath);
-        mMediaRecorder.setVideoSize(mWidth, mHeight);
-        mMediaRecorder.setVideoFrameRate(FRAME_RATE);
-        mMediaRecorder.setVideoEncodingBitRate(mBitRate);
+
+        mMediaRecorder.setVideoEncodingBitRate(5 * 1024 * 1024);
         mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
         mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+        //setVideoSize是设置视频分辨率，跟设备硬件有关，若手机不支持则会报该错误
+        //把setVideoSize和setVideoFrameRate放到设置编码和格式的代码后面（亲测可行）
+        mMediaRecorder.setVideoSize(720, 1280);
+        mMediaRecorder.setVideoFrameRate(FRAME_RATE);
 
         try {
             mMediaRecorder.prepare();

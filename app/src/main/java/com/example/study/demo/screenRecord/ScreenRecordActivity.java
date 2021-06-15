@@ -13,6 +13,9 @@ import com.example.study.R;
 
 public class ScreenRecordActivity extends AppCompatActivity {
 
+    //MediaRecorder的几个常见坑
+    //https://linqiarui.blog.csdn.net/article/details/54347892
+
     private final String[] permissions = new String[]{
             Manifest.permission.RECORD_AUDIO,
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -35,6 +38,12 @@ public class ScreenRecordActivity extends AppCompatActivity {
     public void onRecordPush(View view) {
         Intent intent = new Intent();
         intent.setClass(this, RecordPushActivity.class);
+        startActivity(intent);
+    }
+
+    public void onRecordSound(View view) {
+        Intent intent = new Intent();
+        intent.setClass(this, RecordSoundActivity.class);
         startActivity(intent);
     }
 }

@@ -15,11 +15,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import com.example.study.R;
 import com.example.study.demo.screenRecord.service.RecordSaveService;
 
 import java.io.File;
+import java.io.IOException;
 
 public class RecordSaveActivity extends AppCompatActivity {
 
@@ -85,7 +85,11 @@ public class RecordSaveActivity extends AppCompatActivity {
             } else {
                 file = Environment.getExternalStorageDirectory();
             }
-            file = new File(file, "11111.mp4");
+            try {
+                file = new File(Environment.getExternalStorageDirectory().getCanonicalFile(), "testvideo.mp4");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             if (requestCode == 1000) {
                 recordSave = new RecordSaveService(screenWidth, screenHeight, 6000000, dpi, mediaProjection, file.getAbsolutePath());
