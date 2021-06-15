@@ -34,7 +34,8 @@ public class RecordSaveService extends Thread {
         try {
             initMediaRecorder();
             //在mediaRecorder.prepare()方法后调用
-            mVirtualDisplay = mMediaProjection.createVirtualDisplay(TAG + "-display", mWidth, mHeight, mDpi, DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC, mMediaRecorder.getSurface(), null, null);
+            mVirtualDisplay = mMediaProjection.createVirtualDisplay(TAG + "-display", mWidth, mHeight, mDpi,
+                    DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC, mMediaRecorder.getSurface(), null, null);
             Log.d(TAG, "created virtual display: " + mVirtualDisplay);
             mMediaRecorder.start();
             Log.d(TAG, "mediaRecorder start");
@@ -47,19 +48,21 @@ public class RecordSaveService extends Thread {
      * 初始化MediaRecorder
      */
     public void initMediaRecorder() {
+        //MediaRecorder官方文档导读
+        //https://blog.csdn.net/qq_32175491/article/details/78664821
         mMediaRecorder = new MediaRecorder();
-        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
         mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        mMediaRecorder.setOutputFile(mDstPath);
 
-        mMediaRecorder.setVideoEncodingBitRate(5 * 1024 * 1024);
-        mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
         mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+        mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
+        mMediaRecorder.setOutputFile(mDstPath);
         //setVideoSize是设置视频分辨率，跟设备硬件有关，若手机不支持则会报该错误
         //把setVideoSize和setVideoFrameRate放到设置编码和格式的代码后面（亲测可行）
         mMediaRecorder.setVideoSize(720, 1280);
         mMediaRecorder.setVideoFrameRate(FRAME_RATE);
+        mMediaRecorder.setVideoEncodingBitRate(5 * 1024 * 1024);
 
         try {
             mMediaRecorder.prepare();
