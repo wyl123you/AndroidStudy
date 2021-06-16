@@ -53,7 +53,7 @@ public class DeviceInfoActivity extends AppCompatActivity {
 //                e.printStackTrace();
 //                ((TextView) findViewById(R.id.blue_tooth)).setText("获取失败");
 //            }
-            builder.append("蓝牙 MAC: ").append(getBlueToothMacAddress()).append("\n");
+            builder.append("蓝牙 MAC: ").append("暂不支持安卓6以上").append("\n");
         }
 
         //是否支持红外

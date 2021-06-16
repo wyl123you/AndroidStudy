@@ -20,7 +20,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- <uses-permission android:name="com.vivo.android.launcher.permission.CHANGE_BADGE" /> -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- <uses-permission android:name="com.vivo.android.launcher.permission.CHANGE_BADGE" /> -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
@@ -47,17 +48,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
-        <activity android:name=".demo.screenRecord.RecordSoundActivity"></activity>
-        <activity android:name=".demo.radarVIew.RadarActivity" />
-        <activity
-            android:name=".demo.systemUI.SystemUIActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".demo.roundImageVIew.RoundImageViewActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".demo.welcome.WelcomeActivity"
             android:launchMode="standard"
@@ -217,6 +208,23 @@
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".demo.screenRecord.RecordSoundActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.radarVIew.RadarActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.systemUI.SystemUIActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".demo.roundImageVIew.RoundImageViewActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".demo.android11storage.Android11StorageActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
@@ -248,6 +256,10 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".demo.screenRecord.service.RecordSaveService"
+            android:foregroundServiceType="mediaProjection" />
 
         <meta-data
             android:name="BUGLY_APPID"

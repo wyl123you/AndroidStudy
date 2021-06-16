@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.study.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class RecordSoundActivity extends AppCompatActivity {
@@ -42,6 +44,17 @@ public class RecordSoundActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_sound);
+
+        try {
+            File file = new File(Environment.getExternalStorageDirectory(), "aa.txt");
+            FileOutputStream stream = new FileOutputStream(file);
+            stream.write("vvvvvvvvvvvvvvssssvvvv".getBytes());
+            Log.d(TAG, "File: ");
+            stream.flush();
+            stream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void onStartRecordSound(View view) throws IOException {
@@ -61,7 +74,7 @@ public class RecordSoundActivity extends AppCompatActivity {
         //设置所录制的声音的采样率
         mediaRecorder.setAudioSamplingRate(1000);
         //
-        mediaRecorder.setOutputFile(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC) + "/aaa.amr");
+        mediaRecorder.setOutputFile(Environment.getExternalStorageDirectory() + "/aaa.amr");
         Log.d(TAG, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath());
 
         mediaRecorder.prepare();

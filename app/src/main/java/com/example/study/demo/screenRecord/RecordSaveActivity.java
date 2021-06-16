@@ -1,10 +1,9 @@
 package com.example.study.demo.screenRecord;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
@@ -14,33 +13,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.study.R;
 import com.example.study.demo.screenRecord.service.RecordSaveService;
-
-import java.io.File;
-import java.io.IOException;
 
 public class RecordSaveActivity extends AppCompatActivity {
 
     public static final String TAG = "RecordSaveActivity";
 
-    private MediaProjectionManager mProjectionManager;
-
     private TextView status;
 
     private boolean recording;
-
-    private RecordSaveService recordSave;
 
     private int screenWidth;
     private int screenHeight;
     private int dpi;
 
+    private Intent recordSaveService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_save);
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.FOREGROUND_SERVICE}, 10);
 
         status = findViewById(R.id.status);
         status.setText(R.string.start);
@@ -74,28 +71,13 @@ public class RecordSaveActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            MediaProjection mediaProjection = mProjectionManager.getMediaProjection(resultCode, data);
-            if (mediaProjection == null) {
-                Log.d(TAG, "media projection is null");
-                return;
-            }
-            File file;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                file = getExternalFilesDir(Environment.DIRECTORY_SCREENSHOTS);
-            } else {
-                file = Environment.getExternalStorageDirectory();
-            }
-            try {
-                file = new File(Environment.getExternalStorageDirectory().getCanonicalFile(), "testvideo.mp4");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
             if (requestCode == 1000) {
-                recordSave = new RecordSaveService(screenWidth, screenHeight, 6000000, dpi, mediaProjection, file.getAbsolutePath());
-                Log.d(TAG, "Path: " + file.getAbsolutePath());
-                recordSave.start();
-                status.setText(R.string.stop);
+                recordSaveService = new Intent();
+                recordSaveService.setClass(this, RecordSaveService.class);
+                recordSaveService.putExtra("resultCode", resultCode);
+                recordSaveService.putExtra("data", data);
+                recordSaveService.putExtra("path", getExternalFilesDir(Environment.DIRECTORY_MOVIES) + "/RecordSave.mp4");
+                startForegroundService(recordSaveService);
                 recording = true;
             }
         } else {
@@ -105,11 +87,9 @@ public class RecordSaveActivity extends AppCompatActivity {
 
     public void onSwitch(View view) {
         if (recording) {
-            recordSave.release();
-            status.setText(R.string.start);
-            recording = false;
+            stopService(recordSaveService);
         } else {
-            mProjectionManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+            MediaProjectionManager mProjectionManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
             Intent captureIntent = mProjectionManager.createScreenCaptureIntent();
             startActivityForResult(captureIntent, 1000);
         }

@@ -20,6 +20,7 @@ public class Android11StorageActivity extends AppCompatActivity {
 
     Uri uri = Uri.parse("content://com.android.externalstorage.documents/document/primary:");
 
+    //targetSDK<29  则正常使用
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
