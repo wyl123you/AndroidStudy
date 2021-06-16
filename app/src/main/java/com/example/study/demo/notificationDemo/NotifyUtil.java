@@ -11,6 +11,8 @@ import android.os.Build;
 
 import androidx.core.app.NotificationManagerCompat;
 
+import org.jetbrains.annotations.NotNull;
+
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class NotifyUtil {
@@ -39,7 +41,7 @@ public class NotifyUtil {
      * @param importance importance
      */
     @TargetApi(Build.VERSION_CODES.O)
-    public static void createChannel(Context context, String id, String name, int importance) {
+    public static void createChannel(@NotNull Context context, String id, String name, int importance) {
         NotificationChannel channel = new NotificationChannel(id, name, importance);
         //配置通知渠道的属性
         channel.setDescription("收到通知");
@@ -64,7 +66,7 @@ public class NotifyUtil {
         return ID++;
     }
 
-    public static void openNotification(Context context) {
+    public static void openNotification(@NotNull Context context) {
         //进入设置系统应用权限界面
         Intent intent = new Intent();
 //        intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS)

@@ -77,7 +77,7 @@ public class RecordSaveActivity extends AppCompatActivity {
                 recordSaveService.putExtra("resultCode", resultCode);
                 recordSaveService.putExtra("data", data);
                 recordSaveService.putExtra("path", getExternalFilesDir(Environment.DIRECTORY_MOVIES) + "/RecordSave.mp4");
-                startForegroundService(recordSaveService);
+                startService(recordSaveService);
                 recording = true;
             }
         } else {

@@ -39,7 +39,7 @@
         android:name=".MyApplication"
         android:allowBackup="false"
         android:enabled="true"
-        android:icon="@drawable/android"
+        android:icon="@drawable/faces"
         android:label="@string/app_name"
         android:persistent="true"
         android:resizeableActivity="false"
