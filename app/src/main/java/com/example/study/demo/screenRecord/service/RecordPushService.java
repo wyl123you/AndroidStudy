@@ -101,6 +101,7 @@ public class RecordPushService extends Thread {
                     // wait 10ms
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             } else if (index >= 0) {
                 // 有效输出

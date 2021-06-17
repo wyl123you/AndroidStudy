@@ -29,7 +29,7 @@ public class NotificationActivity extends BaseActivity<ActivityNotificationBindi
         Log.d(TAG, "initViews: " + Build.VERSION.SDK_INT);
 
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.baidu.com"));
-        PendingIntent pendingIntent = PendingIntent.getActivity(NotificationActivity.this, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
         NotificationCompat.Builder builder;
         builder = new NotificationCompat.Builder(NotificationActivity.this, NotifyUtil.CHANNEL_MESSAGE)
                 .setWhen(System.currentTimeMillis())

@@ -158,12 +158,19 @@ public class MyApplication extends MultiDexApplication {
     private void initBugly() {
         String appId = null;
         String appKey = null;
+        String version = null;
+        String channel = null;
         ApplicationInfo info;
         try {
             info = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
             appId = info.metaData.getString("BUGLY_APPID");
             appKey = info.metaData.getString("BUGLY_APPKEY");
-            Log.d(TAG, "appId:" + appId + "   appKey:" + appKey);
+            version = info.metaData.getString("BUGLY_APP_VERSION");
+            channel = info.metaData.getString("BUGLY_APP_CHANNEL");
+            Log.d(TAG, "appId:" + appId);
+            Log.d(TAG, "appKey:" + appKey);
+            Log.d(TAG, "version:" + version);
+            Log.d(TAG, "channel:" + channel);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

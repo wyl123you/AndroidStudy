@@ -2,18 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.study">
+
     <!-- 红外遥控 -->
     <uses-permission android:name="android.permission.TRANSMIT_IR" /> <!-- 仅在支持红外的设备上运行 -->
-    <uses-feature
-        android:name="android.hardware.ConsumerIrManager"
-        android:required="true" /> <!-- NFC -->
     <uses-permission android:name="android.permission.NFC" /> <!-- 仅在支持NFC的设备上运行 -->
-    <uses-feature
-        android:name="android.hardware.nfc"
-        android:required="true" />
-
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
@@ -21,19 +15,29 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!-- <uses-permission android:name="com.vivo.android.launcher.permission.CHANGE_BADGE" /> -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-    <uses-permission
-        android:name="android.permission.READ_LOGS"
-        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!--在您的应用与分区存储完全兼容之前，您可以使用以下方法之一暂时停用分区存储：-->
+    <!--以Android 9（API 级别 28）或更低版本为目标平台。-->
+    <!--如果您以 Android 10（API 级别 29）或更高版本为目标平台，请在应用的清单文件中将 requestLegacyExternalStorage 的值设置为 true：-->
+
+    <uses-feature
+        android:name="android.hardware.ConsumerIrManager"
+        android:required="true" /> <!-- 红外 -->
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:name=".MyApplication"
@@ -244,7 +248,8 @@
         <receiver
             android:name=".demo.broadcast.BootBroadcastReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:permission="com.example.study.BootBroadcastReceiver">
             <intent-filter>
                 <action android:name="dddddddd" />
                 <action android:name="dfgkfkjndkfjnkdbf" />
@@ -266,15 +271,16 @@
             android:value="29f089a59e" />
         <meta-data
             android:name="BUGLY_APPKEY"
-            android:value="58b8613e-e469-4da2-95ad-35f53e4a7940" /> <!-- <meta-data -->
-        <!-- android:name="BUGLY_APP_VERSION" -->
-        <!-- android:value="<APP_Version>" /> -->
-        <!-- <meta-data -->
-        <!-- android:name="BUGLY_APP_CHANNEL" -->
-        <!-- android:value="<APP_Channel>" /> -->
+            android:value="58b8613e-e469-4da2-95ad-35f53e4a7940" />
         <meta-data
             android:name="BUGLY_ENABLE_DEBUG"
             android:value="true" />
-    </application>
+        <!--        <meta-data-->
+        <!--            android:name="BUGLY_APP_VERSION"-->
+        <!--            android:value="${versionName}" />-->
+        <!--        <meta-data-->
+        <!--            android:name="BUGLY_APP_CHANNEL"-->
+        <!--            android:value="APP_Channel" />-->
 
+    </application>
 </manifest>
