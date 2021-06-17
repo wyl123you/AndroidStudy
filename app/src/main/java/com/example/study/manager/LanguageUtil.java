@@ -24,7 +24,6 @@ public class LanguageUtil {
         }
     }
 
-
     @RequiresApi(Build.VERSION_CODES.N)
     private static Context updateResource(@NotNull Context context, String language) {
         Resources resources = context.getResources();
@@ -40,7 +39,7 @@ public class LanguageUtil {
     public static void switchLanguage(Context context, String newLanguage) {
         if (TextUtils.isEmpty(newLanguage)) return;
 
-        Resources resources = context.getResources();
+        Resources resources = context.getApplicationContext().getResources();
         Configuration config = resources.getConfiguration();
 
         Locale locale = new Locale(newLanguage);

@@ -25,6 +25,7 @@
 
     <string name="chinese">Chinese</string>
     <string name="english">English</string>
+    <string name="next">next</string>
 
     <string name="mvvn_str_format2">MVVM字符串拼接2 age:%d name:%s</string>
     <string name="mvvn_str_format3">MVVM字符串拼接3 age:%d name:%s</string>

@@ -1,7 +1,10 @@
 package com.example.study.demo.language;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
@@ -54,13 +57,28 @@ public class LanguageActivity extends BaseActivity<ActivityLanguageBinding> {
         switchLanguage(MMKVUtil.getLanguage());
     }
 
-    private void switchLanguage(String language) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            LanguageUtil.switchLanguage(this, language);
-        }
-        Intent intent = new Intent(this, this.getClass());
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+    public void next(View view) {
+        Intent intent = new Intent(this, NextActivity.class);
         startActivity(intent);
-        finish();
+    }
+
+    private void switchLanguage(String language) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            //1、重启activity在attachBaseContext中create上下文(重启App依旧有效)(1和2 选一个)
+            //Intent intent = new Intent(this, this.getClass());
+            //startActivity(intent);
+            //finish();
+            //2、或者手动更新，但是要进入新的activity才生效或者recreate(1和2 选一个)
+            Resources resources = getResources();
+            Configuration config = resources.getConfiguration();
+
+            Locale locale = new Locale(language);
+            config.setLocale(locale);
+            DisplayMetrics dm = resources.getDisplayMetrics();
+            resources.updateConfiguration(config, dm);
+        } else {
+            LanguageUtil.switchLanguage(this, language);
+            recreate();
+        }
     }
 }

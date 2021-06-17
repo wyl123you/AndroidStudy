@@ -23,5 +23,12 @@
             android:layout_height="wrap_content"
             android:onClick="english"
             android:text="@string/english" />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="next"
+            android:text="@string/next" />
     </LinearLayout>
 </layout>

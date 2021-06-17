@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.study">
-
     <!-- 红外遥控 -->
     <uses-permission android:name="android.permission.TRANSMIT_IR" /> <!-- 仅在支持红外的设备上运行 -->
     <uses-permission android:name="android.permission.NFC" /> <!-- 仅在支持NFC的设备上运行 -->
@@ -21,20 +20,15 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <!--在您的应用与分区存储完全兼容之前，您可以使用以下方法之一暂时停用分区存储：-->
-    <!--以Android 9（API 级别 28）或更低版本为目标平台。-->
-    <!--如果您以 Android 10（API 级别 29）或更高版本为目标平台，请在应用的清单文件中将 requestLegacyExternalStorage 的值设置为 true：-->
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 在您的应用与分区存储完全兼容之前，您可以使用以下方法之一暂时停用分区存储： -->
+    <!-- 以Android 9（API 级别 28）或更低版本为目标平台。 -->
+    <!-- 如果您以 Android 10（API 级别 29）或更高版本为目标平台，请在应用的清单文件中将 requestLegacyExternalStorage 的值设置为 true： -->
     <uses-feature
         android:name="android.hardware.ConsumerIrManager"
         android:required="true" /> <!-- 红外 -->
-
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="true" />
-
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -52,7 +46,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
-
+        <activity android:name=".demo.language.NextActivity"></activity>
         <activity
             android:name=".demo.welcome.WelcomeActivity"
             android:launchMode="standard"
@@ -65,10 +59,10 @@
         </activity>
 
         <activity-alias
-            android:name=".TestIcon2"
+            android:name=".TestIcon1"
             android:enabled="false"
-            android:icon="@drawable/background"
-            android:label="@string/app_name2"
+            android:icon="@drawable/account"
+            android:label="@string/app_name1"
             android:targetActivity=".demo.welcome.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,10 +71,10 @@
             </intent-filter>
         </activity-alias>
         <activity-alias
-            android:name=".TestIcon1"
+            android:name=".TestIcon2"
             android:enabled="false"
-            android:icon="@drawable/account"
-            android:label="@string/app_name1"
+            android:icon="@drawable/background"
+            android:label="@string/app_name2"
             android:targetActivity=".demo.welcome.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -275,12 +269,6 @@
         <meta-data
             android:name="BUGLY_ENABLE_DEBUG"
             android:value="true" />
-        <!--        <meta-data-->
-        <!--            android:name="BUGLY_APP_VERSION"-->
-        <!--            android:value="${versionName}" />-->
-        <!--        <meta-data-->
-        <!--            android:name="BUGLY_APP_CHANNEL"-->
-        <!--            android:value="APP_Channel" />-->
-
     </application>
+
 </manifest>
