@@ -137,7 +137,7 @@ public class SecurityActivity extends BaseActivity<ActivitySecurityBinding> {
                 Toast.makeText(this, "设备未检测到指纹模块", Toast.LENGTH_LONG).show();
             }
         } else {//安卓6以下
-            Toast.makeText(this, "安卓6以下暂不支持", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "安卓6以下暂不支持(因为采用非google官方api)", Toast.LENGTH_LONG).show();
         }
     }
 

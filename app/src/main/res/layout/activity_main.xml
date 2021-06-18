@@ -263,6 +263,13 @@
                 android:layout_height="wrap_content"
                 android:text="雷达扫描，技能冷却"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/camera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Camera2"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 

@@ -16,6 +16,7 @@ import com.example.study.demo.android11storage.Android11StorageActivity;
 import com.example.study.demo.appicon.AppIconActivity;
 import com.example.study.demo.breatheLight.BreatheActivity;
 import com.example.study.demo.broadcast.BroadcastActivity;
+import com.example.study.demo.camera.Camera2Activity;
 import com.example.study.demo.cardViewDemo.CardViewActivity;
 import com.example.study.demo.deviceInfo.DeviceInfoActivity;
 import com.example.study.demo.dialogFragmentDemo.DialogFragmentActivity;
@@ -285,6 +286,13 @@ public class MainActivity extends AppCompatActivity {
     public void toRadarActivity() {
         Intent intent = new Intent();
         intent.setClass(this, RadarActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.camera)
+    public void toCameraActivity() {
+        Intent intent = new Intent();
+        intent.setClass(this, Camera2Activity.class);
         startActivity(intent);
     }
 }
