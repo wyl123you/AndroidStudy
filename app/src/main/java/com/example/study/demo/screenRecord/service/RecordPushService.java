@@ -162,7 +162,7 @@ public class RecordPushService extends Thread {
 
     private void prepareEncoder() throws IOException {
 
-        MediaFormat format = MediaFormat.createVideoFormat(MIME_TYPE, mWidth, mHeight);
+        MediaFormat format = MediaFormat.createVideoFormat(MIME_TYPE, 1080, 1920);
         format.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface);
         format.setInteger(MediaFormat.KEY_BIT_RATE, mBitRate);
         format.setInteger(MediaFormat.KEY_FRAME_RATE, FRAME_RATE);

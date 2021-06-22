@@ -1,7 +1,6 @@
 package com.example.study.demo.retrofit;
 
 import com.example.study.MyApplication;
-import com.example.study.demo.retrofit.interceptor.CacheInterceptor;
 import com.example.study.demo.retrofit.interceptor.LoggerInterceptor;
 
 import org.jetbrains.annotations.NotNull;
@@ -15,10 +14,10 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Factory {
+public class ApiRequest {
 
     @NotNull
-    public static APIService create() {
+    public static ApiService create() {
 
         Cache cache = new Cache(MyApplication.getInstance().getCacheDir(), 1024 * 10);
 
@@ -27,8 +26,8 @@ public class Factory {
                 .readTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .addInterceptor(new LoggerInterceptor())
-                .addInterceptor(new CacheInterceptor())
-                .addNetworkInterceptor(new CacheInterceptor())
+                //.addInterceptor(new CacheInterceptor())
+                //.addNetworkInterceptor(new CacheInterceptor())
 //                .sslSocketFactory(
                 .cache(cache)
                 .build();
@@ -48,6 +47,6 @@ public class Factory {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
-        return retrofit.create(APIService.class);
+        return retrofit.create(ApiService.class);
     }
 }

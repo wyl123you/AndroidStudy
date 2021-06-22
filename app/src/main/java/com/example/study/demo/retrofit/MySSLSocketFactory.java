@@ -2,10 +2,8 @@ package com.example.study.demo.retrofit;
 
 import android.util.Log;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.NoSuchAlgorithmException;
@@ -63,27 +61,27 @@ public class MySSLSocketFactory extends SSLSocketFactory {
     }
 
     @Override
-    public Socket createSocket(Socket s, String host, int port, boolean autoClose) throws IOException {
+    public Socket createSocket(Socket s, String host, int port, boolean autoClose) {
         return null;
     }
 
     @Override
-    public Socket createSocket(String host, int port) throws IOException, UnknownHostException {
+    public Socket createSocket(String host, int port) {
         return null;
     }
 
     @Override
-    public Socket createSocket(String host, int port, InetAddress localHost, int localPort) throws IOException, UnknownHostException {
+    public Socket createSocket(String host, int port, InetAddress localHost, int localPort) {
         return null;
     }
 
     @Override
-    public Socket createSocket(InetAddress host, int port) throws IOException {
+    public Socket createSocket(InetAddress host, int port) {
         return null;
     }
 
     @Override
-    public Socket createSocket(InetAddress address, int port, InetAddress localAddress, int localPort) throws IOException {
+    public Socket createSocket(InetAddress address, int port, InetAddress localAddress, int localPort) {
         return null;
     }
 }

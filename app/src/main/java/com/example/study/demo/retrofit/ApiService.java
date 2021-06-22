@@ -20,7 +20,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
-public interface APIService {
+public interface ApiService {
 
     @GET("luckyMoneys")
     //接口设置缓存时间段，max-age 的单位是秒, 表示缓存时长

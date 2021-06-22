@@ -7,8 +7,8 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.study.demo.retrofit.ApiRequest;
 import com.example.study.demo.retrofit.BaseObserver;
-import com.example.study.demo.retrofit.Factory;
 import com.example.study.demo.retrofit.LuckyMoney;
 
 import org.jetbrains.annotations.NotNull;
@@ -69,7 +69,7 @@ public class ListViewModel extends ViewModel implements LifecycleObserver {
     }
 
     public void getByHtp() {
-        Factory.create().getAllLuckyMoney()
+        ApiRequest.create().getAllLuckyMoney()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<ArrayList<LuckyMoney>>() {

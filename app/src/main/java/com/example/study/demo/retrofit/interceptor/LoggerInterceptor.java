@@ -14,10 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.charset.UnsupportedCharsetException;
-import java.util.concurrent.TimeUnit;
 
-import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -29,15 +26,12 @@ import okio.BufferedSource;
 
 
 public class LoggerInterceptor implements Interceptor {
-    private static final String TAG = "OKHttpInterceptor";
+
+    private final String TAG = this.getClass().getSimpleName();
 
     @Override
     @NonNull
     public Response intercept(@NotNull Chain chain) throws IOException {
-
-        Log.d("1234", "LoggerInterceptor: ");
-
-
         Charset UTF8 = StandardCharsets.UTF_8;
 
         //打印请求报文
@@ -54,14 +48,14 @@ public class LoggerInterceptor implements Interceptor {
                 charset = mediaType.charset(UTF8);
             }
             assert charset != null;
-            try {
-                reqBody = toPrettyFormat(buffer.clone().readString(charset));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            reqBody = toPrettyFormat(buffer.clone().readString(charset));
         }
-        Log.d(TAG, String.format("\n发送请求\nmethod：%s\nurl：%s\nheaders: %s\nbody：%s",
-                request.method(), request.url(), request.headers(), reqBody));
+        String requestStr = "发送请求" + "\n" +
+                "请求method: " + request.method() + "\n" +
+                "请求url: " + request.url() + "\n" +
+                "请求headers: " + request.headers().toString() + "\n" +
+                "请求body: " + reqBody + "\n";
+        Log.d(TAG, requestStr);
 
         //打印返回报文
         //先执行请求，才能够获取报文
@@ -74,19 +68,21 @@ public class LoggerInterceptor implements Interceptor {
             Buffer buffer = source.getBuffer();
 
             Charset charset = UTF8;
-            MediaType contentType = responseBody.contentType();
-            if (contentType != null) {
-                try {
-                    charset = contentType.charset(UTF8);
-                } catch (UnsupportedCharsetException e) {
-                    e.printStackTrace();
-                }
+            MediaType mediaType = responseBody.contentType();
+            if (mediaType != null) {
+                charset = mediaType.charset(UTF8);
             }
             assert charset != null;
             respBody = toPrettyFormat(buffer.clone().readString(charset));
         }
-        Log.d(TAG, String.format("收到响应\n响应code：%s\n响应message%s\n响应url：%s\n响应headers：%s\n响应body：%s",
-                response.code(), response.message(), response.request().url(), response.headers(), respBody));
+
+        String responseStr = "收到响应" + "\n" +
+                "响应code：" + response.code() + "\n" +
+                "响应message：" + response.message() + "\n" +
+                "响应url：" + response.request().url() + "\n" +
+                "响应headers：" + response.headers() + "\n" +
+                "响应body：" + respBody + "\n";
+        Log.d(TAG, responseStr);
         return response;
     }
 

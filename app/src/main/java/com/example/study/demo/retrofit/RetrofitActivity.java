@@ -52,7 +52,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
             e.printStackTrace();
         }
 
-        Call<ArrayList<LuckyMoney>> call = Factory.create().getAllLuckyMoneys();
+        Call<ArrayList<LuckyMoney>> call = ApiRequest.create().getAllLuckyMoneys();
 
         call.enqueue(new Callback<ArrayList<LuckyMoney>>() {
             @Override
@@ -102,7 +102,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
     public void onClick(View v) throws UnsupportedEncodingException {
         switch (v.getId()) {
             case R.id.getAll:
-                Factory.create()
+                ApiRequest.create()
                         .getAllLuckyMoney()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -118,7 +118,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
                         });
                 break;
             case R.id.getById:
-                Factory.create()
+                ApiRequest.create()
                         .getLuckyMoneyById(Integer.parseInt(((EditText) findViewById(R.id.et_id)).getText().toString()))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -134,7 +134,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
                 ((TextInputLayout) findViewById(R.id.til_1)).setErrorEnabled(true);
                 ((TextInputLayout) findViewById(R.id.til_1)).setError("这是一个测试");
 
-                Factory.create()
+                ApiRequest.create()
                         .getByProducerAndConsumer(
                                 ((EditText) findViewById(R.id.producer)).getText().toString(),
                                 ((EditText) findViewById(R.id.consumer)).getText().toString())
@@ -150,7 +150,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
                 break;
 
             case R.id.getById2:
-                Factory.create()
+                ApiRequest.create()
                         .getLuckyMoneyById(((EditText) findViewById(R.id.et_id)).getText().toString())
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -163,7 +163,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
                         });
                 break;
             case R.id.byPAndC2:
-                Factory.create()
+                ApiRequest.create()
                         .getByProducerAndConsumer2(
                                 ((EditText) findViewById(R.id.producer)).getText().toString(),
                                 ((EditText) findViewById(R.id.consumer)).getText().toString())
@@ -184,7 +184,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
                 map.put("producer", producer);
                 map.put("consumer", consumer);
 
-                Factory.create()
+                ApiRequest.create()
                         .getByProducerAndConsumer3(map)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -199,7 +199,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
             case R.id.createByPath:
                 String producer111 = ((EditText) findViewById(R.id.producer111)).getText().toString();
                 String money111 = ((EditText) findViewById(R.id.money111)).getText().toString();
-                Factory.create()
+                ApiRequest.create()
                         .create(producer111, money111)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -215,7 +215,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
                 String producer11 = ((EditText) findViewById(R.id.producer111)).getText().toString();
                 String money11 = ((EditText) findViewById(R.id.money111)).getText().toString();
 
-                Factory.create()
+                ApiRequest.create()
                         .create0(producer11, money11)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -235,7 +235,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
                 map1.put("producer", producer1);
                 map1.put("money", money1);
 
-                Factory.create()
+                ApiRequest.create()
                         .create0000(map1)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -251,7 +251,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
                 String producerF = ((EditText) findViewById(R.id.producer111)).getText().toString();
                 String moneyF = ((EditText) findViewById(R.id.money111)).getText().toString();
 
-                Factory.create()
+                ApiRequest.create()
                         .create999(producerF, moneyF)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -268,7 +268,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
                 map2.put("producer", "11111111111111111111111111");
                 map2.put("money", "888888");
 
-                Factory.create()
+                ApiRequest.create()
                         .create9999(map2)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -288,7 +288,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
                 String json = JsonUtil.toJson(keys, values);
                 RequestBody body = RequestBody.create(MediaTypes.MEDIA_TYPE_JSON, json);
 
-                Factory.create()
+                ApiRequest.create()
                         .create11(body)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -303,7 +303,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
             case R.id.createByValuepp:
                 String producerQ = "WYL";
                 RequestBody body1 = RequestBody.create(MediaTypes.MEDIA_TYPE_JSON, producerQ);
-                Factory.create()
+                ApiRequest.create()
                         .create99(body1)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -324,7 +324,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
                         .addFormDataPart("file", "wyl.txt", fileBody)
                         .build();
 
-                Factory.create()
+                ApiRequest.create()
                         .uploadFile(requestBody)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -359,7 +359,7 @@ public class RetrofitActivity extends BaseActivity<ActivityRetrofitBinding> {
 //                        .addFormDataPart("file", "wyl.txt", fileBody1)
 //                        .build();
 
-                Factory.create()
+                ApiRequest.create()
                         .uploadFile2(part)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())

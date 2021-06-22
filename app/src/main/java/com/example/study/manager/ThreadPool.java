@@ -49,7 +49,9 @@ public class ThreadPool {
      * @return {@code true}: yes<br>{@code false}: no
      */
     public static boolean isMainThread() {
-        return Looper.myLooper() == Looper.getMainLooper();
+        Looper myLooper = Looper.myLooper();
+        Looper mainLooper = Looper.getMainLooper();
+        return myLooper == mainLooper;
     }
 
     public static ExecutorService getFixedPool(@IntRange(from = 1) final int size) {
@@ -107,19 +109,51 @@ public class ThreadPool {
         execute(getPoolByTypeAndPriority(size, priority), task);
     }
 
-    public static <T> void executeByFixedWithDelay(@IntRange(from = 1) final int size,
-                                                   final Task<T> task,
-                                                   final long delay,
-                                                   final TimeUnit unit) {
-        executeWithDelay(getPoolByTypeAndPriority(size), task, delay, unit);
+    public static <T> void executeByFixed(@IntRange(from = 1) final int size,
+                                          final Task<T> task,
+                                          final long initialDelay,
+                                          final TimeUnit unit) {
+        executeWithDelay(getPoolByTypeAndPriority(size), task, initialDelay, unit);
     }
 
-    public static <T> void executeByFixedWithDelay(@IntRange(from = 1) final int size,
-                                                   final Task<T> task,
-                                                   final long delay,
-                                                   final TimeUnit unit,
-                                                   @IntRange(from = 1, to = 10) final int priority) {
-        executeWithDelay(getPoolByTypeAndPriority(size, priority), task, delay, unit);
+    public static <T> void executeByFixed(@IntRange(from = 1) final int size,
+                                          final Task<T> task,
+                                          final long initialDelay,
+                                          final TimeUnit unit,
+                                          @IntRange(from = 1, to = 10) final int priority) {
+        executeWithDelay(getPoolByTypeAndPriority(size, priority), task, initialDelay, unit);
+    }
+
+    public static <T> void executeByFixedWithFixedDelay(@IntRange(from = 1) final int size,
+                                                        final Task<T> task,
+                                                        final long initialDelay,
+                                                        final long delay,
+                                                        final TimeUnit unit) {
+        executeWithFixedDelay(getPoolByTypeAndPriority(size), task, initialDelay, delay, unit);
+    }
+
+    public static <T> void executeByFixedWithFixedDelay(@IntRange(from = 1) final int size,
+                                                        final Task<T> task,
+                                                        final long initialDelay,
+                                                        final long delay,
+                                                        final TimeUnit unit,
+                                                        @IntRange(from = 1, to = 10) final int priority) {
+        executeWithFixedDelay(getPoolByTypeAndPriority(size, priority), task, initialDelay, delay, unit);
+    }
+
+    public static <T> void executeByFixedWithFixedDelay(@IntRange(from = 1) final int size,
+                                                        final Task<T> task,
+                                                        final long delay,
+                                                        final TimeUnit unit) {
+        executeWithFixedDelay(getPoolByTypeAndPriority(size), task, 0, delay, unit);
+    }
+
+    public static <T> void executeByFixedWithFixedDelay(@IntRange(from = 1) final int size,
+                                                        final Task<T> task,
+                                                        final long delay,
+                                                        final TimeUnit unit,
+                                                        @IntRange(from = 1, to = 10) final int priority) {
+        executeWithFixedDelay(getPoolByTypeAndPriority(size, priority), task, 0, delay, unit);
     }
 
     public static <T> void executeByFixedAtFixedRate(@IntRange(from = 1) final int size,
@@ -163,17 +197,45 @@ public class ThreadPool {
         execute(getPoolByTypeAndPriority(TYPE_SINGLE, priority), task);
     }
 
-    public static <T> void executeBySingleWithDelay(final Task<T> task,
-                                                    final long delay,
-                                                    final TimeUnit unit) {
-        executeWithDelay(getPoolByTypeAndPriority(TYPE_SINGLE), task, delay, unit);
+    public static <T> void executeBySingle(final Task<T> task,
+                                           final long initialDelay,
+                                           final TimeUnit unit) {
+        executeWithDelay(getPoolByTypeAndPriority(TYPE_SINGLE), task, initialDelay, unit);
     }
 
-    public static <T> void executeBySingleWithDelay(final Task<T> task,
-                                                    final long delay,
-                                                    final TimeUnit unit,
-                                                    @IntRange(from = 1, to = 10) final int priority) {
-        executeWithDelay(getPoolByTypeAndPriority(TYPE_SINGLE, priority), task, delay, unit);
+    public static <T> void executeBySingle(final Task<T> task,
+                                           final long initialDelay,
+                                           final TimeUnit unit,
+                                           @IntRange(from = 1, to = 10) final int priority) {
+        executeWithDelay(getPoolByTypeAndPriority(TYPE_SINGLE, priority), task, initialDelay, unit);
+    }
+
+    public static <T> void executeBySingleWithFixedDelay(final Task<T> task,
+                                                         final long delay,
+                                                         final TimeUnit unit) {
+        executeWithFixedDelay(getPoolByTypeAndPriority(TYPE_SINGLE), task, 0, delay, unit);
+    }
+
+    public static <T> void executeBySingleWithFixedDelay(final Task<T> task,
+                                                         final long delay,
+                                                         final TimeUnit unit,
+                                                         @IntRange(from = 1, to = 10) final int priority) {
+        executeWithFixedDelay(getPoolByTypeAndPriority(TYPE_SINGLE, priority), task, 0, delay, unit);
+    }
+
+    public static <T> void executeBySingleWithFixedDelay(final Task<T> task,
+                                                         final long initialDelay,
+                                                         final long delay,
+                                                         final TimeUnit unit) {
+        executeWithFixedDelay(getPoolByTypeAndPriority(TYPE_SINGLE), task, initialDelay, delay, unit);
+    }
+
+    public static <T> void executeBySingleWithFixedDelay(final Task<T> task,
+                                                         final long initialDelay,
+                                                         final long delay,
+                                                         final TimeUnit unit,
+                                                         @IntRange(from = 1, to = 10) final int priority) {
+        executeWithFixedDelay(getPoolByTypeAndPriority(TYPE_SINGLE, priority), task, initialDelay, delay, unit);
     }
 
     public static <T> void executeBySingleAtFixedRate(final Task<T> task,
@@ -360,11 +422,26 @@ public class ThreadPool {
         execute(pool, task);
     }
 
-    public static <T> void executeByCustomWithDelay(final ExecutorService pool,
-                                                    final Task<T> task,
-                                                    final long delay,
-                                                    final TimeUnit unit) {
-        executeWithDelay(pool, task, delay, unit);
+    public static <T> void executeByCustom(final ExecutorService pool,
+                                           final Task<T> task,
+                                           final long initialDelay,
+                                           final TimeUnit unit) {
+        executeWithDelay(pool, task, initialDelay, unit);
+    }
+
+    public static <T> void executeByCustomWithFixedDelay(final ExecutorService pool,
+                                                         final Task<T> task,
+                                                         final long delay,
+                                                         final TimeUnit unit) {
+        executeWithFixedDelay(pool, task, 0, delay, unit);
+    }
+
+    public static <T> void executeByCustomWithFixedDelay(final ExecutorService pool,
+                                                         final Task<T> task,
+                                                         final long initialDelay,
+                                                         final long delay,
+                                                         final TimeUnit unit) {
+        executeWithFixedDelay(pool, task, initialDelay, delay, unit);
     }
 
     public static <T> void executeByCustomAtFixedRate(final ExecutorService pool,
@@ -382,27 +459,39 @@ public class ThreadPool {
         executeAtFixedRate(pool, task, initialDelay, period, unit);
     }
 
+    /**
+     * execute:立即执行
+     * schedule:延时任务
+     * scheduleAtFixedRate:循环任务，按照上一次任务的发起时间计算下一次任务的开始时间
+     * scheduleWithFixedDelay:循环任务，以上一次任务的结束时间计算下一次任务的开始时间
+     */
 
-    private static <T> void execute(final ExecutorService pool,
+    //执行线程1：立即执行
+    private static <T> void execute(@NotNull final ExecutorService pool,
                                     final Task<T> task) {
-        executeWithDelay(pool, task, 0, TimeUnit.MILLISECONDS);
+        pool.execute(task);
     }
 
+    //执行线程2：延时任务
     private static <T> void executeWithDelay(final ExecutorService pool,
                                              final Task<T> task,
-                                             final long delay,
+                                             final long initialDelay,
                                              final TimeUnit unit) {
-        //execute:立即执行
-        //schedule:延时任务
-        //scheduleAtFixedRate:循环任务，按照上一次任务的发起时间计算下一次任务的开始时间
-        //scheduleWithFixedDelay:循环任务，以上一次任务的结束时间计算下一次任务的开始时间
-        if (delay <= 0) {
-            getScheduledByTask(task).execute(() -> pool.execute(task));
-        } else {
-            getScheduledByTask(task).schedule(() -> pool.execute(task), delay, unit);
-        }
+        getScheduledByTask(task).schedule(() -> pool.execute(task), initialDelay, unit);
     }
 
+
+    //执行线程3：循环任务，按照上一次任务的发起时间计算下一次任务的开始时间
+    private static <T> void executeWithFixedDelay(final ExecutorService pool,
+                                                  @NotNull final Task<T> task,
+                                                  final long initialDelay,
+                                                  final long delay,
+                                                  final TimeUnit unit) {
+        task.isSchedule = true;
+        getScheduledByTask(task).scheduleWithFixedDelay(() -> pool.execute(task), initialDelay, delay, unit);
+    }
+
+    //执行线程4：循环任务，以上一次任务的结束时间计算下一次任务的开始时间
     private static <T> void executeAtFixedRate(final ExecutorService pool,
                                                @NotNull final Task<T> task,
                                                final long initialDelay,
@@ -586,10 +675,10 @@ public class ThreadPool {
                 final T result = doingBackground();
 
                 if (isSchedule) {
-                    Deliver.post(() -> onSuccess(result));
+                    Delivery.post(() -> onSuccess(result));
                 } else {
                     state = COMPLETING;
-                    Deliver.post(() -> {
+                    Delivery.post(() -> {
                         onSuccess(result);
                         removeScheduleByTask(Task.this);
                     });
@@ -599,7 +688,7 @@ public class ThreadPool {
                 if (state != NEW) return;
 
                 state = EXCEPTIONAL;
-                Deliver.post(() -> {
+                Delivery.post(() -> {
                     onFail(e);
                     removeScheduleByTask(Task.this);
                 });
@@ -609,7 +698,7 @@ public class ThreadPool {
         public void cancel() {
             if (state != NEW) return;
             state = CANCELLED;
-            Deliver.post(() -> {
+            Delivery.post(() -> {
                 onCancel();
                 removeScheduleByTask(Task.this);
             });
@@ -623,17 +712,12 @@ public class ThreadPool {
         }
     }
 
-    private static final class Deliver {
+    private static final class Delivery {
 
         private static final Handler MAIN_HANDLER;
 
         static {
-            Looper looper;
-            try {
-                looper = Looper.getMainLooper();
-            } catch (Exception e) {
-                looper = null;
-            }
+            Looper looper = Looper.getMainLooper();
             if (looper != null) {
                 MAIN_HANDLER = new Handler(looper);
             } else {
