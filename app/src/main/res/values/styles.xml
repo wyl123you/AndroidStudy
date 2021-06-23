@@ -16,16 +16,11 @@
         <item name="windowNoTitle">true</item>
         <!--状态栏是否为半透明-->
         <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
         <!--突出状态栏字体颜色-->
         <item name="android:windowLightStatusBar">true</item>
         <!--状态栏背景颜色-->
         <item name="android:statusBarColor">@android:color/transparent</item>
-
-
-        <item name="android:windowTranslucentNavigation">true</item>
-
-        <!-- 避免控件会顶到状态栏上 -->
-        <!--<item name="android:fitsSystemWindows">true</item>-->
     </style>
 
     <style name="DialogFragment" parent="Theme.AppCompat.Dialog">
@@ -45,6 +40,4 @@
         <item name="android:windowEnterAnimation">@anim/anim_down</item>
         <item name="android:windowExitAnimation">@anim/anim_up</item>
     </style>
-
-
 </resources>

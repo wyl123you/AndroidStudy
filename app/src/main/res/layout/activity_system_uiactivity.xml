@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -10,20 +8,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffaacd"
-        tools:context=".demo.systemUI.SystemUIActivity">
+        android:fitsSystemWindows="true"
+        android:background="#ffaacd">
 
         <View
             android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:layout_alignParentTop="true"
-            android:background="@color/colorAccent"
-            android:layout_height="100dp"/>
+            android:background="@color/colorAccent" />
 
         <View
             android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorAccent"
-            android:layout_height="100dp"/>
+            android:background="@color/colorAccent" />
 
     </RelativeLayout>
 </layout>
