@@ -43,9 +43,9 @@ public class SweepImageView extends androidx.appcompat.widget.AppCompatImageView
 
 
     public static final int ANGLE000 = 0x0000;
-    public static final int ANGLE090 = 0x0020;
-    public static final int ANGLE180 = 0x0030;
-    public static final int ANGLE270 = 0x0040;
+    public static final int ANGLE090 = 0x005A;
+    public static final int ANGLE180 = 0x00B4;
+    public static final int ANGLE270 = 0x010e;
 
     @IntDef({CW, CCW})
     @Retention(RetentionPolicy.SOURCE)

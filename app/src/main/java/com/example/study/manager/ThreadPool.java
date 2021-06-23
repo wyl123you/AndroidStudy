@@ -561,27 +561,27 @@ public class ThreadPool {
 
     private static ExecutorService createPoolByTypeAndPriority(final int type, final int priority) {
         switch (type) {
-            case TYPE_SINGLE:
+            case TYPE_SINGLE://单一线程吃池
                 return Executors.newSingleThreadExecutor(
                         new UtilsThreadFactory("single", priority)
                 );
-            case TYPE_CACHED:
+            case TYPE_CACHED://缓存线程池，同步队列
                 return Executors.newCachedThreadPool(
                         new UtilsThreadFactory("cached", priority)
                 );
-            case TYPE_IO:
+            case TYPE_IO://IO密集型
                 return new ThreadPoolExecutor(2 * CPU_COUNT + 1,
                         2 * CPU_COUNT + 1,
                         30, TimeUnit.SECONDS,
                         new LinkedBlockingQueue<>(128),
                         new UtilsThreadFactory("io", priority));
-            case TYPE_CPU:
+            case TYPE_CPU://CPU密集型
                 return new ThreadPoolExecutor(CPU_COUNT + 1,
                         2 * CPU_COUNT + 1,
                         30, TimeUnit.SECONDS,
                         new LinkedBlockingQueue<>(128),
                         new UtilsThreadFactory("cpu", priority));
-            default:
+            default://定长线程池
                 return Executors.newFixedThreadPool(
                         type,
                         new UtilsThreadFactory("fixed(" + type + ")", priority)

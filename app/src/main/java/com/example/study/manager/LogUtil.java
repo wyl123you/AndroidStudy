@@ -46,10 +46,10 @@ public final class LogUtil {
     private static final int JSON = 0x20;
     private static final int XML = 0x30;
 
-//    @IntDef({FILE, JSON, XML})
-//    @Retention(RetentionPolicy.SOURCE)
-//    public @interface Type {
-//    }
+    @IntDef({FILE, JSON, XML})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Type {
+    }
 
     private static final String FILE_SEP = System.getProperty("file.separator");
     private static final String LINE_SEP = System.getProperty("line.separator");

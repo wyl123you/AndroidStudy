@@ -9,9 +9,6 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,15 +24,11 @@ import com.example.study.databinding.ActivityRefreshListBinding;
 import java.util.ArrayList;
 import java.util.Random;
 
-import butterknife.BindView;
-
 public class RefreshListActivity extends BaseActivity<ActivityRefreshListBinding> {
 
     private static final String TAG = "LoginActivity";
-
-    @BindView(R.id.textView)
-    public TextView textView;
     private LinearLayoutManager manager;
+    private int totalY;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +41,7 @@ public class RefreshListActivity extends BaseActivity<ActivityRefreshListBinding
         mBinding.mRecyclerView.setAdapter(adapter);
         manager = new LinearLayoutManager(this);
         mBinding.mRecyclerView.setLayoutManager(manager);
-        //mBinding.mRecyclerView.smoothScrollToPosition();
+//        mBinding.mRecyclerView.smoothScrollToPosition(2);
 
         mBinding.mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -77,11 +70,11 @@ public class RefreshListActivity extends BaseActivity<ActivityRefreshListBinding
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                mBinding.textView.setVisibility(dy > 0 ? View.GONE : View.VISIBLE);
                 Log.d(TAG, "水平:" + dx + "  垂直:" + dy);
                 Log.d(TAG, "是否能向上滑" + recyclerView.canScrollVertically(-1));
                 Log.d(TAG, "是否能向下滑: " + recyclerView.canScrollVertically(1));
-                showTitle();
+                totalY += dy;
+                mBinding.textView.setTranslationY((float) -totalY);
             }
         });
 
@@ -152,7 +145,7 @@ public class RefreshListActivity extends BaseActivity<ActivityRefreshListBinding
                     Log.d(TAG, "params.bottomMargin: " + params.bottomMargin);
                     Log.d(TAG, " Math.round(ViewCompat.getTranslationY(child): " + Math.round(ViewCompat.getTranslationY(child)));
                     //divider的bottom就是top加上divider的高度了
-                    final int bottom = (int) (top + 140);
+                    final int bottom = top + 140;
                     c.drawRect(left, top, right, bottom, mPaint);
                     c.drawText("" + i, left, top, mPaint);
                 }
@@ -217,10 +210,5 @@ public class RefreshListActivity extends BaseActivity<ActivityRefreshListBinding
         View firstVisibleChildView = manager.findViewByPosition(position);
         int itemHeight = firstVisibleChildView.getHeight();
         return (position) * itemHeight - firstVisibleChildView.getTop();
-    }
-
-    private void showTitle() {
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.hybrid);
-        mBinding.textView.startAnimation(animation);
     }
 }

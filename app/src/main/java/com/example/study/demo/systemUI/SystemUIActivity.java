@@ -63,9 +63,9 @@ public class SystemUIActivity extends AppCompatActivity {
             lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
             getWindow().setAttributes(lp);
         } else {
-            if (Build.BRAND.toLowerCase().contains("vivo")){
+            if (Build.BRAND.toLowerCase().contains("vivo")) {
                 Log.d(TAG, "您的手机是vivo");
-                Log.d(TAG, "您的手机是刘海屏"+hasNotchAtVivo(this));
+                Log.d(TAG, "您的手机是刘海屏" + hasNotchAtVivo(this));
                 //vivo在设置–显示与亮度–第三方应用显示比例中可以切换是否全屏显示还是安全区域显示。
                 //vivo不提供接口获取刘海尺寸，目前vivo的刘海宽为100dp,高为27dp。
             }
@@ -73,7 +73,6 @@ public class SystemUIActivity extends AppCompatActivity {
         }
     }
 
-    //@RequiresApi(api = Build.VERSION_CODES.P)
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onResume() {
@@ -111,12 +110,12 @@ public class SystemUIActivity extends AppCompatActivity {
         super.onAttachedToWindow();
         Log.d(TAG, "onAttachedToWindow: ");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            aaa();
+            isCutOut();
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
-    private void aaa() {
+    private void isCutOut() {
         final View decorView = getWindow().getDecorView();
 
         decorView.postDelayed(() -> {
@@ -145,17 +144,17 @@ public class SystemUIActivity extends AppCompatActivity {
         }, 1000);
     }
 
-    public boolean isCutOut(Activity ctx) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            if (ctx.getWindow() == null || ctx.getWindow().getDecorView().getRootWindowInsets() == null) {
-                return false;
-            }
-            DisplayCutout cutout = ctx.getWindow().getDecorView().getRootWindowInsets().getDisplayCutout();
-            return cutout != null && cutout.getSafeInsetTop() != 0;
-        } else {
-            return false;
-        }
-    }
+//    public boolean isCutOut(Activity ctx) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+//            if (ctx.getWindow() == null || ctx.getWindow().getDecorView().getRootWindowInsets() == null) {
+//                return false;
+//            }
+//            DisplayCutout cutout = ctx.getWindow().getDecorView().getRootWindowInsets().getDisplayCutout();
+//            return cutout != null && cutout.getSafeInsetTop() != 0;
+//        } else {
+//            return false;
+//        }
+//    }
 
     public static final int VIVO_NOTCH = 0x00000020;//是否有刘海
     public static final int VIVO_FILLET = 0x00000008;//是否有圆角

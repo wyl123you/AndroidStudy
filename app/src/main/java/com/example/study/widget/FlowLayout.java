@@ -15,10 +15,10 @@ public class FlowLayout extends ViewGroup {
 
     private final String TAG = this.getClass().getSimpleName();
 
-    private Context context;
+    private final Context context;
 
-    private int mHorizontalSpace = 10;
-    private int mVerticalSpace = 10;
+    private final int mHorizontalSpace = 10;
+    private final int mVerticalSpace = 10;
 
     private ArrayList<ArrayList<View>> allLines = new ArrayList<>();
     private ArrayList<Integer> lineHeights = new ArrayList<>();

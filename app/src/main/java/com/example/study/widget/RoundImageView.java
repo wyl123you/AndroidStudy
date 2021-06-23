@@ -172,33 +172,6 @@ public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView
             paint.setDither(true);
             canvas.drawArc(rectF, startAngle, 360f, false, paint);
             Log.d(TAG, "起始角:" + startAngle);
-            //post(this);
         }
     }
-
-//    private final Runnable runnable = new Runnable() {
-//        @Override
-//        public void run() {
-//            startAngle += 10;
-//            invalidate();
-//        }
-//    };
-//
-//    @Override
-//    public void run() {
-//        ValueAnimator anim = ValueAnimator.ofFloat(0, 360);
-//        anim.setRepeatMode(ValueAnimator.RESTART);
-//        anim.setRepeatCount(ValueAnimator.INFINITE);
-//        anim.setInterpolator(new AccelerateDecelerateInterpolator());
-//        anim.setDuration(10000);
-//        anim.addUpdateListener(animation -> {
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//
-//        });
-//        anim.start();
-//    }
 }
