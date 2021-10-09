@@ -13,11 +13,12 @@
     <!--        android:background="@color/colorPrimaryDark" />-->
 
     <TextView
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="page2"
+        android:text="page3"
         android:textColor="#ffffff"
         android:textSize="30sp" />
 </RelativeLayout>

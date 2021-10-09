@@ -183,7 +183,7 @@
                 android:id="@+id/view_pager_3d"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="3D ViewPager(未完成)"
+                android:text="3D ViewPager"
                 android:textAllCaps="false" />
 
             <Button

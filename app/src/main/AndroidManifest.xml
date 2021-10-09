@@ -24,6 +24,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 在您的应用与分区存储完全兼容之前，您可以使用以下方法之一暂时停用分区存储： -->
     <!-- 以Android 9（API 级别 28）或更低版本为目标平台。 -->
     <!-- 如果您以 Android 10（API 级别 29）或更高版本为目标平台，请在应用的清单文件中将 requestLegacyExternalStorage 的值设置为 true： -->
+
+    <!--安卓11存储-->
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-feature
         android:name="android.hardware.ConsumerIrManager"
         android:required="true" /> <!-- 红外 -->
@@ -69,7 +72,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/clock_provider_info" />
         </receiver>
-
 
 
         <activity-alias
@@ -173,6 +175,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".demo.viewPager3D.ViewPager3DActivity"
+            android:hardwareAccelerated="false"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
         <activity

@@ -1,6 +1,7 @@
 package com.example.study.demo.palettePager.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,24 @@ import com.example.study.R;
  */
 public class FragmentF extends Fragment {
 
+    private static final String TAG = "FragmentF";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView");
+        return inflater.inflate(R.layout.fragment_f, container, false);
+    }
 
-        return inflater.inflate(R.layout.fragment_f, container, true);
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG, "onDestroyView");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy");
     }
 }

@@ -1,10 +1,8 @@
 package com.example.study.demo.viewPager3D;
 
-import android.util.Log;
-import android.view.View;
-
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.study.BaseActivity;
@@ -50,15 +48,13 @@ public class ViewPager3DActivity extends BaseActivity<Activity3dViewpagerBinding
         PagerAdapter adapter = new PagerAdapter(this, fragments);
         mBinding.viewPager1.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         mBinding.viewPager1.setAdapter(adapter);
-        mBinding.viewPager1.setOffscreenPageLimit(2);
+        mBinding.viewPager1.setOffscreenPageLimit(1);
         mBinding.viewPager1.setCurrentItem(999, false);
 
-        mBinding.viewPager1.setPageTransformer(new ViewPager2.PageTransformer() {
-            @Override
-            public void transformPage(@NonNull View page, float position) {
-                Log.d(TAG, "position: " + position);
-            }
-        });
+        CompositePageTransformer transformer = new CompositePageTransformer();
+        transformer.addTransformer(new MarginPageTransformer(300));
+        transformer.addTransformer(new DepthPageTransformer());
+        mBinding.viewPager1.setPageTransformer(transformer);
 
     }
 }
