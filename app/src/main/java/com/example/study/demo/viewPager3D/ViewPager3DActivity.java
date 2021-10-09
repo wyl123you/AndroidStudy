@@ -45,16 +45,29 @@ public class ViewPager3DActivity extends BaseActivity<Activity3dViewpagerBinding
         fragments.add(new FragmentD());
         fragments.add(new FragmentE());
         fragments.add(new FragmentF());
+
+        int pagerWidth = (int) (getResources().getDisplayMetrics().widthPixels * 3.0f / 5.0f);
+//        ViewGroup.LayoutParams lp = mBinding.viewPager1.getLayoutParams();
+//        if (lp == null) {
+//            lp = new ViewGroup.LayoutParams(pagerWidth, ViewGroup.LayoutParams.MATCH_PARENT);
+//        } else {
+//            lp.width = pagerWidth;
+//        }
+//        mBinding.viewPager1.setLayoutParams(lp);
+
+
         PagerAdapter adapter = new PagerAdapter(this, fragments);
         mBinding.viewPager1.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         mBinding.viewPager1.setAdapter(adapter);
         mBinding.viewPager1.setOffscreenPageLimit(1);
         mBinding.viewPager1.setCurrentItem(999, false);
 
+        mBinding.parent.setOnTouchListener((v, event) -> mBinding.viewPager1.dispatchTouchEvent(event));
+
         CompositePageTransformer transformer = new CompositePageTransformer();
         transformer.addTransformer(new MarginPageTransformer(300));
         transformer.addTransformer(new DepthPageTransformer());
-        mBinding.viewPager1.setPageTransformer(transformer);
+        mBinding.viewPager1.setPageTransformer(new GallyPageTransformer());
 
     }
 }
