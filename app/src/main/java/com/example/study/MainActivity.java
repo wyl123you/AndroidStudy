@@ -42,6 +42,7 @@ import com.example.study.demo.roundImageVIew.RoundImageViewActivity;
 import com.example.study.demo.screenRecord.ScreenRecordActivity;
 import com.example.study.demo.securityTest.SecurityActivity;
 import com.example.study.demo.shareAnimation.ShareAnimationActivity;
+import com.example.study.demo.slide.SlideRecyclerActivity;
 import com.example.study.demo.systemUI.SystemUIActivity;
 import com.example.study.demo.touchListener.TouchListenerActivity;
 import com.example.study.demo.viewPager3D.ViewPager3DActivity;
@@ -124,6 +125,11 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.refresh_recycler_list)
     public void toRefreshRecyclerActivity() {
         startActivity(new Intent(this, RefreshListActivity.class));
+    }
+
+    @OnClick(R.id.slide)
+    public void toSlideActivity() {
+        startActivity(new Intent(this, SlideRecyclerActivity.class));
     }
 
     @OnClick(R.id.qr_code)

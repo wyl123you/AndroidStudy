@@ -7,7 +7,10 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.graphics.Xfermode;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
 
@@ -275,6 +278,7 @@ public class SweepImageView extends androidx.appcompat.widget.AppCompatImageView
         rectF.bottom = sweepType == SQUARE ? 2 * height : height;
         //Log.d(TAG, "startAngle: " + startAngle);
         //Log.d(TAG, "areaAngle: " + areaAngle);
+        //paint.setXfermode();
         canvas.drawArc(rectF, startAngle, areaAngle, true, paint);
     }
 }

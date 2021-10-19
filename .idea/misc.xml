@@ -5,7 +5,10 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.41875" />
         <entry key="app/src/main/res/layout/activity_3d_viewpager.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_flow_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3904282115869018" />
+        <entry key="app/src/main/res/layout/activity_slide_recycler.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/bbb.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/clock_provider.xml" value="0.3974358974358974" />
         <entry key="app/src/main/res/layout/fragment_a.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_b.xml" value="0.4036458333333333" />
@@ -13,6 +16,7 @@
         <entry key="app/src/main/res/layout/fragment_d.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_e.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_f.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/item_slide.xml" value="0.4036458333333333" />
       </map>
     </option>
   </component>

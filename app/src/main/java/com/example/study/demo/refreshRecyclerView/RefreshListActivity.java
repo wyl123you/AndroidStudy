@@ -93,8 +93,6 @@ public class RefreshListActivity extends BaseActivity<ActivityRefreshListBinding
 
         // 拖拽移动和左滑删除
         SimpleItemTouchCallBack simpleItemTouchCallBack = new SimpleItemTouchCallBack(adapter);
-        // 要实现侧滑删除条目，把 false 改成 true 就可以了
-        simpleItemTouchCallBack.setSwipeEnable(true);
         ItemTouchHelper helper = new ItemTouchHelper(simpleItemTouchCallBack);
         helper.attachToRecyclerView(mBinding.mRecyclerView);
 
