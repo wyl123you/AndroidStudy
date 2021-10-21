@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
+import com.bun.miitmdid.core.JLibrary;
 import com.example.study.demo.mvvm.Person;
 import com.example.study.demo.notificationDemo.NotifyUtil;
 import com.example.study.manager.ActivityStackManager;
@@ -113,6 +114,8 @@ public class MyApplication extends MultiDexApplication {
         LogUtil.xml("a", "a");
         LogUtil.xml(LogUtil.DEBUG, "a");
         LogUtil.xml(LogUtil.DEBUG, "aaa", "aaaaa");
+
+        JLibrary.InitEntry(this);
     }
 
     private void initActivityCallbacks() {

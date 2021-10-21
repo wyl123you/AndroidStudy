@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.study">
     <!-- 红外遥控 -->
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.TRANSMIT_IR" /> <!-- 仅在支持红外的设备上运行 -->
     <uses-permission android:name="android.permission.NFC" /> <!-- 仅在支持NFC的设备上运行 -->
     <uses-permission android:name="android.permission.READ_CALENDAR" />

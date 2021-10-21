@@ -7,11 +7,15 @@ import android.nfc.NfcAdapter;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bun.miitmdid.core.IIdentifierListener;
+import com.bun.miitmdid.core.MdidSdkHelper;
+import com.bun.miitmdid.supplier.IdSupplier;
 import com.example.study.R;
 import com.example.study.manager.MacAddressUtil;
 
@@ -77,8 +81,28 @@ public class DeviceInfoActivity extends AppCompatActivity {
             builder.append("正在充电: ").append(batteryManager.isCharging() ? "是" : "否").append("\n");
         }
 
-
-
+        //ime 参数，android10以下imei，10包括10以上 oaid
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            int result = MdidSdkHelper.InitSdk(this, true, new IIdentifierListener() {
+                @Override
+                public void OnSupport(boolean b, IdSupplier idSupplier) {
+                    if (idSupplier != null && idSupplier.isSupported()) {
+                        builder.append("OAID: ").append(idSupplier.getOAID()).append("\n");
+                        Log.d(TAG, "OAID: " + idSupplier.getOAID());
+                    }
+                }
+            });
+            Log.d(TAG, "result: " + result);
+        } else {
+            TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                Log.d(TAG, "PhoneCount: " + telephonyManager.getPhoneCount());
+                for (int slot = 0; slot < telephonyManager.getPhoneCount(); slot++) {
+                    String imei = telephonyManager.getDeviceId(slot);
+                    builder.append("IMEI: ").append(imei).append("\n");
+                }
+            }
+        }
     }
 
     @Override
