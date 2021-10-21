@@ -63,7 +63,7 @@ public class SlideRecyclerActivity extends AppCompatActivity {
                     Rect rect = new Rect();
                     paint.getTextBounds(str, 0, str.length(), rect);
                     paint.setTextSize(30);
-                    c.drawText(str, 0, str.length(), 0, view.getTop() + rect.height(), paint);
+                    c.drawText(str, 0, str.length(), view.getLeft(), view.getTop() + rect.height(), paint);
                 }
             }
 

@@ -21,6 +21,7 @@ import com.example.study.demo.cardViewDemo.CardViewActivity;
 import com.example.study.demo.deviceInfo.DeviceInfoActivity;
 import com.example.study.demo.dialogFragmentDemo.DialogFragmentActivity;
 import com.example.study.demo.diyExtension.DiyExtensionActivity;
+import com.example.study.demo.flow.FlowActivity;
 import com.example.study.demo.home.HomeActivity;
 import com.example.study.demo.javajs.JavaJsActivity;
 import com.example.study.demo.jni.JniActivity;
@@ -299,6 +300,13 @@ public class MainActivity extends AppCompatActivity {
     public void toCameraActivity() {
         Intent intent = new Intent();
         intent.setClass(this, Camera2Activity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.flow)
+    public void toFlowActivity() {
+        Intent intent = new Intent();
+        intent.setClass(this, FlowActivity.class);
         startActivity(intent);
     }
 }

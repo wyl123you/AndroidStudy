@@ -1,13 +1,16 @@
 package com.example.study.widget;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.OverScroller;
+import android.widget.Scroller;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -17,27 +20,58 @@ public class FlowLayout extends ViewGroup {
 
     private final Context context;
 
-    private final int mHorizontalSpace = 10;
-    private final int mVerticalSpace = 10;
+    private final int mHorizontalSpace = 40;
+    private final int mVerticalSpace = 40;
 
     private ArrayList<ArrayList<View>> allLines = new ArrayList<>();
     private ArrayList<Integer> lineHeights = new ArrayList<>();
 
+    // 屏幕的高度
+    private int mScreenHeight;
+
+    // 手指按下时的getScrollY
+    private int mScrollStart;
+
+    // 手指抬起时的getScrollY
+    private int mScrollEnd;
+
+    //记录移动时的Y
+    private int mLastY;
+
+    //滚动的辅助类
+    OverScroller overScroller;
+    private Scroller mScroller;
+
+    //是否正在滚动
+    private boolean isScrolling;
+
+    //加速度检测
+    private VelocityTracker mVelocityTracker;
+
     public FlowLayout(Context context) {
         super(context);
         this.context = context;
+        mScroller = new Scroller(context);
+        mVelocityTracker = VelocityTracker.obtain();
+        Log.d(TAG, "FlowLayout1");
     }
 
     //反射
     public FlowLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        mScroller = new Scroller(context);
+        mVelocityTracker = VelocityTracker.obtain();
+        Log.d(TAG, "FlowLayout2");
     }
 
     //主题
     public FlowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
+        mScroller = new Scroller(context);
+        mVelocityTracker = VelocityTracker.obtain();
+        Log.d(TAG, "FlowLayout3");
     }
 
     private void init() {
@@ -70,9 +104,6 @@ public class FlowLayout extends ViewGroup {
 
         for (int i = 0; i < childCount; i++) {
             View childView = getChildAt(i);
-            childView.setTag(i + 1);
-            childView.setOnClickListener(view -> Toast.makeText(context, view.getTag() + "", Toast.LENGTH_LONG).show());
-            childView.setBackgroundColor(Color.GRAY);
             LayoutParams childLP = childView.getLayoutParams();
             int childWidthMeasureSpec = getChildMeasureSpec(widthMeasureSpec, paddingLeft + paddingRight, childLP.width);
             int childHeightMeasureSpec = getChildMeasureSpec(heightMeasureSpec, paddingTop + paddingBottom, childLP.height);
@@ -112,6 +143,7 @@ public class FlowLayout extends ViewGroup {
         int realWidth = (widthMode == MeasureSpec.EXACTLY) ? selfWidth : parentNeededWidth + paddingLeft + paddingRight;
         int realHeight = (heightMode == MeasureSpec.EXACTLY) ? selfHeight : parentNeededHeight + paddingTop + paddingBottom;
         setMeasuredDimension(realWidth, realHeight);
+        scrollTo(0, 0);
     }
 
     @Override
@@ -141,8 +173,96 @@ public class FlowLayout extends ViewGroup {
         }
     }
 
+//    @Override
+//    public boolean onInterceptTouchEvent(@NonNull MotionEvent ev) {
+//        int action = ev.getAction();
+//        switch (action) {
+//            case MotionEvent.ACTION_DOWN:
+//                return false;
+//            case MotionEvent.ACTION_MOVE:
+//                return true;
+//            case MotionEvent.ACTION_UP:
+//            default:
+//                break;
+//        }
+//        return super.onInterceptTouchEvent(ev);
+//    }
+
     @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+    public boolean onInterceptTouchEvent(@NonNull MotionEvent ev) {
+
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if (!mScroller.isFinished()) {
+                    mScroller.abortAnimation();
+                }
+                break;
+            case MotionEvent.ACTION_MOVE:
+                return true;
+            case MotionEvent.ACTION_UP:
+                break;
+        }
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // 如果当前正在滚动，调用父类的onTouchEvent
+        if (isScrolling) return super.onTouchEvent(event);
+
+        mVelocityTracker.addMovement(event);
+
+        int action = event.getAction();
+        int currentY = (int) event.getY();
+
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                mScrollStart = getScrollY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (!mScroller.isFinished()) mScroller.abortAnimation();
+
+                int deltaY = currentY - mLastY;//正数上滑，负数下滑
+
+                if (deltaY < 0) {//上滑
+                    Log.d(TAG, "下滑");
+                    scrollBy(0, -deltaY);
+                } else {//下滑
+                    Log.d(TAG, "上滑");
+                    if (getScrollY() < 0) {//上滑至顶部
+
+                        int overScroll = -getScrollY();
+
+
+                        int ratio = 1;
+
+                        scrollBy(0, -deltaY * ratio);
+                    } else {
+                        scrollBy(0, -deltaY);
+                    }
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                mVelocityTracker.computeCurrentVelocity(1000);
+                Log.d(TAG, "X: " + mVelocityTracker.getXVelocity());
+
+                int autoScrollDeltaY = -(int) mVelocityTracker.getYVelocity();
+
+
+                mScroller.startScroll(0, getScrollY(), 0, autoScrollDeltaY, 2000);
+                postInvalidate();
+                break;
+        }
+        mLastY = currentY;
+        return true;
+    }
+
+    @Override
+    public void computeScroll() {
+        Log.d(TAG, "computeScroll: ");
+        if (mScroller.computeScrollOffset()) {//返回false表示滚动结束
+            scrollTo(0, mScroller.getCurrY());
+            postInvalidate();
+        }
     }
 }
