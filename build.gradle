@@ -6,12 +6,15 @@ buildscript {
         google()
         mavenCentral()
         //1.扫描二维码,添加maven仓地址
-        maven { url 'http://developer.huawei.com/repo/' }
+        maven {
+            allowInsecureProtocol = true
+            url 'http://developer.huawei.com/repo/'
+        }
         maven { url 'https://dl.bintray.com/umsdk/release' }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.android.tools.build:gradle:7.0.3'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
         // 2.添加仓库
@@ -27,7 +30,10 @@ allprojects {
         mavenCentral()
         maven { url 'https://jitpack.io' }//node media player
         // 3.添加仓库
-        maven { url 'http://developer.huawei.com/repo' }//扫码
+        maven {
+            allowInsecureProtocol = true
+            url 'http://developer.huawei.com/repo'
+        }//扫码
         maven { url 'https://dl.bintray.com/umsdk/release' }
     }
 }
